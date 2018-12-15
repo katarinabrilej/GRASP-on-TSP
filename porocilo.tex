@@ -1,0 +1,128 @@
+\documentclass[12pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+%\usepackage[normalem]{ulem}
+\usepackage[dvipsnames,usenames]{color}
+
+% ne spreminjaj podatkov, ki vplivajo na obliko strani
+\textwidth 15cm
+\textheight 24cm
+\oddsidemargin.5cm
+\evensidemargin.5cm
+\topmargin-5mm
+\addtolength{\footskip}{10pt}
+\pagestyle{plain}
+\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+
+\renewcommand\endprimer{\hfill$\diamondsuit$}
+
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+% za stevilske mnozice uporabi naslednje simbole
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+
+% ukaz za slovarsko geslo
+\newlength{\odstavek}
+\setlength{\odstavek}{\parindent}
+\newcommand{\geslo}[2]{\noindent\textbf{#1}\hspace*{3mm}\hangindent=\parindent\hangafter=1 #2}
+
+
+% naslednje ukaze ustrezno popravi
+\newcommand{\program}{Finančna matematika} % ime studijskega programa
+\newcommand{\imeavtorja}{Katarina Brilej, Sara Kovačič} % ime avtorja
+\newcommand{\imementorja}{prof.~dr. Riste Škrekovski} % akademski naziv in ime mentorja
+\newcommand{\naslovdela}{Uporaba metahevristike GRASP na problemu potujočega trgovca}
+\newcommand{\letnica}{2018} %letnica 
+
+
+% vstavi svoje definicije ...
+
+
+
+
+\begin{document}
+
+% od tod do povzetka ne spreminjaj nicesar
+\thispagestyle{empty}
+\noindent{\large
+UNIVERZA V LJUBLJANI\\[1mm]
+FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
+\program\ -- 1.~stopnja}
+\vfill
+
+\begin{center}{\large
+\imeavtorja\\[2mm]
+{\bf \naslovdela}\\[10mm]
+Projekt OR pri predmetu Finančni praktikum\\[1cm]
+Mentor: \imementorja}
+\end{center}
+\vfill
+
+\noindent{\large
+Ljubljana, \letnica}
+\pagebreak
+
+\thispagestyle{empty}
+\tableofcontents
+\pagebreak
+
+
+
+% tu se zacne besedilo seminarja
+\section{Uvod}
+
+\section{Problem potujočega trgovca}
+
+Problem trgovskega potnika (”travelling salesman problem”/TSP) se glasi:
+\begin{itemize}
+\item {\bf Formulacija v vsakdanjem jeziku:} danih je $n$ mest in razdalja med poljubnim parom mest (od mesta do mesta lahko potujemo po zgolj eni poti). Najdi najkrajšo (najcenejšo) pot, ki se začne in konča v istem mestu ter obišče vsako mesto natanko enkrat.
+\item{\bf Formulacija v matematičnem jeziku}: v (neusmerjenem enostavnem) polnem grafu $K_n$ z uteženimi povezavami (pozitivne vrednosti) najdi najkrajši cikel, ki vsebuje vsa vozlišča. Ciklom, ki vsebujejo vsa vozlišča grafa, pravimo Hamiltonovi cikli.
+
+\end{itemize}
+
+\subsection{Celoštevilski linearni program}
+
+
+
+
+
+
+
+%\geslo{}{}
+%
+%\geslo{}{}
+%
+
+
+% seznam uporabljene literature
+\begin{thebibliography}{99}
+
+%\bibitem{}
+
+\end{thebibliography}
+
+\end{document}
+
