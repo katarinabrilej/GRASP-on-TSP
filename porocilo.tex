@@ -86,7 +86,7 @@ Ljubljana, \letnica}
 \pagebreak
 
 \thispagestyle{empty}
-\tableofcontents
+%%%%     \tableofcontents PRI KRATKEM POROČILU NI SMISELNO KAZALO - dodaj pri dolgem
 \pagebreak
 
 
@@ -123,7 +123,7 @@ $$ X_{i,j} := \left\{ \begin{array}{ll}
 
 \hfill \break
 
-$y_{i}$ \ldots katero po vrsti obiščemo mesto i
+$y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
 
 
 \begin{equation*}
@@ -140,12 +140,27 @@ $y_{i}$ \ldots katero po vrsti obiščemo mesto i
 \end{equation*}
 
 
+\section{Grasp} 
 
+GRASP (\textit{greedy randomized adaptive search procedure}) je metahevristika, ki sestoji iz dveh faz: \textit{greedy randomized construction} in \textit{local search}.
+V prvi fazi na pameten način (odvisno od problema) izberemo izmed vseh možnih rešitev CL (candidate list) množico začetnih približkov RCL (restricted candidates list). 
+To storimo deloma deterministično in deloma stohastično, da zagotovimo, da so začetni približki obetavni, a dovolj razpršeni po celotni množici CL, da bo druga faza pregledala čimvečji del CL. 
+V drugi fazi za vsako izmed teh rešitev$ s \in  RCL $ pregledamo elemente $s' \in CL$ v njeni okolici (kaj je okolica je od problema in načina reševanja odvisno). Če najdemo boljšo rešitev $s'$, 
+jo dodamo v RCL ter $s$ odstranimo. To ponavljamo dokler zaustavitveni pogoj (npr. št. iteracij, zahtevana natančnost) ni izpolnjen.
 
+\section{Nadaljnje delo}
+
+ Problem potujočega trgovca bova predstavili z matriko, kjer element $a_{i,j}$ matrike $A$ predstavlja razdaljo (oz. ceno) potovanja po poti od mesta $i$ do mesta $j$. Predpostavimo, da je matrika pozitivna in simetrična in, da 0 izven diagonale v tej matriki pomeni, da povezava med mestoma ne obstaja.  Za takšno matriko bova v Pythonu napisali obe fazi algoritma \textit{GRASP} (Greedy randomized construction \textit{in} Local search). Problem potujočega trgovca bova rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bova nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bova primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
+ 
+
+\pagebreak
 % seznam uporabljene literature
 \begin{thebibliography}{99}
 
-%\bibitem{}
+\bibitem{Wikipedia TSP}
+Travelling salesman problem
+\\\texttt{http://en.wikipedia.org/wiki/Travelling\_salesman\_problem}
+
 
 \end{thebibliography}
 
