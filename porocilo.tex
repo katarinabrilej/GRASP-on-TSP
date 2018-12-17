@@ -94,27 +94,52 @@ Ljubljana, \letnica}
 % tu se zacne besedilo seminarja
 \section{Uvod}
 
-\section{Problem potujočega trgovca}
 
-Problem trgovskega potnika (”travelling salesman problem”/TSP) se glasi:
+Metahevristika je algoritemski način reševanja kombinatoričnega optimizacijskega problema, pri katerem na začetku izberemo množico kandidatov za rešitev, in jo iterativno izboljšujemo (glede na neko vnaprej izbrano funkcijo zaželenosti), ter po dovolj korakih vrnemo najboljši element iz te množice. Metahevristike torej vrnejo približne rešitve, a veliko hitreje kot eksaktni postopki. V projektu bova na problem potujočega trgovca implementirali metahevristiko GRASP (\textit{greedy randomized adaptive search procedure}). Problem potujočega trgovca bova rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bova nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bova primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
+
+
+\section{Problem potujočega trgovca} 
+
+Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
+
+
 \begin{itemize}
 \item {\bf Formulacija v vsakdanjem jeziku:} danih je $n$ mest in razdalja med poljubnim parom mest (od mesta do mesta lahko potujemo po zgolj eni poti). Najdi najkrajšo (najcenejšo) pot, ki se začne in konča v istem mestu ter obišče vsako mesto natanko enkrat.
 \item{\bf Formulacija v matematičnem jeziku}: v (neusmerjenem enostavnem) polnem grafu $K_n$ z uteženimi povezavami (pozitivne vrednosti) najdi najkrajši cikel, ki vsebuje vsa vozlišča. Ciklom, ki vsebujejo vsa vozlišča grafa, pravimo Hamiltonovi cikli.
 
 \end{itemize}
+\hfill \break
 
-\subsection{Celoštevilski linearni program}
-
-
-
+\subsection{Celoštevilski linearni program}  \hfill \break
 
 
+Problem potujočega trgovca lahko predstavimo kot \textit{celoštevilski linearni program}.
+Označimo mesta s števili $1, \ldots, n$. Strošek (ali razdalja) potovanja iz mesta $i$ v mesto $j$ je $c_{i,j}$, ( $ 1\leq i, j\leq n$). Minimiziramo strošek potovanja. Definiramo:
+
+$$ X_{i,j} := \left\{ \begin{array}{ll}
+1 ~; & \textrm{potnik gre iz mesta $i$ v mesto $j$}, \\
+0 ~; & \textrm{sicer},
+\end{array} \right. $$
+
+\hfill \break
+
+$y_{i}$ \ldots katero po vrsti obiščemo mesto i
 
 
-%\geslo{}{}
-%
-%\geslo{}{}
-%
+\begin{equation*}
+\begin{aligned}
+& {\text{min}}
+& & \sum_{i=1}^{n} \sum_{j=1}^{n}  x_{i,j} \cdot c_{i,j} \\
+& \text{p. p.}
+& &\sum_{i=1}^{n} x_{i,j} = 1, \text{ za vsak $j$ }\\
+&&&\sum_{j=1}^{n} x_{i,j} = 1, \text{ za vsak $i$ }\\
+&&&  x_{i,j} \in \{0,1\}, \text{ za vsak $i$ in vsak $j$ }\\
+&&& y_{i} \in \{1, \ldots, n\}; \text{za vsak $i$}\\
+&&& y_{i} + 1 - n + n \cdot x_{i,j} \leq y_{j}; \text{za vsak $i$ in vsak $j>1$}
+\end{aligned}
+\end{equation*}
+
+
 
 
 % seznam uporabljene literature
