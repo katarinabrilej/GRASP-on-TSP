@@ -133,4 +133,12 @@ def local_search(g,k, iter):
         RCL.sort(key=lambda x: x[0])
     RCL.sort(key=lambda x: x[0])
     return RCL[0]
+<<<<<<< HEAD
+=======
+        
+
+    
+
+
+>>>>>>> 3831dbc6195a2916ed02e24b7634ca81374c45ea
 
