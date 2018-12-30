@@ -1,46 +1,19 @@
 import random
 import numpy as np
 
-# ustvarimo naključno matriko za TSP
-def TSP(N, max_pot):
-    a = np.random.randint(1, max_pot, size= (N,N))
+# izboljšaj funkcijo
+
+# N je število mest (torej dimenzija incidenčne matrike)
+# max_pot je največja razdalja / cena poti
+def TSP(N, max_pot, min_pot = 1):
+    " funkcija vrne naključno matriko cen povezav, ki predstavlja problem potujočega trgovca"
+    a = np.random.randint(min_pot, max_pot, size= (N,N))
     m = np.tril(a) + np.tril(a, -1).T
     for i in range(N):
         m[i][i] = 0
     return m
-
-# primer matrike
-K = [[ 0,  2,  1, 14,  2,  3, 20, 22, 22, 14],
-       [ 2,  0,  3,  4, 22,  2,  5, 19,  4,  3],
-       [ 1,  3,  0, 14, 22, 22, 21, 13,  2, 13],
-       [14,  4, 14,  0, 11, 13, 10, 10, 24, 11],
-       [ 2, 22, 22, 11,  0, 16,  3, 13,  4,  8],
-       [ 3,  2, 22, 13, 16,  0, 13, 23, 22, 17],
-       [20,  5, 21, 10,  3, 13,  0, 20, 10,  9],
-       [22, 19, 13, 10, 13, 23, 20,  0,  4, 18],
-       [22,  4,  2, 24,  4, 22, 10,  4,  0, 10],
-       [14,  3, 13, 11,  8, 17,  9, 18, 10,  0]]
-
-# funkcija, ki sprejme množico mest in njihove koordinate ter izračuna razdalje med mesti
-# te razdalje zabeleži v matriko
-def izracunaj_razdalje(datoteka):
-    with open(datoteka, 'r') as f:
-        vsebina = f.readlines()
-        st_mest = len(vsebina)
-        matrika = np.zeros(shape=(st_mest,st_mest))
-        mesta = []
-        for vrstica in vsebina:
-            vrstica.strip()
-            mesto, x, y = vrstica.split()
-            mesta += [[int(mesto), float(x), float(y)]]
-        for i in range(0,st_mest):
-            for j in range(i+1, st_mest):
-                matrika[i][j] = (mesta[j][2] - mesta[i][2])**2 + (mesta[j][1] - mesta[i][1])**2
-                matrika[i][i] = 0
-                matrika[j][i] = matrika[i][j] 
-        return matrika
                 
-# ustvarimo slovar cen povezav
+# g je matrika cen povezav 
 def slovar_cen(g):
     r = range(len(g))
     cena = {(i+1, j+1): g[i][j] for i in r for j in r}
@@ -54,14 +27,15 @@ def slovar_cen(g):
 
     # množica vseh rešitev CL je množica vseh Hamiltonovih ciklov v g
     # predstavimo jih kot zaporedja števil (l,1,v2,...,vn), vi je lahko od 2 do n
-    # l je dolžina cikla (1,v2,...,vn) v grafu g 
-
+    # l je dolžina cikla (1,v2,...,vn) v grafu g
+    
 def dolzina_poti(g,pot):
     n = len(g)
     slovar = slovar_cen(g)
     dolzina = 0
     for i in range(1,n):
             dolzina += slovar[(pot[i],pot[i+1])]
+    dolzina += slovar[(pot[n],pot[1])]
     return dolzina
 
 # greedy randomized construction
@@ -71,12 +45,12 @@ def dolzina_poti(g,pot):
 # med p % najbližjih vozlišč do vi-1, ki še niso v t
 # take cikle t konstruiramo toliko časa, da RCL napolnimo
     
-def greedy_construction(g,k):
-    RCL = [0] * k
+def greedy_construction(g, alpha):
+    RCL = [0] * alpha
     slovar = slovar_cen(g)
     n = len(g)
     p = n // 5
-    for j in range(0,k):
+    for j in range(0, alpha):
         t = [0] * (n+1)
         t[1] = 1
         mesta = [h for h in range(2,n+1)]
@@ -133,12 +107,4 @@ def local_search(g,k, iter):
         RCL.sort(key=lambda x: x[0])
     RCL.sort(key=lambda x: x[0])
     return RCL[0]
-<<<<<<< HEAD
-=======
-        
-
-    
-
-
->>>>>>> 3831dbc6195a2916ed02e24b7634ca81374c45ea
 
