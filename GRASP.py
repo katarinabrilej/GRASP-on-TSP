@@ -1,18 +1,6 @@
 import random
 import numpy as np
 
-# izboljšaj funkcijo
-
-# N je število mest (torej dimenzija incidenčne matrike)
-# max_pot je največja razdalja / cena poti
-def TSP(N, max_pot, min_pot = 1):
-    " funkcija vrne naključno matriko cen povezav, ki predstavlja problem potujočega trgovca"
-    a = np.random.randint(min_pot, max_pot, size= (N,N))
-    m = np.tril(a) + np.tril(a, -1).T
-    for i in range(N):
-        m[i][i] = 0
-    return m
-                
 # g je matrika cen povezav 
 def slovar_cen(g):
     r = range(len(g))
@@ -76,8 +64,77 @@ def greedy_construction(g, alpha):
 # če ja, t odstranimo iz RCL in dodamo t'
 # ponavaljamo tolikokrat kot je predpisano (iter)
 
+def dva_opt(n, t,g):
+    slovar = slovar_cen(g)
+    razlika = 0
+    opt_i = 0
+    opt_j = 0
+    for i in range(2,n):
+        for j in range(i+1,n+1):
+            if j != n:
+                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[j+1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[j+1])]
+            else:
+                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]
+                
+            if change < razlika:
+                razlika = change
+                opt_i =  i
+                opt_j = j
 
-def local_search(g,k, iter):
+    if razlika < 0:
+        novi_t = [t[m] for m in range(0,n+1)]
+        novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1]
+
+        novi_t[0] = t[0] + razlika        
+        return novi_t
+    else:
+        return None
+
+
+def tri_opt(n, t,g):
+    slovar = slovar_cen(g)
+    razlika = 0
+
+    novi_t = [t[m] for m in range(0,n+1)]
+    
+    for i in range(2,n-1):
+        for j in range(i+1,n):
+            for k in range(j+1,n+1):
+                A, B, C, D, E = t[i-1], t[i], t[j-1], t[j], t[k-1]
+                if k != n:
+                    F = t[k]
+                else:
+                    F = t[1]
+                d0 = slovar[(A,B)] + slovar[(C,D)] + slovar[(E,F)]
+                d1 = slovar[(A,C)] + slovar[(B,D)] + slovar[(E,F)]
+                d2 = slovar[(A,B)] + slovar[(C,E)] + slovar[(D,F)]
+                d3 = slovar[(A,D)] + slovar[(E,B)] + slovar[(C,F)]
+                d4 = slovar[(F,B)] + slovar[(C,D)] + slovar[(E,A)]
+
+                if d0 > d1:
+                    novi_t[i:j+1] = novi_t[i:j+1][::-1]
+                    razlika = -d0 + d1
+                elif d0 > d2:
+                    novi_t[j:k+1] = novi_t[j:k+1][::-1]
+                    razlika =  -d0 + d2
+                elif d0 > d4:
+                    novi_t[i:k+1] = novi_t[i:k+1][::-1]
+                    razlika = -d0 + d4
+                elif d0 > d3:
+                    tmp = novi_t[j:k+1] + novi_t[i:j+1]
+                    novi_t[i:k+1] = tmp
+                    razlika = -d0 + d3
+                    
+
+
+    if razlika < 0:
+        novi_t[0] = t[0] + razlika        
+        return novi_t
+    else:
+        return None
+            
+
+def local_search(g,k,iter, metoda):
     RCL = greedy_construction(g,k)
     n = len(g)
     slovar = slovar_cen(g)
@@ -88,23 +145,39 @@ def local_search(g,k, iter):
         utezi = [i * 2/((k+1)*k) for i in range(k,0,-1)]
         indeks = np.random.choice(len(RCL), size = 1, p = utezi)
         t = RCL[indeks[0]]
-        okolica = []
-        for i in range(1,n+1):
-            for j in range(i+1,n+1):
-                novi_t = [t[m] for m in range(0,n+1)]
-                element_i = t[i]
-                element_j = t[j]
-                novi_t[i] = element_j 
-                novi_t[j] = element_i
-                
-                novi_t[0] = dolzina_poti(g,novi_t)
-                okolica.append(novi_t)
-        okolica.sort(key=lambda x: x[0])
-        if okolica[0][0] < t[0]:
-                RCL.append(okolica[0])
-                RCL.remove(t)   
+
+        if metoda == "dva_opt":
+            novi_t = dva_opt(n,t,g)
+        elif metoda == "tri_opt":
+            novi_t = tri_opt(n,t,g)
+        
+        if novi_t:
+            RCL.append(novi_t)
+            RCL.remove(t)   
         stevec += 1
         RCL.sort(key=lambda x: x[0])
     RCL.sort(key=lambda x: x[0])
     return RCL[0]
+
+M = [[ 0,  9,  8, 2,  2,  9, 8, 9, 7, 8],
+    [ 9,  0,  7,  9, 8,  4,  7, 9,  8,  2],
+    [8, 7, 0, 9, 8, 9, 3, 2, 7, 9],
+     [2,9,9,0,9,8,7,9,8,1],
+     [2,8,8,9,0,9,3,8,7,9],
+     [9,4,9,8,9,0,9,8,1,7],
+     [8,7,3,7,3,9,0,9,8,9],
+     [9,9,2,9,8,8,9,0,3,8],
+     [7,8,7,8,7,1,8,3,0,9],
+     [8,2,9,1,9,7,9,8,9,0]]
+
+matrika = [[0, 3, 9, 2, 11],
+           [3, 0, 10, 9, 2],
+           [9, 10, 0, 3, 4],
+           [2, 9, 3, 0, 11],
+           [11, 2, 4, 11, 0]]
+
+
+
+
+    
 

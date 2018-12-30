@@ -1,3 +1,22 @@
+import random
+import numpy as np
+
+# izboljšaj funkcijo
+
+# N je število mest (torej dimenzija incidenčne matrike)
+# max_pot je največja razdalja / cena poti
+def TSP(N, max_pot, min_pot = 1):
+    " funkcija vrne naključno matriko cen povezav, ki predstavlja problem potujočega trgovca"
+    a = np.random.randint(min_pot, max_pot, size= (N,N))
+    m = np.tril(a) + np.tril(a, -1).T
+    for i in range(N):
+        m[i][i] = 0
+    return m
+
+
+
+
+
 #import ilp as ILP
 import GRASP as GRASP
 
@@ -43,4 +62,25 @@ matrika = [[0, 3, 9, 2, 11],
            [2, 9, 3, 0, 11],
            [11, 2, 4, 11, 0]]
 
-zgled = GRASP.TSP(10,50)
+M = [[ 0,  9,  8, 2,  2,  9, 8, 9, 7, 8],
+    [ 9,  0,  7,  9, 8,  4,  7, 9,  8,  2],
+    [8, 7, 0, 9, 8, 9, 3, 2, 7, 9],
+     [2,9,9,0,9,8,7,9,8,1],
+     [2,8,8,9,0,9,3,8,7,9],
+     [9,4,9,8,9,0,9,8,1,7],
+     [8,7,3,7,3,9,0,9,8,9],
+     [9,9,2,9,8,8,9,0,3,8],
+     [7,8,7,8,7,1,8,3,0,9],
+     [8,2,9,1,9,7,9,8,9,0]]
+
+with open("swiss42.tsp", 'r') as f:
+    vsebina = f.readlines()
+    st_mest = 42
+    matrika = np.zeros(shape=(st_mest, st_mest))
+    vsebina = vsebina[7:49]
+
+
+    l = [[int(num) for num in line.strip().split()] for line in vsebina ]
+
+GRASP.local_search(M, 5, 100, "dva_opt")
+GRASP.local_search(l, 10, 100, "dva_opt")   
