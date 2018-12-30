@@ -3,7 +3,7 @@ from pulp import *
 import numpy as np
 
 # g je matrika cen povezav
-def slovar_cen(g):
+def slovar_cen_ilp(g):
     r = range(len(g))
     cena = {(i+1, j+1): g[i][j] for i in r for j in r}
     #izbrišemo cene diagonalnih elementov:
@@ -15,7 +15,7 @@ def tsp_as_ilp(g):
     " Funkcija reši problem trgovskega potnika s celoštevilskim linearnim programiranjem."
     " Sprejme matriko cen povezav, izpiše pa minimalno razdaljo/ceno potovanja "
     " in vrne urejen seznam obiskanih mest. "
-    razdalje = slovar_cen(g) # slovar razdalj
+    razdalje = slovar_cen_ilp(g) # slovar razdalj
     mesta = [x+1 for x in range(len(g))]  # seznam mest (od 1 do n)
     prob=LpProblem("salesman", LpMinimize) # definiramo problem
 
