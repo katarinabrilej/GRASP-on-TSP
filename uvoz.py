@@ -81,7 +81,7 @@ def razdalje(datoteka, velikost):
             matrika[i][j] = ((mesta[i][1] - mesta[j][1])**2 + (mesta[i][2] - mesta[j][2])**2)**(1/2)
             matrika[j][i] = matrika[i][j]
             
-    return(utezi)
+    return matrika
 
 
 # primer za tsp berlin52 velikoti 52x52        
