@@ -16,13 +16,13 @@ def preberi_matriko(datoteka,velikost):
 swiss42 = preberi_matriko("swiss42.tsp",42)
 
 #funkcija iz datoteke prebere koordinate mest, te so lahko v decimalnem zapisu ali pa v stopinjah
-def preberi_koordinate(datoteka,velikost):
+def preberi_koordinate(datoteka,velikost,k):
     " funkcija sprejme datoteko v kateri je zapisan TSP problem in velikost ter vrne seznam mest oblike "
     " [mesto, x koordinata, y koordinata]"
     pot = os.path.join(os.getcwd() + "/testni_primeri", datoteka)
     with open(pot, 'r') as f:
         vsebina = f.readlines()
-        vsebina = vsebina[7:(7+velikost)]
+        vsebina = vsebina[k:(k+velikost)]
         mesta = []
         for vrstica in vsebina:
             vrstica.strip()
@@ -36,10 +36,10 @@ def preberi_koordinate(datoteka,velikost):
 # popravi !!!
 
 # v datoteki so v posamezni vrstici napisani zaporedna številka mesta ter koordinate
-def geo_razdalje(datoteka, velikost):
+def geo_razdalje(datoteka, velikost,k = 7):
     " funkcija sprejme množico mest in njihove koordinate ter izračuna razdalje med mesti, ki jih "
     " zabeleži v matriko "
-    mesta = preberi_koordinate(datoteka,velikost)
+    mesta = preberi_koordinate(datoteka,velikost,k)
     matrika = np.zeros((velikost,velikost))
 
     pi = math.pi
@@ -70,10 +70,10 @@ def geo_razdalje(datoteka, velikost):
 ulysses22 = geo_razdalje("ulysses22.tsp",22)
 
 
-def razdalje(datoteka, velikost):
+def razdalje(datoteka, velikost,k = 6):
     " funkcija sprejme množico mest in njihove koordinate ter izračuna evklidske razdalje med mesti, ki jih "
     " zabeleži v matriko "
-    mesta = preberi_koordinate(datoteka,velikost)
+    mesta = preberi_koordinate(datoteka,velikost,k)
     matrika = np.zeros((velikost,velikost))
 
     for i in range(0,velikost):
@@ -85,9 +85,9 @@ def razdalje(datoteka, velikost):
 
 
 # primer za tsp berlin52 velikoti 52x52        
-ulysses22 = razdalje("berlin52.tsp",22)
+berlin52 = razdalje("berlin52.tsp",52)
 
 # primer za tsp kroA100 velikoti 100x100        
-ulysses22 = razdalje("kroA100.tsp",100)
+kroA100 = razdalje("kroA100.tsp",100)
 
 
