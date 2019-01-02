@@ -16,6 +16,7 @@ def TSP(N, max_pot, min_pot = 1):
 
 #import ilp as ILP
 import GRASP as GRASP
+import uvoz as uv
 
 # primer matrike
 K = [[ 0,  2,  1, 14,  2,  3, 20, 22, 22, 14],
@@ -46,3 +47,8 @@ M = [[ 0,  9,  8, 2,  2,  9, 8, 9, 7, 8],
      [9,9,2,9,8,8,9,0,3,8],
      [7,8,7,8,7,1,8,3,0,9],
      [8,2,9,1,9,7,9,8,9,0]]
+
+
+#GRASP.local_search(M, 5, 100, "dva_opt")
+#GRASP.local_search(l, 10, 100, "dva_opt")
+#GRASP.local_search(l, 10, 100, "tri_opt")  
