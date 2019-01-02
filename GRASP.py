@@ -37,7 +37,7 @@ def greedy_construction(g, alpha):
     RCL = [0] * alpha
     slovar = slovar_cen(g)
     n = len(g)
-    p = n // 5
+    p = n // 2  # n//nekaj mora biti vec kot 1 
     for j in range(0, alpha):
         t = [0] * (n+1)
         t[1] = 1

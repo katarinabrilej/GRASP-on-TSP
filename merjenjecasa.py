@@ -8,6 +8,6 @@ def cas_ilp(matrika):
 
 def cas_grasp(matrika,k,iter):
     start = time.time()
-    local_search(matrika,k,iter)
+    local_search(matrika,k,iter, "tri_opt")
     end = time.time()
     return end - start
