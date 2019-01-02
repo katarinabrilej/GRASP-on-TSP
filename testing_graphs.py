@@ -82,5 +82,6 @@ with open("swiss42.tsp", 'r') as f:
 
     l = [[int(num) for num in line.strip().split()] for line in vsebina ]
 
-GRASP.local_search(M, 5, 100, "dva_opt")
-GRASP.local_search(l, 10, 100, "dva_opt")   
+#GRASP.local_search(M, 5, 100, "dva_opt")
+#GRASP.local_search(l, 10, 100, "dva_opt")
+#GRASP.local_search(l, 10, 100, "tri_opt")  

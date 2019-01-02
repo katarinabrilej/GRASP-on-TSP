@@ -67,8 +67,6 @@ def greedy_construction(g, alpha):
 def dva_opt(n, t,g):
     slovar = slovar_cen(g)
     razlika = 0
-    opt_i = 0
-    opt_j = 0
     for i in range(2,n):
         for j in range(i+1,n+1):
             if j != n:
@@ -91,44 +89,82 @@ def dva_opt(n, t,g):
         return None
 
 
-def tri_opt(n, t,g):
+def menjava(indeks,n,t,opt_i,opt_j,opt_k):
+    
+    novi_t = [t[m] for m in range(0,n+1)]
+    
+    if indeks == 1:
+        novi_t[opt_i:opt_k] = novi_t[opt_i:opt_k][::-1]
+    if indeks == 2:
+        novi_t[opt_j:opt_k] = novi_t[opt_j:opt_k][::-1]
+    if indeks == 3:
+        novi_t[opt_i:opt_j] = novi_t[opt_i:opt_j][::-1]
+        
+    if indeks == 4:
+        novi_t[opt_i:opt_j] = novi_t[opt_i:opt_j][::-1]
+        novi_t[opt_j:opt_k] = novi_t[opt_j:opt_k][::-1]
+        
+    if indeks == 5:
+        tmp = novi_t[opt_j:opt_k][::-1] + novi_t[opt_i:opt_j]
+        novi_t[opt_i:opt_k] = tmp
+        
+    if indeks == 6:
+        tmp = novi_t[opt_j:opt_k] + novi_t[opt_i:opt_j][::-1]
+        novi_t[opt_i:opt_k] = tmp
+        
+    if indeks == 7:
+        tmp = novi_t[opt_j:opt_k] + novi_t[opt_i:opt_j]
+        novi_t[opt_i:opt_k] = tmp
+    return novi_t
+        
+
+def tri_opt(n, t, g):
+    #print("nova iteracija")
     slovar = slovar_cen(g)
     razlika = 0
-
-    novi_t = [t[m] for m in range(0,n+1)]
     
     for i in range(2,n-1):
         for j in range(i+1,n):
             for k in range(j+1,n+1):
-                A, B, C, D, E = t[i-1], t[i], t[j-1], t[j], t[k-1]
-                if k != n:
-                    F = t[k]
-                else:
-                    F = t[1]
-                d0 = slovar[(A,B)] + slovar[(C,D)] + slovar[(E,F)]
-                d1 = slovar[(A,C)] + slovar[(B,D)] + slovar[(E,F)]
-                d2 = slovar[(A,B)] + slovar[(C,E)] + slovar[(D,F)]
-                d3 = slovar[(A,D)] + slovar[(E,B)] + slovar[(C,F)]
-                d4 = slovar[(F,B)] + slovar[(C,D)] + slovar[(E,A)]
+                X1, X2, Y1, Y2, Z1, Z2 = t[i-1], t[i], t[j-1], t[j], t[k-1], t[k]
 
-                if d0 > d1:
-                    novi_t[i:j+1] = novi_t[i:j+1][::-1]
-                    razlika = -d0 + d1
-                elif d0 > d2:
-                    novi_t[j:k+1] = novi_t[j:k+1][::-1]
-                    razlika =  -d0 + d2
-                elif d0 > d4:
-                    novi_t[i:k+1] = novi_t[i:k+1][::-1]
-                    razlika = -d0 + d4
-                elif d0 > d3:
-                    tmp = novi_t[j:k+1] + novi_t[i:j+1]
-                    novi_t[i:k+1] = tmp
-                    razlika = -d0 + d3
-                    
 
+# 2 opt moves
+                change1 = slovar[(X1,Z1)] + slovar[(X2,Z2)] -  slovar[(X1,X2)] - slovar[(Z1,Z2)]
+                change2 = slovar[(Y1, Z1)] + slovar[(Y2, Z2)] -  slovar[(Y1, Y2)] - slovar[(Z1, Z2)] 
+                change3 = slovar[(X1, Y1)] + slovar[(X2, Y2)] -  slovar[(X1, X2)] - slovar[(Y1, Y2)]
+# 3 opt moves
+                odstej = slovar[(X1, X2)] + slovar[(Y1, Y2)] + slovar[(Z1, Z2)]
+
+                change4 = slovar[(X1, Y1)] + slovar[(X2, Z1)] + slovar[(Y2, Z2)] -  odstej
+                change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + slovar[(Y1, Z2)] -  odstej
+                change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + slovar[(X2, Z2)] -  odstej
+                change7 = slovar[(X1, Y2)] + slovar[(Z1, X2)] + slovar[(Y1, Z2)] -  odstej
+
+                spremembe = [change1,change2, change3, change4, change5,change6,change7]
+                change = min(spremembe)
+                ind = np.argmin(spremembe) + 1
+
+                if change < razlika:
+##                    print("negativnoooo")
+##                    print(t)
+##                    print(i)
+##                    print(j)
+##                    print(k)
+##                    print(change)
+##                    print("indeks")
+##                    print(ind)
+                    razlika = change
+                    indeks = ind
+                    opt_i =  i
+                    opt_j = j
+                    opt_k = k
 
     if razlika < 0:
-        novi_t[0] = t[0] + razlika        
+        novi_t = menjava(indeks,n,t,opt_i,opt_j,opt_k)
+        novi_t[0] = t[0] + razlika
+##        print("novi_T")
+##        print(novi_t)
         return novi_t
     else:
         return None
@@ -158,26 +194,4 @@ def local_search(g,k,iter, metoda):
         RCL.sort(key=lambda x: x[0])
     RCL.sort(key=lambda x: x[0])
     return RCL[0]
-
-M = [[ 0,  9,  8, 2,  2,  9, 8, 9, 7, 8],
-    [ 9,  0,  7,  9, 8,  4,  7, 9,  8,  2],
-    [8, 7, 0, 9, 8, 9, 3, 2, 7, 9],
-     [2,9,9,0,9,8,7,9,8,1],
-     [2,8,8,9,0,9,3,8,7,9],
-     [9,4,9,8,9,0,9,8,1,7],
-     [8,7,3,7,3,9,0,9,8,9],
-     [9,9,2,9,8,8,9,0,3,8],
-     [7,8,7,8,7,1,8,3,0,9],
-     [8,2,9,1,9,7,9,8,9,0]]
-
-matrika = [[0, 3, 9, 2, 11],
-           [3, 0, 10, 9, 2],
-           [9, 10, 0, 3, 4],
-           [2, 9, 3, 0, 11],
-           [11, 2, 4, 11, 0]]
-
-
-
-
-    
 
