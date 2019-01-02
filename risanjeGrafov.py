@@ -27,3 +27,15 @@ def narisi_graf(matrika):
 # tako, da bomo lahko narisali se resitev
 
     
+def resitev_v_matriko(m, resitev):
+    "resitev metode GRASP (local search) pretvori v matriko"
+    prazna = np.zeros((len(m), len(m)))
+    for k in resitev[1:-1]:
+        prazna[k-1][resitev[resitev.index(k)+1]-1] = m[k-1][resitev[resitev.index(k)+1]-1]
+        prazna[resitev[resitev.index(k)+1]-1][k-1] = m[resitev[resitev.index(k)+1]-1][k-1]
+    prazna[resitev[-1]-1][0] = m[resitev[-1]-1][0]
+    prazna[0][resitev[-1]-1]= m[0][resitev[-1]-1]
+    return prazna
+        
+#dodaj se risanje koordinat  
+    
