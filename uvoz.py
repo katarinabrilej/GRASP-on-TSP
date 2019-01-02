@@ -71,15 +71,23 @@ ulysses22 = geo_razdalje("ulysses22.tsp",22)
 
 
 def razdalje(datoteka, velikost):
-    " funkcija sprejme množico mest in njihove koordinate ter izračuna razdalje med mesti, ki jih "
+    " funkcija sprejme množico mest in njihove koordinate ter izračuna evklidske razdalje med mesti, ki jih "
     " zabeleži v matriko "
     mesta = preberi_koordinate(datoteka,velikost)
+    matrika = np.zeros((velikost,velikost))
+
+    for i in range(0,velikost):
+        for j in range(i+1, velikost):
+            matrika[i][j] = ((mesta[i][1] - mesta[j][1])**2 + (mesta[i][2] - mesta[j][2])**2)**(1/2)
+            matrika[j][i] = matrika[i][j]
+            
+    return(utezi)
 
 
 # primer za tsp berlin52 velikoti 52x52        
-ulysses22 = geo_razdalje("berlin52.tsp",22)
+ulysses22 = razdalje("berlin52.tsp",22)
 
 # primer za tsp kroA100 velikoti 100x100        
-ulysses22 = geo_razdalje("kroA100.tsp",100)
+ulysses22 = razdalje("kroA100.tsp",100)
 
 
