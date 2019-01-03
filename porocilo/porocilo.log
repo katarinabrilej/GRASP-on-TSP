@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  3 JAN 2019 20:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  3 JAN 2019 22:07
 entering extended mode
 **./porocilo.tex
 (porocilo.tex
@@ -357,58 +357,35 @@ g/pdftex.map}] (porocilo.toc)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-Overfull \hbox (11.69994pt too wide) in paragraph at lines 127--128
+Overfull \hbox (11.69994pt too wide) in paragraph at lines 126--127
 \OT1/cmr/m/n/12 potujocega trgovca implementirali metahevristiko GRASP (\OT1/c
 mr/m/it/12 greedy randomized adaptive|
  []
 
 
-Overfull \hbox (3.2043pt too wide) in paragraph at lines 137--138
+Overfull \hbox (3.2043pt too wide) in paragraph at lines 136--137
 \OT1/cmr/m/n/12 polnem grafu $\OML/cmm/m/it/12 K[]$ \OT1/cmr/m/n/12 z utezenim
 i povezavami (pozitivne vrednosti) najdi najkrajsi|
  []
 
 
-Overfull \hbox (22.40736pt too wide) in paragraph at lines 144--146
- \OT1/cmr/m/n/12 2.1.\OT1/cmr/bx/n/12 Celostevilski linearni program in primer
-java z GRASP.[] \OT1/cmr/m/n/12 Problem potujocega|
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
-
- []
-
-
-Overfull \hbox (7.43193pt too wide) in paragraph at lines 170--172
-\OT1/cmr/m/n/12 matriko cen povezav, izpise minimalno ceno potovanja in vrne u
-rejen seznam obiskanih|
- []
-
-[3]
-<casilp.png, id=21, 469.755pt x 286.82156pt>
-File: casilp.png Graphic file (type png)
-<use casilp.png>
-Package pdftex.def Info: casilp.png  used on input line 173.
-(pdftex.def)             Requested size: 375.80452pt x 229.45755pt.
-
-Overfull \hbox (8.0847pt too wide) in paragraph at lines 177--182
+Overfull \hbox (8.0847pt too wide) in paragraph at lines 143--148
 \OT1/cmr/m/n/12 deterministicno in deloma stohasticno, da zagotovimo, da so z
 acetni priblizki obetavni,|
  []
 
 
-Overfull \hbox (15.15222pt too wide) in paragraph at lines 185--189
+Overfull \hbox (15.15222pt too wide) in paragraph at lines 151--155
 \OT1/cmr/m/n/12 iz dveh delov. Najprej bomo predstavili tako imenovan greedy ra
 ndomized construction.|
  []
 
-
+[3]
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/l
 istings/lstlang1.sty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
-) [4 <./casilp.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 193.
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 159.
 
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/b
@@ -416,15 +393,15 @@ ase/omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 193.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 159.
 
-Overfull \hbox (17.4605pt too wide) in paragraph at lines 232--234
+Overfull \hbox (17.4605pt too wide) in paragraph at lines 198--200
  \OT1/cmr/m/n/12 3.2.\OT1/cmr/bx/n/12 Local search.[] \OT1/cmr/m/n/12 V tem del
 u se bomo posvetili drugemu delu algoritma imenovanemu|
  []
 
-[5]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 244.
+[4]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 210.
 
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/b
@@ -432,51 +409,81 @@ ase/omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 244.
- [6]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 210.
+ [5]
 Underfull \vbox (badness 2261) has occurred while \output is active []
 
+ [6]
+Underfull \vbox (badness 7433) has occurred while \output is active []
+
  [7]
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
+
+ []
+
+
+Overfull \hbox (7.43193pt too wide) in paragraph at lines 347--350
+\OT1/cmr/m/n/12 matriko cen povezav, izpise minimalno ceno potovanja in vrne u
+rejen seznam obiskanih|
+ []
+
 [8]
+<casilp.png, id=40, 469.755pt x 286.82156pt>
+File: casilp.png Graphic file (type png)
+<use casilp.png>
+Package pdftex.def Info: casilp.png  used on input line 385.
+(pdftex.def)             Requested size: 375.80452pt x 229.45755pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
+
+ []
+
+[9 <./casilp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 402--403
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
+
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9]
-[10] (porocilo.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ [10]
+[11] (porocilo.aux) ) 
 Here is how much of TeX's memory you used:
- 5553 strings out of 494889
- 75545 string characters out of 3176777
- 531075 words of memory out of 3000000
- 8929 multiletter control sequences out of 15000+200000
+ 5576 strings out of 494889
+ 75823 string characters out of 3176777
+ 541986 words of memory out of 3000000
+ 8952 multiletter control sequences out of 15000+200000
  12011 words of font info for 47 fonts, out of 3000000 for 9000
  162 hyphenation exceptions out of 8191
- 41i,12n,42p,1042b,1723s stack positions out of 5000i,500n,10000p,200000b,50000s
-</Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type
-1/public/amsfonts/cm/cmbx12.pfb></Users/katarina/Library/Application Support/Mi
-KTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/katarina
-/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/
-cm/cmex10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/instal
-l/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/katarina/Library/Applicatio
-n Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Use
-rs/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></Users/katarina/Library/Application Support/MiKTeX/tex
-mfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/katarina/Library/A
-pplication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.p
+ 41i,12n,42p,1042b,1727s stack positions out of 5000i,500n,10000p,200000b,50000s
+</Users/katarina/Library/Application Support/MiKTeX/texmfs
+/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/katarina/Library/App
+lication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.p
 fb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/typ
-e1/public/amsfonts/cm/cmr8.pfb></Users/katarina/Library/Application Support/MiK
-TeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr9.pfb></Users/katarina/Lib
-rary/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb></Users/katarina/Library/Application Sup
-port/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmti12.pfb></Users/ka
-tarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/ams
-fonts/cm/cmtt10.pfb>
-Output written on porocilo.pdf (10 pages, 210011 bytes).
+e1/public/amsfonts/cm/cmex10.pfb></Users/katarina/Library/Application Support/M
+iKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/katarina
+/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/
+cm/cmmi12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/instal
+l/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/katarina/Library/Application
+ Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users
+/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmf
+s/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/katarina/Library/Appl
+ication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr9.pfb><
+/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></Users/katarina/Library/Application Support/MiKTe
+X/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/katarina/Libr
+ary/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cm
+ti12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fon
+ts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on porocilo.pdf (11 pages, 216506 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
+ 97 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
