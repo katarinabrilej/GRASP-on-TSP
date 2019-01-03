@@ -382,8 +382,6 @@ def tsp_as_ilp(g):
     return potovanje
 \end{lstlisting}
 
-Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
-\includegraphics[scale =0.8]{casilp}
 
 
 \section{Primerjave}
@@ -400,10 +398,37 @@ def TSP(N, max_pot, min_pot = 1):
 \end{lstlisting}
 
 \subsection{Primerjava parametra alpha} ~\\
-\subsection{Primerjava ILP in GRASP} ~\\
-\subsection{Primerjava s skupino 7} ~\\
-\section{Zaklju"cek}
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. %testiram nekaj
 
+
+\subsection{Primerjava ILP in GRASP} ~\\
+Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
+
+\begin{figure}[h]
+\caption{Časovna primerjava ILP in GRASP}
+\centering
+\includegraphics[scale =0.8]{casilp}
+\end{figure}
+
+
+\subsection{Primerjava s skupino 7} ~\\
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\begin{figure}[h]
+\caption{Najkraša pot primera berlin52 dolga 7692}
+\centering
+\includegraphics[scale =0.5]{berlin_7692}
+\end{figure}
+
+\begin{figure}[h]
+\caption{Najkrajša pot primera ulysses22, dolga 7013}
+\centering
+\includegraphics[scale =0.5]{ulysses22_7013}
+\end{figure}
+
+\section{Zaklju"cek}
+blabla
 
 \pagebreak
 % seznam uporabljene literature
