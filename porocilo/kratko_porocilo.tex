@@ -8,7 +8,6 @@
 \usepackage{url}
 %\usepackage[normalem]{ulem}
 \usepackage[dvipsnames,usenames]{color}
-\usepackage{graphicx}
 
 % ne spreminjaj podatkov, ki vplivajo na obliko strani
 \textwidth 15cm
@@ -56,7 +55,7 @@
 \newcommand{\imeavtorja}{Katarina Brilej, Sara Kovačič} % ime avtorja
 \newcommand{\imementorja}{prof.~dr. Riste Škrekovski} % akademski naziv in ime mentorja
 \newcommand{\naslovdela}{Uporaba metahevristike GRASP na problemu potujočega trgovca}
-\newcommand{\letnica}{2019} %letnica 
+\newcommand{\letnica}{2018} %letnica 
 
 
 % vstavi svoje definicije ...
@@ -111,7 +110,7 @@ Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
 \end{itemize}
 \hfill \break
 
-\subsection{Celoštevilski linearni program in primerjava z GRASP}  \hfill \break
+\subsection{Celoštevilski linearni program}  \hfill \break
 
 
 Problem potujočega trgovca lahko predstavimo kot \textit{celoštevilski linearni program}.
@@ -140,10 +139,6 @@ $y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
 \end{aligned}
 \end{equation*}
 
-Problem potujočega trgovca se da v pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov. V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest. 
-Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
-
-\includegraphics[scale =0.8]{casilp}
 
 \section{Grasp} 
 
@@ -155,6 +150,7 @@ jo dodamo v RCL ter $s$ odstranimo. To ponavljamo dokler zaustavitveni pogoj (np
 
 \section{Nadaljnje delo}
 
+ Problem potujočega trgovca bova predstavili z matriko, kjer element $a_{i,j}$ matrike $A$ predstavlja razdaljo (oz. ceno) potovanja po poti od mesta $i$ do mesta $j$. Predpostavimo, da je matrika pozitivna in simetrična in, da 0 izven diagonale v tej matriki pomeni, da povezava med mestoma ne obstaja.  Za takšno matriko bova v Pythonu napisali obe fazi algoritma \textit{GRASP} (Greedy randomized construction \textit{in} Local search). Problem potujočega trgovca bova rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bova nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bova primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
  
 
 \pagebreak
