@@ -287,8 +287,8 @@ def dva_opt(n,t,g):
         return None
 \end{lstlisting}
 
-3opt je nekoliko bolj dodelana razli"cica local searcha. Tako kot 2opt sprejme velikost matrike, matriko in cikel t. 
-
+3opt je nekoliko bolj dodelana razli"cica local searcha, zamenjamo namre"c kar tri vozli"s"ca. Tako kot 2opt sprejme velikost matrike, 
+matriko in cikel t. Zaradi peglednosti na za"cetku definiramo spremenljivke X1, X2, Y1, Y2, Z1, Z2. Sedaj imamo 7 mo"znih menjav. Tri od teh so 2opt, "stiri pa 3opt. Za vsako od mo"znih menjav nato izra"cunamo razliko. Ker pri 3opt menjavah odstranimo enake povezave, lahko to shranimo pod spremenljivko odstej. Ko izra"cunamo vse razlike, poi"s"cemo minimum, s tem ko si zabele"zimo, pri katerem indeksu je bila minimalna razlika dose"zena, bomo kasneje vedeli katero menjavo izvesti, saj so te urejene po vrsti v seznamu spremembe. "Ce je change manj"sa od trenutne razlike, pomeni, da lahko t izbolj"samo. Posodobimo razliko, indeks in si zabele"zimo optimalne i,j in k, ki jih bomo potem potrebovali, da izvedemo ustrezno menjavo. Torej "ce je na koncu razlika manj"sa kot 0 lahko zgradimo novi\_t. Ta je odvisen od vrste menjave, ki jo moramo izvr"siti, ta pa je dolo"cena z indeksom in optimalnimi i,j in k. Tako kot pri 2opt tudi tukaj novo dol"zino cikla izra"cunamo tako, da pri"stejemo razliko. 
 
 \begin{lstlisting}[language=Python]
 def tri_opt(n, t, g):
@@ -309,7 +309,7 @@ def tri_opt(n, t, g):
                 change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + slovar[(Y1, Z2)] -  odstej
                 change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + slovar[(X2, Z2)] -  odstej
                 change7 = slovar[(X1, Y2)] + slovar[(Z1, X2)] + slovar[(Y1, Z2)] -  odstej
-
+# izracunamo najmanjso vrednost razlike
                 spremembe = [change1,change2, change3, change4, change5,change6,change7]
                 change = min(spremembe)
                 ind = np.argmin(spremembe) + 1
@@ -327,7 +327,45 @@ def tri_opt(n, t, g):
         return None
 \end{lstlisting}
 
+V naslednji funkciji so opisane menjave, ki jih moramo narediti na trenutnem ciklu t, odvisne pa so od indeksa. 
+
+\begin{lstlisting}[language=Python]
+def menjava(indeks,n,t,opt_i,opt_j,opt_k):   
+    novi_t = [t[m] for m in range(0,n+1)]
+    if indeks == 1:
+        novi_t[opt_i:opt_k] = novi_t[opt_i:opt_k][::-1]
+    if indeks == 2:
+        novi_t[opt_j:opt_k] = novi_t[opt_j:opt_k][::-1]
+    if indeks == 3:
+        novi_t[opt_i:opt_j] = novi_t[opt_i:opt_j][::-1]      
+    if indeks == 4:
+        novi_t[opt_i:opt_j] = novi_t[opt_i:opt_j][::-1]
+        novi_t[opt_j:opt_k] = novi_t[opt_j:opt_k][::-1]      
+    if indeks == 5:
+        tmp = novi_t[opt_j:opt_k][::-1] + novi_t[opt_i:opt_j]
+        novi_t[opt_i:opt_k] = tmp        
+    if indeks == 6:
+        tmp = novi_t[opt_j:opt_k] + novi_t[opt_i:opt_j][::-1]
+        novi_t[opt_i:opt_k] = tmp      
+    if indeks == 7:
+        tmp = novi_t[opt_j:opt_k] + novi_t[opt_i:opt_j]
+        novi_t[opt_i:opt_k] = tmp
+    return novi_t
+\end{lstlisting}
+
 \section{Primerjave}
+Za razli"cne primerjave smo se osredoto"cili na pet grafov, vendar pa ne bomo povsod primerjali vseh. Poleg grafov skupine 7, ti so ulysses22, berlin52 in kroA100 smo si izbrali "se swiss42 in st70. Vse smo dobili iz TSPLIB, kjer so zapisane tudi trenutne znane optimalne re"sitve, ki jih bomo tekom naslednjega poglavja tudi primerjali. Ker pa so podatki za TSP podani v razli"cnih oblikah, smo napisali "se tri razli"cne funkcije za uvoz. Za primerjavo GRASP in ILP pa smo sami generirali nekoliko manj"se matrike. Te so simetri"cne s celo"stevilskimi vrednostmi od 1 pa do maximalne vrednosti, ki jo dolo"cimo sami. 
+
+\begin{lstlisting}[language=Python]
+def TSP(N, max_pot, min_pot = 1):
+    " funkcija vrne nakljucno matriko cen povezav, ki predstavlja problem potujocega trgovca"
+    a = np.random.randint(min_pot, max_pot, size= (N,N))
+    m = np.tril(a) + np.tril(a, -1).T
+    for i in range(N):
+        m[i][i] = 0
+    return m
+\end{lstlisting}
+
 \subsection{Primerjava parametra alpha}
 \subsection{Primerjava ILP in GRASP}
 \subsection{Primerjava s skupino 7}
