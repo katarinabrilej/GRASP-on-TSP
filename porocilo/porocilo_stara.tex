@@ -10,35 +10,6 @@
 \usepackage[dvipsnames,usenames]{color}
 \usepackage{graphicx}
 
-\usepackage{listings}
-\usepackage{color}
- 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
- 
-\lstset{style=mystyle}
-
 % ne spreminjaj podatkov, ki vplivajo na obliko strani
 \textwidth 15cm
 \textheight 24cm
@@ -116,13 +87,14 @@ Ljubljana, \letnica}
 \pagebreak
 
 \thispagestyle{empty}
-\tableofcontents 
+%%%%     \tableofcontents PRI KRATKEM POROČILU NI SMISELNO KAZALO - dodaj pri dolgem
 \pagebreak
 
 
 
 % tu se zacne besedilo seminarja
 \section{Uvod}
+
 
 Metahevristika je algoritemski način reševanja kombinatoričnega optimizacijskega problema, pri katerem na začetku izberemo množico kandidatov za rešitev, in jo iterativno izboljšujemo (glede na neko vnaprej izbrano funkcijo zaželenosti), ter po dovolj korakih vrnemo najboljši element iz te množice. Metahevristike torej vrnejo približne rešitve, a veliko hitreje kot eksaktni postopki. V projektu bova na problem potujočega trgovca implementirali metahevristiko GRASP (\textit{greedy randomized adaptive search procedure}). Problem potujočega trgovca bova rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bova nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bova primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
 
@@ -137,8 +109,9 @@ Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
 \item{\bf Formulacija v matematičnem jeziku}: v (neusmerjenem enostavnem) polnem grafu $K_n$ z uteženimi povezavami (pozitivne vrednosti) najdi najkrajši cikel, ki vsebuje vsa vozlišča. Ciklom, ki vsebujejo vsa vozlišča grafa, pravimo Hamiltonovi cikli.
 
 \end{itemize}
+\hfill \break
 
-\subsection{Celoštevilski linearni program in primerjava z GRASP} 
+\subsection{Celoštevilski linearni program in primerjava z GRASP}  \hfill \break
 
 
 Problem potujočega trgovca lahko predstavimo kot \textit{celoštevilski linearni program}.
@@ -177,98 +150,12 @@ Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo,
 GRASP (\textit{greedy randomized adaptive search procedure}) je metahevristika, ki sestoji iz dveh faz: \textit{greedy randomized construction} in \textit{local search}.
 V prvi fazi na pameten način (odvisno od problema) izberemo izmed vseh možnih rešitev CL (candidate list) množico začetnih približkov RCL (restricted candidates list). 
 To storimo deloma deterministično in deloma stohastično, da zagotovimo, da so začetni približki obetavni, a dovolj razpršeni po celotni množici CL, da bo druga faza pregledala čimvečji del CL. 
-V drugi fazi za vsako izmed teh rešitev $ s \in  RCL $ pregledamo elemente $s' \in CL$ v njeni okolici (kaj je okolica je od problema in načina reševanja odvisno). Če najdemo boljšo rešitev $s'$, 
+V drugi fazi za vsako izmed teh rešitev$ s \in  RCL $ pregledamo elemente $s' \in CL$ v njeni okolici (kaj je okolica je od problema in načina reševanja odvisno). Če najdemo boljšo rešitev $s'$, 
 jo dodamo v RCL ter $s$ odstranimo. To ponavljamo dokler zaustavitveni pogoj (npr. št. iteracij, zahtevana natančnost) ni izpolnjen.
 
-\subsection{Greedy randomized construction} 
+\section{Nadaljnje delo}
 
-Kot smo "ze omenili je GRASP sestavljen iz dveh delov. Najprej bomo predstavili tako imenovan greedy randomized construction.
-Tu parameter alpha predstavlja mo"c mno"zice za"cetnih pribli"zkov (RCL), v na"sem primeru torej dol"zino seznama RCL.
-Za vhodni podatek imamo tudi inciden"cno matriko cen povezav velikosti nxn. g je simetri"cna matrika, z ni"clami po diagonali.
-Na za"cetku jo s pomo"cjo funkcije slovar\_cen spremenimo v slovar, sestavljen iz elementov, ki jo imajo za klju"c povezavo oblike ($x_{i}$, $x_{j}$), za vrednost pa ceno/razdaljo, ki ji pripada. Vsak za"cetni pribli"zek $t = (l,1,v_{2}, \dots,v_{n})$ iz RCL konstruiramo tako, da dolo"cimo $v_{1} := 1$ nato iteraticno za$ i = 2, \dots,n$ za $v{i}$ izberemo naklju"cno med p \% najbli"zjih vozli"s"c do $v{i-1}$, ki "se niso v  $t$. Na koncu "se izra"cunamo dol"zino poti s prej definirano funkcijo dolzina\_poti in jo postavimo na ni"cto mesto. Take cikle $t$ konstruiramo toliko 2casa, da RCL napolnimo. "Ce delamo z matrikami velikosti manj kot 5, moramo nastaviti tudi parameter deles, saj mora vrednost n // delez presegati "stevilo 1.  
-
-\begin{lstlisting}[language=Python]
-def greedy_construction(g, alpha, delez = 5):
-    RCL = [0] * alpha
-    slovar = slovar_cen(g)
-    n = len(g)
-    p = n // delez
-    for j in range(0, alpha):
-        t = [0] * (n+1)
-        t[1] = 1
-        mesta = [h for h in range(2,n+1)]
-        for i in range(2,n+1):
-            povezave = [(t[i-1],m) for m in mesta]
-            cene = { key:value for key, value in slovar.items() if key in povezave }
-            urejene_povezave = sorted(cene, key=cene.__getitem__)
-            (_,vi) = random.choice(urejene_povezave[:p])
-            t[i] = vi
-            mesta.remove(vi)
-        t[0] = dolzina_poti(g,t)
-        RCL[j] = t
-    return RCL
-\end{lstlisting}
-
-\subsection{Local search} 
-
-V tem delu se bomo posvetili drugemu delu algoritma imenovanemu local search. Obravnavali bomo dve metodi 2opt in 3opt. Funkcija local\_search zato poleg matrike g, parametra alpha in "stevila iteracij sprejme "se parameter metodo. 
-Na za"cetku definiramo RCL, ki predstavlja za"cetni seznam pribli"zkov. Te nato uredimo po dol"zini, primerjamo jih po prvem elementu, ki predstavlja dol"zino poti. Nato naklju"cno izberemo t iz RCL, toda z linerano padajo"co verjetnostjo. Najverjetneje izbereme cikel na vrhu RCL , torej najkraj"si. Ko imamo izbran t se na podlagi parametra metoda odlo"cimo za 2opt ali pa 3opt. Obe metodi poizku"sata pribli"zek izbolj"sati, "ce jima uspe, vrneta novi\_t. Neodvisno od metode nato v primeru, da je izbolj"sava uspela v RCL dodamo izbolj"san pribli"zek in starega odstranimo. Kasneje si bomo ogledali "se kako posamezna metoda deluje. Ponavljamo tolikokrat kot je predpisano, to nam dolo"ca iter. 
-
-
-\begin{lstlisting}[language=Python]
-def local_search(g,k,iter,metoda):
-    RCL = greedy_construction(g,k)
-    n = len(g)
-    slovar = slovar_cen(g)
-    #urejen seznam zacetnih priblizkov
-    RCL.sort(key=lambda x: x[0])
-    stevec = 0
-    while stevec < iter:
-        utezi = [i * 2/((k+1)*k) for i in range(k,0,-1)]
-        indeks = np.random.choice(len(RCL), size = 1, p = utezi)
-        t = RCL[indeks[0]]
-
-        if metoda == "dva_opt":
-            novi_t = dva_opt(n,t,g)
-        elif metoda == "tri_opt":
-            novi_t = tri_opt(n,t,g)
-        
-        if novi_t:
-            RCL.append(novi_t)
-            RCL.remove(t)   
-        stevec += 1
-        RCL.sort(key=lambda x: x[0])
-    RCL.sort(key=lambda x: x[0])
-    return RCL[0]
-\end{lstlisting}
-
-"Ce si zdaj ogledamo "se kako delujeta posamezni metodi. Za"cnimo s preprostej"so, 2opt. 
-Ko naklju"cno izberemo cikel t, mu priredimo okolico. Definirana je kot monožica vseh ciklov t' iz CL, ki jih dobimo iz t tako, da mu zamenjamo dve vozišči, torej naključno zamenjamo dve vozlišči t. 
-
-\begin{lstlisting}[language=Python]
-def dva_opt(n, t,g):
-    slovar = slovar_cen(g)
-    razlika = 0
-    for i in range(2,n):
-        for j in range(i+1,n+1):
-            if j != n:
-                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[j+1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[j+1])]
-            else:
-                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]
-                
-            if change < razlika:
-                razlika = change
-                opt_i =  i
-                opt_j = j
-    if razlika < 0:
-        novi_t = [t[m] for m in range(0,n+1)]
-        novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1]
-
-        novi_t[0] = t[0] + razlika        
-        return novi_t
-    else:
-        return None
-\end{lstlisting}
+ 
 
 \pagebreak
 % seznam uporabljene literature
