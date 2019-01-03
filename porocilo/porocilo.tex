@@ -138,39 +138,6 @@ Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
 
 \end{itemize}
 
-\subsection{Celoštevilski linearni program in primerjava z GRASP} 
-
-
-Problem potujočega trgovca lahko predstavimo kot \textit{celoštevilski linearni program}.
-Označimo mesta s števili $1, \ldots, n$. Strošek (ali razdalja) potovanja iz mesta $i$ v mesto $j$ je $c_{i,j}$, ( $ 1\leq i, j\leq n$). Minimiziramo strošek potovanja. Definiramo:
-
-$$ X_{i,j} := \left\{ \begin{array}{ll}
-1 ~; & \textrm{potnik gre iz mesta $i$ v mesto $j$}, \\
-0 ~; & \textrm{sicer},
-\end{array} \right. $$
-
-\hfill \break
-
-$y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
-
-
-\begin{equation*}
-\begin{aligned}
-& {\text{min}}
-& & \sum_{i=1}^{n} \sum_{j=1}^{n}  x_{i,j} \cdot c_{i,j} \\
-& \text{p. p.}
-& &\sum_{i=1}^{n} x_{i,j} = 1, \text{ za vsak $j$ }\\
-&&&\sum_{j=1}^{n} x_{i,j} = 1, \text{ za vsak $i$ }\\
-&&&  x_{i,j} \in \{0,1\}, \text{ za vsak $i$ in vsak $j$ }\\
-&&& y_{i} \in \{1, \ldots, n\}; \text{za vsak $i$}\\
-&&& y_{i} + 1 - n + n \cdot x_{i,j} \leq y_{j}; \text{za vsak $i$ in vsak $j>1$}
-\end{aligned}
-\end{equation*}
-
-Problem potujočega trgovca se da v pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov. V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest. 
-Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
-
-\includegraphics[scale =0.8]{casilp}
 
 \section{Grasp} 
 
@@ -353,6 +320,72 @@ def menjava(indeks,n,t,opt_i,opt_j,opt_k):
     return novi_t
 \end{lstlisting}
 
+\section{Celoštevilski linearni program in primerjava z GRASP} 
+
+Problem potujočega trgovca lahko predstavimo kot \textit{celoštevilski linearni program}.
+Označimo mesta s števili $1, \ldots, n$. Strošek (ali razdalja) potovanja iz mesta $i$ v mesto $j$ je $c_{i,j}$, ( $ 1\leq i, j\leq n$). Minimiziramo strošek potovanja. Definiramo:
+
+$$ X_{i,j} := \left\{ \begin{array}{ll}
+1 ~; & \textrm{potnik gre iz mesta $i$ v mesto $j$}, \\
+0 ~; & \textrm{sicer},
+\end{array} \right. $$
+
+\hfill \break
+
+$y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
+
+\begin{equation*}
+\begin{aligned}
+& {\text{min}}
+& & \sum_{i=1}^{n} \sum_{j=1}^{n}  x_{i,j} \cdot c_{i,j} \\
+& \text{p. p.}
+& &\sum_{i=1}^{n} x_{i,j} = 1, \text{ za vsak $j$ }\\
+&&&\sum_{j=1}^{n} x_{i,j} = 1, \text{ za vsak $i$ }\\
+&&&  x_{i,j} \in \{0,1\}, \text{ za vsak $i$ in vsak $j$ }\\
+&&& y_{i} \in \{1, \ldots, n\}; \text{za vsak $i$}\\
+&&& y_{i} + 1 - n + n \cdot x_{i,j} \leq y_{j}; \text{za vsak $i$ in vsak $j>1$}
+\end{aligned}
+\end{equation*}
+\\
+Problem potujočega trgovca se da v Pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov. V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest.
+
+\begin{lstlisting}[language=Python]
+from pulp import *
+def tsp_as_ilp(g):
+    razdalje = slovar_cen_ilp(g)   # slovar razdalj 
+    mesta = [x+1 for x in range(len(g))]  # seznam mest (od 1 do n)
+    prob = LpProblem("salesman", LpMinimize) # definiramo problem
+    x = LpVariable.dicts('x', razdalje, 0,1, LpBinary) 
+    cena = lpSum([x[(i,j)]*razdalje[(i,j)] for (i,j) in razdalje]) 
+    prob += cena
+    for k in mesta:  # pri pogojih:
+        prob += lpSum([ x[(i,k)] for i in mesta if (i,k) in x]) == 1  
+        prob += lpSum([ x[(k,i)] for i in mesta if (k,i) in x]) == 1  
+    u = LpVariable.dicts('u', mesta, 0, len(mesta)-1, LpInteger) 
+    N = len(mesta)
+    for i in mesta:  
+        for j in mesta:
+            if i != j and (i != 1 and j!= 1) and (i,j) in x:
+                prob += u[i] - u[j] <= (N)*(1-x[(i,j)]) - 1
+    prob.solve() # PuLP sam izbere metodo
+    sites_left = mesta.copy()
+    org = 1 
+    potovanje = []
+    potovanje.append(sites_left.pop(sites_left.index(org))) 
+    while len(sites_left) > 0:
+        for k in sites_left:
+            if x[(org,k)].varValue == 1:
+                potovanje.append(sites_left.pop(sites_left.index(k)))
+                org = k             
+    potovanje.append(1)    
+    print("Optimalna cena potovanja = ", value(prob.objective))
+    return potovanje
+\end{lstlisting}
+
+Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
+\includegraphics[scale =0.8]{casilp}
+
+
 \section{Primerjave}
 Za razli"cne primerjave smo se osredoto"cili na pet grafov, vendar pa ne bomo povsod primerjali vseh. Poleg grafov skupine 7, ti so ulysses22, berlin52 in kroA100 smo si izbrali "se swiss42 in st70. Vse smo dobili iz TSPLIB, kjer so zapisane tudi trenutne znane optimalne re"sitve, ki jih bomo tekom naslednjega poglavja tudi primerjali. Ker pa so podatki za TSP podani v razli"cnih oblikah, smo napisali "se tri razli"cne funkcije za uvoz. Za primerjavo GRASP in ILP pa smo sami generirali nekoliko manj"se matrike. Te so simetri"cne s celo"stevilskimi vrednostmi od 1 pa do maximalne vrednosti, ki jo dolo"cimo sami. 
 
@@ -366,9 +399,9 @@ def TSP(N, max_pot, min_pot = 1):
     return m
 \end{lstlisting}
 
-\subsection{Primerjava parametra alpha}
-\subsection{Primerjava ILP in GRASP}
-\subsection{Primerjava s skupino 7}
+\subsection{Primerjava parametra alpha} ~\\
+\subsection{Primerjava ILP in GRASP} ~\\
+\subsection{Primerjava s skupino 7} ~\\
 \section{Zaklju"cek}
 
 
