@@ -3,12 +3,23 @@ import numpy as np
 import os
 import math
 
+
+# N je število mest (torej dimenzija incidenčne matrike)
+# max_pot je največja razdalja / cena poti
+def TSP(N, max_pot, min_pot = 1):
+    " funkcija vrne naključno matriko cen povezav, ki predstavlja problem potujočega trgovca"
+    a = np.random.randint(min_pot, max_pot, size= (N,N))
+    m = np.tril(a) + np.tril(a, -1).T
+    for i in range(N):
+        m[i][i] = 0
+    return m
+
 # funkcija, ki prebere TSP, če je zapisan kot txt matrika in naredi matriko
-def preberi_matriko(datoteka,velikost):
+def preberi_matriko(datoteka,velikost, k = 7):
     pot = os.path.join(os.getcwd() + "/testni_primeri", datoteka)
     with open(pot, 'r') as f:
         vsebina = f.readlines()
-        vsebina = vsebina[7:(7+velikost)]
+        vsebina = vsebina[k:(k+velikost)]
     matrika = [[int(num) for num in line.strip().split()] for line in vsebina]
     return matrika
 
@@ -31,9 +42,6 @@ def preberi_koordinate(datoteka,velikost,k):
             mesta += [[int(mesto), float(x), float(y)]]
         return mesta
 
-
-# funkcija trenutno razdalje računa, kot da bi bile v koordinatnem sistemu in ne na krogli
-# popravi !!!
 
 # v datoteki so v posamezni vrstici napisani zaporedna številka mesta ter koordinate
 def geo_razdalje(datoteka, velikost,k = 7):
