@@ -78,7 +78,6 @@ def dva_opt(n, t,g):
                 razlika = change
                 opt_i =  i
                 opt_j = j
-
     if razlika < 0:
         novi_t = [t[m] for m in range(0,n+1)]
         novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1]
@@ -119,23 +118,19 @@ def menjava(indeks,n,t,opt_i,opt_j,opt_k):
         
 
 def tri_opt(n, t, g):
-    #print("nova iteracija")
     slovar = slovar_cen(g)
-    razlika = 0
-    
+    razlika = 0    
     for i in range(2,n-1):
         for j in range(i+1,n):
             for k in range(j+1,n+1):
                 X1, X2, Y1, Y2, Z1, Z2 = t[i-1], t[i], t[j-1], t[j], t[k-1], t[k]
-
-
 # 2 opt moves
                 change1 = slovar[(X1,Z1)] + slovar[(X2,Z2)] -  slovar[(X1,X2)] - slovar[(Z1,Z2)]
                 change2 = slovar[(Y1, Z1)] + slovar[(Y2, Z2)] -  slovar[(Y1, Y2)] - slovar[(Z1, Z2)] 
                 change3 = slovar[(X1, Y1)] + slovar[(X2, Y2)] -  slovar[(X1, X2)] - slovar[(Y1, Y2)]
 # 3 opt moves
                 odstej = slovar[(X1, X2)] + slovar[(Y1, Y2)] + slovar[(Z1, Z2)]
-
+# v vseh treh primerih odstranimo enake povezave
                 change4 = slovar[(X1, Y1)] + slovar[(X2, Z1)] + slovar[(Y2, Z2)] -  odstej
                 change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + slovar[(Y1, Z2)] -  odstej
                 change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + slovar[(X2, Z2)] -  odstej
@@ -144,32 +139,19 @@ def tri_opt(n, t, g):
                 spremembe = [change1,change2, change3, change4, change5,change6,change7]
                 change = min(spremembe)
                 ind = np.argmin(spremembe) + 1
-
                 if change < razlika:
-##                    print("negativnoooo")
-##                    print(t)
-##                    print(i)
-##                    print(j)
-##                    print(k)
-##                    print(change)
-##                    print("indeks")
-##                    print(ind)
                     razlika = change
                     indeks = ind
                     opt_i =  i
                     opt_j = j
                     opt_k = k
-
     if razlika < 0:
         novi_t = menjava(indeks,n,t,opt_i,opt_j,opt_k)
         novi_t[0] = t[0] + razlika
-##        print("novi_T")
-##        print(novi_t)
         return novi_t
     else:
         return None
             
-
 def local_search(g,k,iter, metoda):
     RCL = greedy_construction(g,k)
     n = len(g)

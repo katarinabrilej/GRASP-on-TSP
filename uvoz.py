@@ -4,7 +4,7 @@ import os
 import math
 
 
-# N je število mest (torej dimenzija incidenčne matrike)
+# N je stevilo mest (torej dimenzija incidencne matrike)
 # max_pot je največja razdalja / cena poti
 def TSP(N, max_pot, min_pot = 1):
     " funkcija vrne naključno matriko cen povezav, ki predstavlja problem potujočega trgovca"

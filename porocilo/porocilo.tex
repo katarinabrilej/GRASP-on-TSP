@@ -116,7 +116,7 @@ Ljubljana, \letnica}
 \pagebreak
 
 \thispagestyle{empty}
-\tableofcontents 
+\tableofcontents
 \pagebreak
 
 
@@ -188,6 +188,24 @@ Za vhodni podatek imamo tudi inciden"cno matriko cen povezav velikosti nxn. g je
 Na za"cetku jo s pomo"cjo funkcije slovar\_cen spremenimo v slovar, sestavljen iz elementov, ki jo imajo za klju"c povezavo oblike ($x_{i}$, $x_{j}$), za vrednost pa ceno/razdaljo, ki ji pripada. Vsak za"cetni pribli"zek $t = (l,1,v_{2}, \dots,v_{n})$ iz RCL konstruiramo tako, da dolo"cimo $v_{1} := 1$ nato iteraticno za$ i = 2, \dots,n$ za $v{i}$ izberemo naklju"cno med p \% najbli"zjih vozli"s"c do $v{i-1}$, ki "se niso v  $t$. Na koncu "se izra"cunamo dol"zino poti s prej definirano funkcijo dolzina\_poti in jo postavimo na ni"cto mesto. Take cikle $t$ konstruiramo toliko 2casa, da RCL napolnimo. "Ce delamo z matrikami velikosti manj kot 5, moramo nastaviti tudi parameter deles, saj mora vrednost n // delez presegati "stevilo 1.  
 
 \begin{lstlisting}[language=Python]
+def slovar_cen(g):
+    r = range(len(g))
+    cena = {(i+1, j+1): g[i][j] for i in r for j in r}
+    return cena
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def dolzina_poti(g,pot):
+    n = len(g)
+    slovar = slovar_cen(g)
+    dolzina = 0
+    for i in range(1,n):
+            dolzina += slovar[(pot[i],pot[i+1])]
+    dolzina += slovar[(pot[n],pot[1])]
+    return dolzina
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
 def greedy_construction(g, alpha, delez = 5):
     RCL = [0] * alpha
     slovar = slovar_cen(g)
@@ -243,10 +261,11 @@ def local_search(g,k,iter,metoda):
 \end{lstlisting}
 
 "Ce si zdaj ogledamo "se kako delujeta posamezni metodi. Za"cnimo s preprostej"so, 2opt. 
-Ko naklju"cno izberemo cikel t, mu priredimo okolico. Definirana je kot monožica vseh ciklov t' iz CL, ki jih dobimo iz t tako, da mu zamenjamo dve vozišči, torej naključno zamenjamo dve vozlišči t. 
+Ko naklju"cno izberemo cikel t, ga "zelimo izbolj"sati. Kraj"si cikel i"s"cemo v okolici, ki je definirana kot monožica vseh ciklov t' iz CL, 
+ki jih dobimo iz t tako, da mu zamenjamo dve vozišči, torej naključno zamenjamo dve vozlišči t. Namesto, da bi shranjevali vse mo"zne  t' in na koncu preverili, "ce je najkraj"si kraj"si od trenutnega t, je bolj u"cinkovito, "ce sproti preverjamo, "ce posamezna menjava prinese izbolj"savo. Na za"cetku zato definiramo spremenljivko razlika, ta meri, "ce je dana menjava bolj"sa. Nato moramo v zanki lo"citi dva primera, saj v primeru, da je j = n, razdremo povezavo s prvim elementom. Nato izra"cunamo change, "ce je ta manj"si od trenutne razlike, jo posodobimo, saj smo dobili kraj"si cikel. Shranimo si tudi optimalni i in j, da bomo na koncu vedeli s katero menjavo smo dosegli najkraj"si cikel. "Ce smo uspeli izbolj"sati t, bo razlika negativna in dobili bomo novi\_t. Tega konstruiramo tako, da na starem t izvedemo menjavo dolo"ceno z optimalnim i in j. Namesto, da znova ra"cunamo celotno dol"zino cikla, samo pri"stejemo razliko, ki je nagativna. 
 
 \begin{lstlisting}[language=Python]
-def dva_opt(n, t,g):
+def dva_opt(n,t,g):
     slovar = slovar_cen(g)
     razlika = 0
     for i in range(2,n):
@@ -254,8 +273,7 @@ def dva_opt(n, t,g):
             if j != n:
                 change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[j+1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[j+1])]
             else:
-                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]
-                
+                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]               
             if change < razlika:
                 razlika = change
                 opt_i =  i
@@ -263,12 +281,58 @@ def dva_opt(n, t,g):
     if razlika < 0:
         novi_t = [t[m] for m in range(0,n+1)]
         novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1]
-
         novi_t[0] = t[0] + razlika        
         return novi_t
     else:
         return None
 \end{lstlisting}
+
+3opt je nekoliko bolj dodelana razli"cica local searcha. Tako kot 2opt sprejme velikost matrike, matriko in cikel t. 
+
+
+\begin{lstlisting}[language=Python]
+def tri_opt(n, t, g):
+    slovar = slovar_cen(g)
+    razlika = 0    
+    for i in range(2,n-1):
+        for j in range(i+1,n):
+            for k in range(j+1,n+1):
+                X1, X2, Y1, Y2, Z1, Z2 = t[i-1], t[i], t[j-1], t[j], t[k-1], t[k]
+# 2 opt moves
+                change1 = slovar[(X1,Z1)] + slovar[(X2,Z2)] -  slovar[(X1,X2)] - slovar[(Z1,Z2)]
+                change2 = slovar[(Y1, Z1)] + slovar[(Y2, Z2)] -  slovar[(Y1, Y2)] - slovar[(Z1, Z2)] 
+                change3 = slovar[(X1, Y1)] + slovar[(X2, Y2)] -  slovar[(X1, X2)] - slovar[(Y1, Y2)]
+# 3 opt moves
+                odstej = slovar[(X1, X2)] + slovar[(Y1, Y2)] + slovar[(Z1, Z2)]
+# v vseh treh primerih odstranimo enake povezave
+                change4 = slovar[(X1, Y1)] + slovar[(X2, Z1)] + slovar[(Y2, Z2)] -  odstej
+                change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + slovar[(Y1, Z2)] -  odstej
+                change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + slovar[(X2, Z2)] -  odstej
+                change7 = slovar[(X1, Y2)] + slovar[(Z1, X2)] + slovar[(Y1, Z2)] -  odstej
+
+                spremembe = [change1,change2, change3, change4, change5,change6,change7]
+                change = min(spremembe)
+                ind = np.argmin(spremembe) + 1
+                if change < razlika:
+                    razlika = change
+                    indeks = ind
+                    opt_i =  i
+                    opt_j = j
+                    opt_k = k
+    if razlika < 0:
+        novi_t = menjava(indeks,n,t,opt_i,opt_j,opt_k)
+        novi_t[0] = t[0] + razlika
+        return novi_t
+    else:
+        return None
+\end{lstlisting}
+
+\section{Primerjave}
+\subsection{Primerjava parametra alpha}
+\subsection{Primerjava ILP in GRASP}
+\subsection{Primerjava s skupino 7}
+\section{Zaklju"cek}
+
 
 \pagebreak
 % seznam uporabljene literature
