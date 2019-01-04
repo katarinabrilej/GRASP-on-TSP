@@ -420,6 +420,22 @@ KroA100   &      &   &   &    &  &21282  \\
 \end{table}
 
 
+\subsection{Primerjava glede na število iteracij} ~\\
+
+Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij sva preizkusili na primeru St70 (velikosti 70). Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2opt dobilo še le pri 600 iteracijah. 
+
+\begin{figure}[h]
+\caption{Odvisnost rešitve od števila iteracij}
+\centering
+\includegraphics[scale =0.8]{resitev_iteracije}
+\end{figure}
+
+Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASPA uporabimo več iteracij kot pri metodi 3opt. 
+\begin{figure}[h]
+\caption{Odvisnost časa izvajanja od števila iteracij}
+\centering
+\includegraphics[scale =0.8]{cas_izvajanja}
+\end{figure}
 
 \subsection{Primerjava s skupino 7} ~\\
 
@@ -446,7 +462,17 @@ KroA100   & 21761 & 36408
 \end{figure}
 
 \section{Zaklju"cek}
-blabla
+
+The description of GRASP as given
+above indicates that a basic GRASP does
+not use the history of the search process.11
+The only memory requirement is for storing the problem instance and for keeping the best so-far solution. This is one
+of the reasons why GRASP is often outperformed by other metaheuristics. However, due to its simplicity, it is generally
+very fast and it is able to produce quite
+good solutions in a very short amount of
+computation time. Furthermore, it can be
+successfully integrated into other search
+techniques.
 
 \pagebreak
 % seznam uporabljene literature
