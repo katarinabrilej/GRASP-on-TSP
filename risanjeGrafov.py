@@ -14,12 +14,15 @@ def ustvarigraf(matrika):
                 G.add_edge(i+1, j+1, length = matrika[i][j])
     return G
 
-def narisigraf(G):
-	pos = nx.spring_layout(G)
-	nx.draw(G, pos, with_labels = True, edge_color = 'black')  #with_labels=true is to show the node number in the output graph
-	edge_labels = nx.get_edge_attributes(G,'length')
-	nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labels,  font_size = 11) #napiše uteži na povezave
-	return pos, plt.show()
+def narisigraf(matrika):
+    G = ustvarigraf(matrika)
+    pos = nx.circular_layout(G) # izberi med kamada_kawai_layout, spring_layout, circular_layout itd..
+    nx.draw(G, pos, with_labels = True, edge_color = 'black')  #with_labels=true is to show the node number in the output graph
+    edge_labels = nx.get_edge_attributes(G,'length')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labels,  font_size = 11) #napiše uteži na povezave
+    return pos, plt.show()
+
+
     
 def resitev_v_matriko(m, resitev):
     "resitev metode GRASP (local search) pretvori v matriko"
@@ -31,9 +34,6 @@ def resitev_v_matriko(m, resitev):
     prazna[0][resitev[-1]-1]= m[0][resitev[-1]-1]
     return prazna
 
-def narisi_graf(matrika):
-    G = ustvarigraf(matrika)
-    return narisigraf(G)
 
 ## Risanje omrežja z upoštevanjem koordinat (v 2D):
 
