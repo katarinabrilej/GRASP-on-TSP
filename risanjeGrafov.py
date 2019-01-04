@@ -37,22 +37,10 @@ def narisi_graf(matrika):
 
 ## Risanje omrežja z upoštevanjem koordinat (v 2D):
 
-def preberi_koordinate(datoteka,velikost,k):
-    " funkcija sprejme datoteko v kateri je zapisan TSP problem in velikost ter vrne seznam mest oblike "
-    " [mesto, x koordinata, y koordinata]"
-    pot = os.path.join(os.getcwd() + "/testni_primeri", datoteka)
-    with open(pot, 'r') as f:
-        vsebina = f.readlines()
-        vsebina = vsebina[k:(k+velikost)]
-        mesta = []
-        for vrstica in vsebina:
-            vrstica.strip()
-            ## print(vrstica.split())
-            mesto, x, y = vrstica.split()
-            mesta += [[int(mesto), float(x), float(y)]]
-        return mesta
-    
-# koord = preberi_koordinate("berlin52.tsp",52,6)
+import uvoz as uv
+
+# koord = uv.preberi_koordinate("berlin52.tsp",52,6)
+# koord = uv.preberi_koordinate("ulysses22.tsp",22,6)
 
 def uredi_mesta(koord, resitev):
     "uredi seznam s koordinatami mest v vrstni red optimalne poti"
@@ -63,17 +51,17 @@ def uredi_mesta(koord, resitev):
     nove.append(nove[0])
     return nove
 
-def narisi(positions, resitev):
+def narisi(koord, resitev):
     "positions = seznam, ki ga vrne funkcija preberi_koordinate,"
     "resitev = seznam, ki ga vrne algoritem GRASP"
-    positions = uredi_mesta(positions, resitev)
-    positions = np.array(positions)
+    koord = uredi_mesta(koord, resitev)
+    koord = np.array(koord)
     fig, ax = plt.subplots(2, sharex=True, sharey=True)  # Prepare 2 plots
     ax[0].set_title('Mesta')
     ax[1].set_title('Optimalna pot')
-    ax[0].scatter(positions[:, 1], positions[:, 2])             # plot A
-    ax[1].scatter(positions[:, 1], positions[:, 2])             # plot B
-    ax[1].plot(positions[:, 1], positions[:, 2])                # plot B
+    ax[0].scatter(koord[:, 1], koord[:, 2])             # plot A
+    ax[1].scatter(koord[:, 1], koord[:, 2])             # plot B
+    ax[1].plot(koord[:, 1], koord[:, 2])                # plot B
     plt.tight_layout()
     plt.show()
 
