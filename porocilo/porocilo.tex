@@ -10,6 +10,8 @@
 \usepackage[dvipsnames,usenames]{color}
 \usepackage{graphicx}
 
+\usepackage[table,xcdraw]{xcolor}
+
 \usepackage{listings}
 \usepackage{color}
  
@@ -402,6 +404,28 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 \subsection{Primerjava ILP in GRASP} ~\\
 Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
+
+\begin{table}[h]
+\begin{tabular}{llllll}
+\rowcolor[HTML]{FFCCC9} 
+TSP       &      & 3 & 5 & 10 & 15 \\ \hline
+Ulysses22 &      &   &   &    &    \\
+          & 2-opt & 7013  &  7013 & 7013   & 7013   \\
+          & 3-opt &   7013&  7013 &  7013  &  7013  \\
+Swiss42   &      &   &   &    &    \\
+	& 2-opt &   1273&  1273 &   1365 &  1592  \\
+          & 3-opt &  1273 &  1273 & 1316   &  1273  \\
+Berlin52 &      &   &   &    &    \\
+	 & 2-opt &  7716 & 8130 &   8629 &  10464  \\
+          & 3-opt &  7803 &  7692 &  7983  & 8705   \\
+St70      &      &   &   &    &    \\
+	& 2-opt &  714 &  888 &   1211 &  1386  \\
+          & 3-opt &  684 &  754 &    &    \\
+KroA100   &      &   &   &    &    \\
+	& 2-opt &  37162 &  54119 &   74951 &   74462 \\
+          & 3-opt &   &   &    &   
+\end{tabular}
+\end{table}
 
 \begin{figure}[h]
 \caption{Časovna primerjava ILP in GRASP}

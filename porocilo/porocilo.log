@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  3 JAN 2019 22:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  4 JAN 2019 08:32
 entering extended mode
 **./porocilo.tex
 (porocilo.tex
@@ -213,57 +213,97 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
 )
+("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/x
+color/xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/g
+raphics-cfg/color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/c
+olortbl/colortbl.sty"
+Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
+
+("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/t
+ools/array.sty"
+Package: array 2018/04/30 v2.4h Tabular extension package (FMi)
+\col@sep=\dimen117
+\ar@mcellbox=\box29
+\extrarowheight=\dimen118
+\NC@list=\toks28
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box30
+)
+\everycr=\toks29
+\minrowclearance=\skip53
+)
+LaTeX Info: Redefining \color on input line 709.
+\rownum=\count102
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/l
 istings/listings.sty"
-\lst@mode=\count102
-\lst@gtempboxa=\box29
-\lst@token=\toks28
-\lst@length=\count103
-\lst@currlwidth=\dimen117
-\lst@column=\count104
-\lst@pos=\count105
-\lst@lostspace=\dimen118
-\lst@width=\dimen119
-\lst@newlines=\count106
-\lst@lineno=\count107
-\lst@maxwidth=\dimen120
+\lst@mode=\count103
+\lst@gtempboxa=\box31
+\lst@token=\toks30
+\lst@length=\count104
+\lst@currlwidth=\dimen119
+\lst@column=\count105
+\lst@pos=\count106
+\lst@lostspace=\dimen120
+\lst@width=\dimen121
+\lst@newlines=\count107
+\lst@lineno=\count108
+\lst@maxwidth=\dimen122
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/l
 istings/lstmisc.sty"
 File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
-\c@lstnumber=\count108
-\lst@skipnumbers=\count109
-\lst@framebox=\box30
+\c@lstnumber=\count109
+\lst@skipnumbers=\count110
+\lst@framebox=\box32
 )
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/l
 istings/listings.cfg"
 File: listings.cfg 2018/09/02 1.7 listings configuration
 ))
 Package: listings 2018/09/02 1.7 (Carsten Heinz)
-\c@definicija=\count110
-\odstavek=\skip51
+\c@definicija=\count111
+\odstavek=\skip54
  (porocilo.aux)
 \openout1 = `porocilo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Try loading font information for U+msa on input line 98.
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/a
 msfonts/umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+LaTeX Font Info:    Try loading font information for U+msb on input line 98.
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/a
 msfonts/umsb.fd"
@@ -272,17 +312,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/context
 /base/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count111
-\scratchdimen=\dimen121
-\scratchbox=\box31
-\nofMPsegments=\count112
-\nofMParguments=\count113
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count114
-\MPscratchDim=\dimen122
-\MPnumerator=\count115
-\makeMPintoPDFobject=\count116
-\everyMPtoPDFconversion=\toks30
+\scratchcounter=\count112
+\scratchdimen=\dimen123
+\scratchbox=\box33
+\nofMPsegments=\count113
+\nofMParguments=\count114
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen124
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
+\everyMPtoPDFconversion=\toks32
 )
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/o
 berdiek/epstopdf-base.sty"
@@ -347,7 +387,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\c@lstlisting=\count117
+\c@lstlisting=\count118
  [1{/Users/katarina/Library/Application Support/MiKTeX/texmfs/data/pdftex/confi
 g/pdftex.map}] (porocilo.toc)
 \tf@toc=\write3
@@ -357,25 +397,25 @@ g/pdftex.map}] (porocilo.toc)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-Overfull \hbox (11.69994pt too wide) in paragraph at lines 126--127
+Overfull \hbox (11.69994pt too wide) in paragraph at lines 128--129
 \OT1/cmr/m/n/12 potujocega trgovca implementirali metahevristiko GRASP (\OT1/c
 mr/m/it/12 greedy randomized adaptive|
  []
 
 
-Overfull \hbox (3.2043pt too wide) in paragraph at lines 136--137
+Overfull \hbox (3.2043pt too wide) in paragraph at lines 138--139
 \OT1/cmr/m/n/12 polnem grafu $\OML/cmm/m/it/12 K[]$ \OT1/cmr/m/n/12 z utezenim
 i povezavami (pozitivne vrednosti) najdi najkrajsi|
  []
 
 
-Overfull \hbox (8.0847pt too wide) in paragraph at lines 143--148
+Overfull \hbox (8.0847pt too wide) in paragraph at lines 145--150
 \OT1/cmr/m/n/12 deterministicno in deloma stohasticno, da zagotovimo, da so z
 acetni priblizki obetavni,|
  []
 
 
-Overfull \hbox (15.15222pt too wide) in paragraph at lines 151--155
+Overfull \hbox (15.15222pt too wide) in paragraph at lines 153--157
 \OT1/cmr/m/n/12 iz dveh delov. Najprej bomo predstavili tako imenovan greedy ra
 ndomized construction.|
  []
@@ -385,7 +425,7 @@ ndomized construction.|
 istings/lstlang1.sty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 159.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 161.
 
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/b
@@ -393,15 +433,15 @@ ase/omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 159.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 161.
 
-Overfull \hbox (17.4605pt too wide) in paragraph at lines 198--200
+Overfull \hbox (17.4605pt too wide) in paragraph at lines 200--202
  \OT1/cmr/m/n/12 3.2.\OT1/cmr/bx/n/12 Local search.[] \OT1/cmr/m/n/12 V tem del
 u se bomo posvetili drugemu delu algoritma imenovanemu|
  []
 
 [4]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 210.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 212.
 
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/b
@@ -409,7 +449,7 @@ ase/omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 210.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 212.
  [5]
 Underfull \vbox (badness 2261) has occurred while \output is active []
 
@@ -417,73 +457,87 @@ Underfull \vbox (badness 2261) has occurred while \output is active []
 Underfull \vbox (badness 7433) has occurred while \output is active []
 
  [7]
-Underfull \hbox (badness 10000) in paragraph at lines 332--333
+Underfull \hbox (badness 10000) in paragraph at lines 334--335
 
  []
 
 
-Overfull \hbox (7.43193pt too wide) in paragraph at lines 347--350
+Overfull \hbox (7.43193pt too wide) in paragraph at lines 349--352
 \OT1/cmr/m/n/12 matriko cen povezav, izpise minimalno ceno potovanja in vrne u
 rejen seznam obiskanih|
  []
 
 [8]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 <casilp.png, id=40, 469.755pt x 286.82156pt>
 File: casilp.png Graphic file (type png)
 <use casilp.png>
-Package pdftex.def Info: casilp.png  used on input line 385.
+Package pdftex.def Info: casilp.png  used on input line 433.
 (pdftex.def)             Requested size: 375.80452pt x 229.45755pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
 
  []
 
-[9 <./casilp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
-
- []
+[9]
+<berlin_7692.png, id=45, 568.0422pt x 214.6419pt>
+File: berlin_7692.png Graphic file (type png)
+<use berlin_7692.png>
+Package pdftex.def Info: berlin_7692.png  used on input line 444.
+(pdftex.def)             Requested size: 284.0204pt x 107.32068pt.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
- [10]
-[11] (porocilo.aux) ) 
+<ulysses22_7013.png, id=46, 462.528pt x 179.2296pt>
+File: ulysses22_7013.png Graphic file (type png)
+<use ulysses22_7013.png>
+Package pdftex.def Info: ulysses22_7013.png  used on input line 450.
+(pdftex.def)             Requested size: 231.26343pt x 89.61456pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 1264) has occurred while \output is active []
+
+ [10 <./casilp.png>] [11 <./berlin_7692.png> <./ulysses22_7013.png>] (porocilo.
+aux) ) 
 Here is how much of TeX's memory you used:
- 5576 strings out of 494889
- 75823 string characters out of 3176777
- 541986 words of memory out of 3000000
- 8952 multiletter control sequences out of 15000+200000
+ 6122 strings out of 494889
+ 82607 string characters out of 3176777
+ 553372 words of memory out of 3000000
+ 9483 multiletter control sequences out of 15000+200000
  12011 words of font info for 47 fonts, out of 3000000 for 9000
  162 hyphenation exceptions out of 8191
- 41i,12n,42p,1042b,1727s stack positions out of 5000i,500n,10000p,200000b,50000s
-</Users/katarina/Library/Application Support/MiKTeX/texmfs
-/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/katarina/Library/App
-lication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.p
-fb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/typ
-e1/public/amsfonts/cm/cmex10.pfb></Users/katarina/Library/Application Support/M
-iKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/katarina
-/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/
-cm/cmmi12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/instal
-l/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/katarina/Library/Application
- Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users
-/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmf
-s/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/katarina/Library/Appl
-ication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr9.pfb><
+ 41i,13n,42p,1042b,1727s stack positions out of 5000i,500n,10000p,200000b,50000s
+</Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/
+type1/public/amsfonts/cm/cmbx12.pfb></Users/katarina/Library/Application Suppor
+t/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/kata
+rina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/in
+stall/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/katarina/Library/Applic
+ation Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 /Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb></Users/katarina/Library/Application Support/MiKTe
-X/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/katarina/Libr
-ary/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cm
-ti12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fon
-ts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on porocilo.pdf (11 pages, 216506 bytes).
+ublic/amsfonts/cm/cmmi8.pfb></Users/katarina/Library/Application Support/MiKTeX
+/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/katarina/Libra
+ry/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts
+/type1/public/amsfonts/cm/cmr8.pfb></Users/katarina/Library/Application Support
+/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr9.pfb></Users/katarina
+/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/instal
+l/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/katarina/Library/Application
+ Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmti12.pfb></User
+s/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public
+/amsfonts/cm/cmtt10.pfb>
+Output written on porocilo.pdf (11 pages, 259058 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

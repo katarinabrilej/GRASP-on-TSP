@@ -40,7 +40,7 @@ def povprecje(ponovitve,g,k,iter, metoda):
             min_pot = resitev
             
     povprecje = vsota / ponovitve
-    return (povprecje, min_resitev)
+    return (povprecje, min_resitev, min_pot)
 
 # primerjava rezultatov za različne vrednosti parametra alfa
 
@@ -50,19 +50,20 @@ def povprecje(ponovitve,g,k,iter, metoda):
 
 # dva_opt
 
-## povprecje(10,ulysses22,3,100,"dva_opt") # best = 7013
-## povprecje(10,ulysses22,5,100,"dva_opt") # best = 7013
-## povprecje(10,ulysses22,10,100,"dva_opt") # best = 7013
-## povprecje(10,ulysses22,15,100,"dva_opt") # best = 7013
+print("ulysses22")
+print(povprecje(10,ulysses22,3,100,"dva_opt")) # best = 7013
+print(povprecje(10,ulysses22,5,100,"dva_opt")) # best = 7013
+print(povprecje(10,ulysses22,10,100,"dva_opt")) # best = 7013
+print(povprecje(10,ulysses22,15,100,"dva_opt")) # best = 7013
 
 # vedno vrne optimalno vrednost 7013, neodvisno od parametra alfa
 
 # tri_opt
 
-## povprecje(10,ulysses22,3,100,"tri_opt") # best = 7013
-## povprecje(10,ulysses22,5,100,"tri_opt") # best = 7013
-## povprecje(10,ulysses22,10,100,"tri_opt") # best = 7013
-## povprecje(10,ulysses22,15,100,"tri_opt") # best = 7013
+print(povprecje(10,ulysses22,3,100,"tri_opt")) # best = 7013
+print(povprecje(10,ulysses22,5,100,"tri_opt")) # best = 7013
+print(povprecje(10,ulysses22,10,100,"tri_opt")) # best = 7013
+print(povprecje(10,ulysses22,15,100,"tri_opt")) # best = 7013
 
 
 # swiss42 velikosti 42x42
@@ -70,19 +71,21 @@ def povprecje(ponovitve,g,k,iter, metoda):
 
 # dva_opt
 
-## povprecje(10,swiss42,3,100,"dva_opt") # best = 1273
-## povprecje(10,swiss42,5,100,"dva_opt") # best = 1273
-## povprecje(10,swiss42,10,100,"dva_opt") # best = 1464
-## povprecje(10,swiss42,15,100,"dva_opt") # best = 1728
+print("swiss42")
+
+print(povprecje(10,swiss42,3,100,"dva_opt")) # best = 1273
+print(povprecje(10,swiss42,5,100,"dva_opt")) # best = 1273
+print(povprecje(10,swiss42,10,100,"dva_opt")) # best = 1420
+print(povprecje(10,swiss42,15,100,"dva_opt")) # best = 1592
 
 # če je iter = 1000 -> vedno vrne optimalen rezultat 1273, neodvisno od parametra alfa
 
 # tri_opt
 
-## povprecje(10,swiss42,3,100,"tri_opt") # best = 1332
-## povprecje(10,swiss42,5,100,"tri_opt") # best = 1321
-## povprecje(10,swiss42,10,100,"tri_opt") # best = 1359
-## povprecje(10,swiss42,15,100,"tri_opt") # best = 1400
+print(povprecje(10,swiss42,3,100,"tri_opt")) # best = 1273
+print(povprecje(10,swiss42,5,100,"tri_opt")) # best = 1273
+print(povprecje(10,swiss42,10,100,"tri_opt")) # best = 1316
+print(povprecje(10,swiss42,15,100,"tri_opt")) # best = 1273
 
 
 # berlin52 velikosti 52x52
@@ -90,18 +93,19 @@ def povprecje(ponovitve,g,k,iter, metoda):
 # 7542 je optimalna rešitev
 
 # dva_opt
+print("berlin52")
 
-## povprecje(10,berlin52,3,100,"dva_opt") # best = 7716
-## povprecje(10,berlin52,5,100,"dva_opt") # best = 8130
-## povprecje(10,berlin52,10,100,"dva_opt") # best = 8629
-## povprecje(10,berlin52,15,100,"dva_opt") # best = 10464
+print(povprecje(10,berlin52,3,100,"dva_opt")) # best = 7716
+print(povprecje(10,berlin52,5,100,"dva_opt")) # best = 8130
+print(povprecje(10,berlin52,10,100,"dva_opt")) # best = 8629
+print(povprecje(10,berlin52,15,100,"dva_opt")) # best = 10464
 
 # tri_opt
 
-## povprecje(10,berlin52,3,100,"tri_opt") # best = 7803
-## povprecje(10,berlin52,5,100,"tri_opt") # best = 7692
-## povprecje(10,berlin52,10,100,"tri_opt") # best = 7983
-## povprecje(10,berlin52,15,100,"tri_opt") # best = 8705
+print(povprecje(10,berlin52,3,100,"tri_opt")) # best = 7803
+print(povprecje(10,berlin52,5,100,"tri_opt")) # best = 7692
+print(povprecje(10,berlin52,10,100,"tri_opt")) # best = 7983
+print(povprecje(10,berlin52,15,100,"tri_opt")) # best = 8705
 
 # opt pot
 # [7692.430405071905, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50, 29, 16, 46, 44,
@@ -114,18 +118,19 @@ def povprecje(ponovitve,g,k,iter, metoda):
 # 675 je znana optimalna rešitev
 
 # dva_opt
+print("st70")
 
-## povprecje(10,st70,3,100,"dva_opt") # best = 714
-## povprecje(10,st70,5,100,"dva_opt") # best = 888
-## povprecje(10,st70,10,100,"dva_opt") # best = 1211
-## povprecje(10,st70,15,100,"dva_opt") # best = 1386
+print(povprecje(10,st70,3,100,"dva_opt")) # best = 714
+print(povprecje(10,st70,5,100,"dva_opt")) # best = 888
+print(povprecje(10,st70,10,100,"dva_opt")) # best = 1211
+print(povprecje(10,st70,15,100,"dva_opt")) # best = 1386
 
 # tri_opt
 
-## povprecje(10,st70,3,100,"tri_opt") # best = 684
-## povprecje(10,st70,5,100,"tri_opt") # best = 754
-## povprecje(10,st70,10,100,"tri_opt") # best = 
-## povprecje(10,st70,15,100,"tri_opt") # best =
+print(povprecje(10,st70,3,100,"tri_opt")) # best = 684
+print(povprecje(10,st70,5,100,"tri_opt")) # best = 754
+print(povprecje(10,st70,10,100,"tri_opt")) # best = 
+print(povprecje(10,st70,15,100,"tri_opt")) # best =
 
 
 #[684.9533643299762, 1, 36, 29, 13, 70, 35, 69, 31, 38, 59, 22, 66, 63, 57, 15, 24, 19, 55, 49, 26, 8,
@@ -137,18 +142,18 @@ def povprecje(ponovitve,g,k,iter, metoda):
 # 21282 je znana optimalna rešitev
 
 # dva_opt
-
-## povprecje(2,kroA100,3,100,"dva_opt") # best = 37162 (oz. 21909, če je iter = 1000 )
-## povprecje(2,kroA100,5,100,"dva_opt") # best = 54119 (oz. 21855, če je iter = 1000 )
-## povprecje(2,kroA100,10,100,"dva_opt") # best = 74951 (oz. 21761, če je iter = 1000 )
-## povprecje(2,kroA100,15,100,"dva_opt") # best = 74462 (oz. 22508, če je iter = 1000 )
+print("kroA100")
+print(povprecje(10,kroA100,3,100,"dva_opt")) # best = 37162 (oz. 21909, če je iter = 1000 )
+print(povprecje(10,kroA100,5,100,"dva_opt")) # best = 54119 (oz. 21855, če je iter = 1000 )
+print(povprecje(10,kroA100,10,100,"dva_opt")) # best = 74951 (oz. 21761, če je iter = 1000 )
+print(povprecje(10,kroA100,15,100,"dva_opt")) # best = 74462 (oz. 22508, če je iter = 1000 )
 
 # tri_opt
 
-## povprecje(2,kroA100,3,100,"tri_opt") # best = 
-## povprecje(2,kroA100,5,100,"tri_opt") # best = 
-## povprecje(2,kroA100,10,100,"tri_opt") # best = 
-## povprecje(2,kroA100,15,100,"tri_opt") # best = 
+print(povprecje(10,kroA100,3,100,"tri_opt")) # best = 
+print(povprecje(10,kroA100,5,100,"tri_opt")) # best = 
+print(povprecje(10,kroA100,10,100,"tri_opt")) # best = 
+print(povprecje(10,kroA100,15,100,"tri_opt")) # best = 
 
 #[21761.92240454664, 1, 93, 28, 67, 58, 61, 51, 87, 25, 81, 69, 64, 40, 54, 2, 44, 50,
 # 73, 68, 85, 39, 82, 95, 13, 76, 33, 37, 5, 52, 78, 96, 30, 48, 100, 41, 71, 14, 3, 43,
