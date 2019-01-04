@@ -329,7 +329,9 @@ $y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
 \end{aligned}
 \end{equation*}
 \\
-Problem potujočega trgovca se da v Pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov. V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest.
+Problem potujočega trgovca se da v Pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov.
+ V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest.
+ V nadaljevanju je prikazan del funkcije $ tsp\_as\_ilp$, v katerem definiramo problem in ga rešimo. Na repozitoriju se nahaja celotna funckija, ki vrne urejen seznam obiskanih mest.
 
 \begin{lstlisting}[language=Python]
 from pulp import *
@@ -350,18 +352,7 @@ def tsp_as_ilp(g):
             if i != j and (i != 1 and j!= 1) and (i,j) in x:
                 prob += u[i] - u[j] <= (N)*(1-x[(i,j)]) - 1
     prob.solve() # PuLP sam izbere metodo
-    sites_left = mesta.copy()
-    org = 1 
-    potovanje = []
-    potovanje.append(sites_left.pop(sites_left.index(org))) 
-    while len(sites_left) > 0:
-        for k in sites_left:
-            if x[(org,k)].varValue == 1:
-                potovanje.append(sites_left.pop(sites_left.index(k)))
-                org = k             
-    potovanje.append(1)    
-    print("Optimalna cena potovanja = ", value(prob.objective))
-    return potovanje
+    print("Optimalna cena potovanja = ", value(prob.objective))   
 \end{lstlisting}
 
 
@@ -380,7 +371,10 @@ def TSP(N, max_pot, min_pot = 1):
 \end{lstlisting}
 
 \subsection{Primerjava ILP in GRASP} ~\\
-Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
+Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. Za potrebe primerjave, smo za parametre pri $GRASP$ vzeli alpha=3, število iteracij=100 in metodo $3opt$. 
+V nadaljevanju bomo ugotovili, da na čas izvajanja local\_search-a vplivata tudi število iteracij in predvsem metoda, zato časovna primerjava funkcij $ tsp\_as\_ilp$ in $GRASP$ ni najbolj točna. Ker za majhne grafe $GRASP$ tudi pri 100 iteracijah vrne pravilno (optimalno) rešitev,
+lahko vseeno sklepamo, da deluje hitreje kot $ tsp\_as\_ilp$. 
+
 
 \begin{figure}[h]
 \caption{Časovna primerjava ILP in GRASP}
@@ -422,7 +416,7 @@ KroA100   &      &   &   &    &  &21282  \\
 
 \subsection{Primerjava glede na število iteracij} ~\\
 
-Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij sva preizkusili na primeru St70 (velikosti 70). Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2opt dobilo še le pri 600 iteracijah. 
+Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij smo preizkusili na primeru St70 (velikosti 70). Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2opt dobimo še le pri 600 iteracijah. 
 
 \begin{figure}[h]
 \caption{Odvisnost rešitve od števila iteracij}
@@ -430,7 +424,8 @@ Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. O
 \includegraphics[scale =0.8]{resitev_iteracije}
 \end{figure}
 
-Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASPA uporabimo več iteracij kot pri metodi 3opt. 
+Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a uporabimo več iteracij kot pri metodi 3opt. Metoda 3opt uporabi $\mathcal{O}(n^3)$ operacij, 2opt pa ima kvadratično časovno zahtevnost oz. $\mathcal{O}(n^2)$.
+
 \begin{figure}[h]
 \caption{Odvisnost časa izvajanja od števila iteracij}
 \centering
@@ -450,9 +445,9 @@ KroA100   & 21761 & 36408
 \end{table}
 
 \begin{figure}[h]
-\caption{Najkraša pot primera berlin52 dolga 7692}
+\caption{Najkraša pot primera berlin52 dolga 7544}
 \centering
-\includegraphics[scale =0.5]{berlin_7692}
+\includegraphics[scale =0.5]{berlin_7544}
 \end{figure}
 
 \begin{figure}[h]
@@ -461,19 +456,17 @@ KroA100   & 21761 & 36408
 \includegraphics[scale =0.5]{ulysses22_7013}
 \end{figure}
 
+\begin{figure}[h]
+\caption{Najkrajša pot primera kroA100, dolga 21761}
+\centering
+\includegraphics[scale =0.5]{kroA100_21761}
+\end{figure}
+
 \section{Zaklju"cek}
 
-The description of GRASP as given
-above indicates that a basic GRASP does
-not use the history of the search process.11
-The only memory requirement is for storing the problem instance and for keeping the best so-far solution. This is one
-of the reasons why GRASP is often outperformed by other metaheuristics. However, due to its simplicity, it is generally
-very fast and it is able to produce quite
-good solutions in a very short amount of
-computation time. Furthermore, it can be
-successfully integrated into other search
-techniques.
-
+V projektni nalogi ugotovimo, da osnovni algoritem GRASP ne uporablja celotne zgodovine iskanja, potrebuje pa najboljšo že doseženo rešitev. 
+Zaradi tega dobivajo druge metahevristike boljše rešitve, vendar pa je algoritem zaradi dvoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
+Furthermore, it can besuccessfully integrated into other search techniques. %to še ttreba urediti
 \pagebreak
 % seznam uporabljene literature
 \begin{thebibliography}{99}

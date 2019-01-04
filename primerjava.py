@@ -82,6 +82,10 @@ povprecje(10,swiss42,5,100,"tri_opt") # best = 1273
 povprecje(10,swiss42,10,100,"tri_opt") # best = 1316
 povprecje(10,swiss42,15,100,"tri_opt") # best = 1273
 
+#opt pot: [1273, 1, 33, 35, 34, 21, 36, 37, 32, 18, 8, 38,
+#16, 17, 15, 20, 14, 6, 27, 19, 13, 12, 26,
+#11, 9, 42, 24, 10, 22, 41, 25, 40, 23, 39, 31, 30, 29, 3, 28, 4, 5, 7, 2]
+
 
 # berlin52 velikosti 52x52
 # ponovitve = 10, iter = 100
@@ -96,10 +100,23 @@ povprecje(10,berlin52,15,100,"dva_opt") # best = 10464
 
 # tri_opt
 
+<<<<<<< HEAD
 povprecje(10,berlin52,3,100,"tri_opt") # best = 7616
 povprecje(10,berlin52,5,100,"tri_opt") # best = 7684
 povprecje(10,berlin52,10,100,"tri_opt") # best = 7735
 povprecje(10,berlin52,15,100,"tri_opt") # best = 8705
+=======
+print(povprecje(10,berlin52,3,100,"tri_opt")) # best = 7616
+print(povprecje(10,berlin52,5,100,"tri_opt")) # best = 7684
+print(povprecje(10,berlin52,10,100,"tri_opt")) # best = 7735
+print(povprecje(10,berlin52,15,100,"tri_opt")) # best = 8705
+
+# opt pot
+# [7544.365901904088, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23,
+# 20, 50, 29, 16, 46, 44, 34, 35, 36, 39, 40, 37, 38, 48, 24, 5, 15, 6, 4,
+# 25, 12, 28, 27, 26, 47, 13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 32, 49]
+
+>>>>>>> a11040c3e988a2255fd8865ffe7988ed1c6dcbf9
 
 #GRASP.local_search(berlin52,10,10000,"dva_opt")
 #[7544.365901904088, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50,
