@@ -3,7 +3,6 @@ import random
 #import ilp as ILP
 import GRASP as GRASP
 import uvoz as uv
-import matrike as m
 
 
 # funkcije
@@ -50,67 +49,62 @@ def povprecje(ponovitve,g,k,iter, metoda):
 
 # dva_opt
 
-print("ulysses22")
-print(povprecje(10,ulysses22,3,100,"dva_opt")) # best = 7013
-print(povprecje(10,ulysses22,5,100,"dva_opt")) # best = 7013
-print(povprecje(10,ulysses22,10,100,"dva_opt")) # best = 7013
-print(povprecje(10,ulysses22,15,100,"dva_opt")) # best = 7013
+##povprecje(10,ulysses22,3,100,"dva_opt") # best = 7013
+##povprecje(10,ulysses22,5,100,"dva_opt") # best = 7013
+##povprecje(10,ulysses22,10,100,"dva_opt") # best = 7013
+##povprecje(10,ulysses22,15,100,"dva_opt") # best = 7013
 
 # vedno vrne optimalno vrednost 7013, neodvisno od parametra alfa
 
 # tri_opt
 
-print(povprecje(10,ulysses22,3,100,"tri_opt")) # best = 7013
-print(povprecje(10,ulysses22,5,100,"tri_opt")) # best = 7013
-print(povprecje(10,ulysses22,10,100,"tri_opt")) # best = 7013
-print(povprecje(10,ulysses22,15,100,"tri_opt")) # best = 7013
-
+##povprecje(10,ulysses22,3,100,"tri_opt") # best = 7013
+##povprecje(10,ulysses22,5,100,"tri_opt") # best = 7013
+##povprecje(10,ulysses22,10,100,"tri_opt") # best = 7013
+##povprecje(10,ulysses22,15,100,"tri_opt") # best = 7013
 
 # swiss42 velikosti 42x42
 # ponovitve = 10, iter = 100
 
 # dva_opt
 
-print("swiss42")
-
-print(povprecje(10,swiss42,3,100,"dva_opt")) # best = 1273
-print(povprecje(10,swiss42,5,100,"dva_opt")) # best = 1273
-print(povprecje(10,swiss42,10,100,"dva_opt")) # best = 1420
-print(povprecje(10,swiss42,15,100,"dva_opt")) # best = 1592
+povprecje(10,swiss42,3,100,"dva_opt") # best = 1273
+povprecje(10,swiss42,5,100,"dva_opt") # best = 1273
+povprecje(10,swiss42,10,100,"dva_opt") # best = 1420
+povprecje(10,swiss42,15,100,"dva_opt") # best = 1592
 
 # če je iter = 1000 -> vedno vrne optimalen rezultat 1273, neodvisno od parametra alfa
 
 # tri_opt
 
-print(povprecje(10,swiss42,3,100,"tri_opt")) # best = 1273
-print(povprecje(10,swiss42,5,100,"tri_opt")) # best = 1273
-print(povprecje(10,swiss42,10,100,"tri_opt")) # best = 1316
-print(povprecje(10,swiss42,15,100,"tri_opt")) # best = 1273
+povprecje(10,swiss42,3,100,"tri_opt") # best = 1273
+povprecje(10,swiss42,5,100,"tri_opt") # best = 1273
+povprecje(10,swiss42,10,100,"tri_opt") # best = 1316
+povprecje(10,swiss42,15,100,"tri_opt") # best = 1273
 
 
 # berlin52 velikosti 52x52
 # ponovitve = 10, iter = 100
-# 7542 je optimalna rešitev
+# 7542 je znana optimalna rešitev
 
 # dva_opt
-print("berlin52")
 
-print(povprecje(10,berlin52,3,100,"dva_opt")) # best = 7716
-print(povprecje(10,berlin52,5,100,"dva_opt")) # best = 8130
-print(povprecje(10,berlin52,10,100,"dva_opt")) # best = 8629
-print(povprecje(10,berlin52,15,100,"dva_opt")) # best = 10464
+povprecje(10,berlin52,3,100,"dva_opt") # best = 7716
+povprecje(10,berlin52,5,100,"dva_opt") # best = 8130
+povprecje(10,berlin52,10,100,"dva_opt") # best = 8629
+povprecje(10,berlin52,15,100,"dva_opt") # best = 10464
 
 # tri_opt
 
-print(povprecje(10,berlin52,3,100,"tri_opt")) # best = 7616
-print(povprecje(10,berlin52,5,100,"tri_opt")) # best = 7684
-print(povprecje(10,berlin52,10,100,"tri_opt")) # best = 7735
-print(povprecje(10,berlin52,15,100,"tri_opt")) # best = 8705
+povprecje(10,berlin52,3,100,"tri_opt") # best = 7616
+povprecje(10,berlin52,5,100,"tri_opt") # best = 7684
+povprecje(10,berlin52,10,100,"tri_opt") # best = 7735
+povprecje(10,berlin52,15,100,"tri_opt") # best = 8705
 
-# opt pot
-#[7616.0298784508095, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50, 29, 16, 46, 44, 34, 35, 36, 39, 40,
-# 37, 38, 48, 24, 5, 15, 6, 4, 25, 12, 28, 27, 26, 47, 13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 49, 32]
-
+#GRASP.local_search(berlin52,10,10000,"dva_opt")
+#[7544.365901904088, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50,
+# 29, 16, 46, 44, 34, 35, 36, 39, 40, 37, 38, 48, 24, 5,
+# 15, 6, 4, 25, 12, 28, 27, 26, 47, 13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 32, 49]
 
 # st70 velikosti 70x70
 # ponovitve = 10, iter = 100
@@ -126,11 +120,16 @@ print(povprecje(10,st70,15,100,"dva_opt")) # best = 1386
 
 # tri_opt
 
-print(povprecje(10,st70,3,100,"tri_opt")) # best = 684
-print(povprecje(10,st70,5,100,"tri_opt")) # best = 754
-print(povprecje(10,st70,10,100,"tri_opt")) # best = 878
-print(povprecje(10,st70,15,100,"tri_opt")) # best =
+povprecje(10,st70,3,100,"tri_opt") # best = 684
+povprecje(10,st70,5,100,"tri_opt") # best = 754
+povprecje(10,st70,10,100,"tri_opt") # best = 878
+povprecje(10,st70,15,100,"tri_opt") # best =
 
+
+#print(povprecje(100,st70,3,1000,"dva_opt"))
+ #[682.1505924549166, 1, 23, 16, 47, 37, 58, 50, 51, 56, 65, 64, 11, 67, 48, 54, 62, 33, 34, 21, 12, 60,
+ # 52, 10, 5, 53, 6, 41, 43, 17, 9, 61, 39, 25, 45, 40, 46, 27, 68, 44, 30, 20,
+ # 14, 28, 49, 55, 26, 8, 3, 32, 42, 18, 4, 2, 7, 19, 24, 15, 57, 63, 66, 22, 59, 38, 31, 69, 35, 70, 13, 29, 36]
 
 #[684.9533643299762, 1, 36, 29, 13, 70, 35, 69, 31, 38, 59, 22, 66, 63, 57, 15, 24, 19, 55, 49, 26, 8,
 # 28, 14, 20, 30, 27, 46, 45, 25, 39, 61, 40, 9, 68, 44, 3, 32, 7, 2, 4, 18, 42, 6, 41, 43,
