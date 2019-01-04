@@ -102,15 +102,14 @@ print(povprecje(10,berlin52,15,100,"dva_opt")) # best = 10464
 
 # tri_opt
 
-print(povprecje(10,berlin52,3,100,"tri_opt")) # best = 7803
-print(povprecje(10,berlin52,5,100,"tri_opt")) # best = 7692
-print(povprecje(10,berlin52,10,100,"tri_opt")) # best = 7983
+print(povprecje(10,berlin52,3,100,"tri_opt")) # best = 7616
+print(povprecje(10,berlin52,5,100,"tri_opt")) # best = 7684
+print(povprecje(10,berlin52,10,100,"tri_opt")) # best = 7735
 print(povprecje(10,berlin52,15,100,"tri_opt")) # best = 8705
 
 # opt pot
-# [7692.430405071905, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50, 29, 16, 46, 44,
-# 49, 32, 45, 19, 41, 8, 9, 10, 43, 33, 51, 11, 52, 14, 13, 47, 26, 27, 28, 12, 25, 4, 6,
-# 15, 5, 24, 48, 38, 37, 40, 39, 36, 35, 34]
+#[7616.0298784508095, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50, 29, 16, 46, 44, 34, 35, 36, 39, 40,
+# 37, 38, 48, 24, 5, 15, 6, 4, 25, 12, 28, 27, 26, 47, 13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 49, 32]
 
 
 # st70 velikosti 70x70
@@ -129,7 +128,7 @@ print(povprecje(10,st70,15,100,"dva_opt")) # best = 1386
 
 print(povprecje(10,st70,3,100,"tri_opt")) # best = 684
 print(povprecje(10,st70,5,100,"tri_opt")) # best = 754
-print(povprecje(10,st70,10,100,"tri_opt")) # best = 
+print(povprecje(10,st70,10,100,"tri_opt")) # best = 878
 print(povprecje(10,st70,15,100,"tri_opt")) # best =
 
 
@@ -176,5 +175,11 @@ print(povprecje(10,kroA100,15,100,"tri_opt")) # best =
 # kroA100
 # GRASP: 21761
 # genetski:
+
+
+#(7804.627605509784, 7544.365901904077, [7544.365901904077, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23,
+#                                        20, 50, 29, 16, 46, 44, 34, 35, 36, 39, 40, 37, 38, 48, 24, 5, 15, 6, 4, 25, 12, 28, 27, 26, 47,
+#                                        13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 32, 49])
+
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  4 JAN 2019 08:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.11.4)  4 JAN 2019 10:15
 entering extended mode
 **./porocilo.tex
 (porocilo.tex
@@ -435,13 +435,12 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 161.
 
-Overfull \hbox (17.4605pt too wide) in paragraph at lines 200--202
+Overfull \hbox (17.4605pt too wide) in paragraph at lines 183--185
  \OT1/cmr/m/n/12 3.2.\OT1/cmr/bx/n/12 Local search.[] \OT1/cmr/m/n/12 V tem del
 u se bomo posvetili drugemu delu algoritma imenovanemu|
  []
 
-[4]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 212.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 195.
 
 
 ("/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/tex/latex/b
@@ -449,95 +448,80 @@ ase/omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 212.
- [5]
-Underfull \vbox (badness 2261) has occurred while \output is active []
-
- [6]
-Underfull \vbox (badness 7433) has occurred while \output is active []
-
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 195.
+ [4] [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
  []
 
 
-Overfull \hbox (7.43193pt too wide) in paragraph at lines 349--352
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+Overfull \hbox (7.43193pt too wide) in paragraph at lines 330--333
 \OT1/cmr/m/n/12 matriko cen povezav, izpise minimalno ceno potovanja in vrne u
 rejen seznam obiskanih|
  []
 
 [8]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 <casilp.png, id=40, 469.755pt x 286.82156pt>
 File: casilp.png Graphic file (type png)
 <use casilp.png>
-Package pdftex.def Info: casilp.png  used on input line 433.
+Package pdftex.def Info: casilp.png  used on input line 388.
 (pdftex.def)             Requested size: 375.80452pt x 229.45755pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+ [9 <./casilp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 424--425
 
  []
 
-[9]
-<berlin_7692.png, id=45, 568.0422pt x 214.6419pt>
+<berlin_7692.png, id=46, 568.0422pt x 214.6419pt>
 File: berlin_7692.png Graphic file (type png)
 <use berlin_7692.png>
-Package pdftex.def Info: berlin_7692.png  used on input line 444.
+Package pdftex.def Info: berlin_7692.png  used on input line 439.
 (pdftex.def)             Requested size: 284.0204pt x 107.32068pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<ulysses22_7013.png, id=46, 462.528pt x 179.2296pt>
+<ulysses22_7013.png, id=47, 462.528pt x 179.2296pt>
 File: ulysses22_7013.png Graphic file (type png)
 <use ulysses22_7013.png>
-Package pdftex.def Info: ulysses22_7013.png  used on input line 450.
+Package pdftex.def Info: ulysses22_7013.png  used on input line 445.
 (pdftex.def)             Requested size: 231.26343pt x 89.61456pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[10 <./berlin_7692.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Underfull \vbox (badness 1264) has occurred while \output is active []
-
- [10 <./casilp.png>] [11 <./berlin_7692.png> <./ulysses22_7013.png>] (porocilo.
-aux) ) 
+ [11 <./ulysses22_7013.png>] [12] (porocilo.aux) ) 
 Here is how much of TeX's memory you used:
- 6122 strings out of 494889
- 82607 string characters out of 3176777
- 553372 words of memory out of 3000000
- 9483 multiletter control sequences out of 15000+200000
+ 6119 strings out of 494889
+ 82581 string characters out of 3176777
+ 569372 words of memory out of 3000000
+ 9480 multiletter control sequences out of 15000+200000
  12011 words of font info for 47 fonts, out of 3000000 for 9000
  162 hyphenation exceptions out of 8191
- 41i,13n,42p,1042b,1727s stack positions out of 5000i,500n,10000p,200000b,50000s
-</Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb></Users/katarina/Library/Application Suppor
-t/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/kata
-rina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfo
-nts/cm/cmex10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/in
-stall/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/katarina/Library/Applic
-ation Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/p
-ublic/amsfonts/cm/cmmi8.pfb></Users/katarina/Library/Application Support/MiKTeX
-/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/katarina/Libra
-ry/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr
-12.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts
-/type1/public/amsfonts/cm/cmr8.pfb></Users/katarina/Library/Application Support
-/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr9.pfb></Users/katarina
-/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/instal
-l/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/katarina/Library/Application
- Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmti12.pfb></User
-s/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public
-/amsfonts/cm/cmtt10.pfb>
-Output written on porocilo.pdf (11 pages, 259058 bytes).
+ 41i,13n,42p,1042b,1729s stack positions out of 5000i,500n,10000p,200000b,50000s
+</Users/katarina/Library/Appl
+ication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1
+/public/amsfonts/cm/cmcsc10.pfb></Users/katarina/Library/Application Support/Mi
+KTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/katarina/
+Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/katarina/Library/Application
+ Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users
+/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></Users/katarina/Library/Application Support/MiKTeX/texmf
+s/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/katarina/Library/App
+lication Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+</Users/katarina/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/
+public/amsfonts/cm/cmr9.pfb></Users/katarina/Library/Application Support/MiKTeX
+/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/katarina/Libr
+ary/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb></Users/katarina/Library/Application Support/MiKTeX/texmfs/install/font
+s/type1/public/amsfonts/cm/cmti12.pfb></Users/katarina/Library/Application Supp
+ort/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on porocilo.pdf (12 pages, 259398 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

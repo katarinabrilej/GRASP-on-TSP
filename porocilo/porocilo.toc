@@ -4,10 +4,10 @@
 \contentsline {section}{\tocsection {}{3}{Grasp}}{3}
 \contentsline {subsection}{\tocsubsection {}{3.1}{Greedy randomized construction}}{3}
 \contentsline {subsection}{\tocsubsection {}{3.2}{Local search}}{4}
-\contentsline {section}{\tocsection {}{4}{Celo\IeC {\v s}tevilski linearni program in primerjava z GRASP}}{8}
+\contentsline {section}{\tocsection {}{4}{Celo\IeC {\v s}tevilski linearni program in primerjava z GRASP}}{7}
 \contentsline {section}{\tocsection {}{5}{Primerjave}}{9}
-\contentsline {subsection}{\tocsubsection {}{5.1}{Primerjava parametra alpha}}{9}
-\contentsline {subsection}{\tocsubsection {}{5.2}{Primerjava ILP in GRASP}}{9}
-\contentsline {subsection}{\tocsubsection {}{5.3}{Primerjava s skupino 7}}{9}
-\contentsline {section}{\tocsection {}{6}{Zaklju"cek}}{10}
-\contentsline {section}{\tocsection {}{}{Literatura}}{11}
+\contentsline {subsection}{\tocsubsection {}{5.1}{Primerjava ILP in GRASP}}{9}
+\contentsline {subsection}{\tocsubsection {}{5.2}{Primerjava parametra alpha}}{9}
+\contentsline {subsection}{\tocsubsection {}{5.3}{Primerjava s skupino 7}}{10}
+\contentsline {section}{\tocsection {}{6}{Zaklju"cek}}{11}
+\contentsline {section}{\tocsection {}{}{Literatura}}{12}

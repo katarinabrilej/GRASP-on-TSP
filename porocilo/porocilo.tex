@@ -155,23 +155,6 @@ Tu parameter alpha predstavlja mo"c mno"zice za"cetnih pribli"zkov (RCL), v na"s
 Za vhodni podatek imamo tudi inciden"cno matriko cen povezav velikosti nxn. g je simetri"cna matrika, z ni"clami po diagonali.
 Na za"cetku jo s pomo"cjo funkcije slovar\_cen spremenimo v slovar, sestavljen iz elementov, ki jo imajo za klju"c povezavo oblike ($x_{i}$, $x_{j}$), za vrednost pa ceno/razdaljo, ki ji pripada. Vsak za"cetni pribli"zek $t = (l,1,v_{2}, \dots,v_{n})$ iz RCL konstruiramo tako, da dolo"cimo $v_{1} := 1$ nato iteraticno za$ i = 2, \dots,n$ za $v{i}$ izberemo naklju"cno med p \% najbli"zjih vozli"s"c do $v{i-1}$, ki "se niso v  $t$. Na koncu "se izra"cunamo dol"zino poti s prej definirano funkcijo dolzina\_poti in jo postavimo na ni"cto mesto. Take cikle $t$ konstruiramo toliko 2casa, da RCL napolnimo. "Ce delamo z matrikami velikosti manj kot 5, moramo nastaviti tudi parameter deles, saj mora vrednost n // delez presegati "stevilo 1.  
 
-\begin{lstlisting}[language=Python]
-def slovar_cen(g):
-    r = range(len(g))
-    cena = {(i+1, j+1): g[i][j] for i in r for j in r}
-    return cena
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python]
-def dolzina_poti(g,pot):
-    n = len(g)
-    slovar = slovar_cen(g)
-    dolzina = 0
-    for i in range(1,n):
-            dolzina += slovar[(pot[i],pot[i+1])]
-    dolzina += slovar[(pot[n],pot[1])]
-    return dolzina
-\end{lstlisting}
 
 \begin{lstlisting}[language=Python]
 def greedy_construction(g, alpha, delez = 5):
@@ -213,12 +196,10 @@ def local_search(g,k,iter,metoda):
         utezi = [i * 2/((k+1)*k) for i in range(k,0,-1)]
         indeks = np.random.choice(len(RCL), size = 1, p = utezi)
         t = RCL[indeks[0]]
-
         if metoda == "dva_opt":
             novi_t = dva_opt(n,t,g)
         elif metoda == "tri_opt":
-            novi_t = tri_opt(n,t,g)
-        
+            novi_t = tri_opt(n,t,g)      
         if novi_t:
             RCL.append(novi_t)
             RCL.remove(t)   
@@ -398,34 +379,8 @@ def TSP(N, max_pot, min_pot = 1):
     return m
 \end{lstlisting}
 
-\subsection{Primerjava parametra alpha} ~\\
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. %testiram nekaj
-
-
 \subsection{Primerjava ILP in GRASP} ~\\
 Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. 
-
-\begin{table}[h]
-\begin{tabular}{llllll}
-\rowcolor[HTML]{FFCCC9} 
-TSP       &      & 3 & 5 & 10 & 15 \\ \hline
-Ulysses22 &      &   &   &    &    \\
-          & 2-opt & 7013  &  7013 & 7013   & 7013   \\
-          & 3-opt &   7013&  7013 &  7013  &  7013  \\
-Swiss42   &      &   &   &    &    \\
-	& 2-opt &   1273&  1273 &   1365 &  1592  \\
-          & 3-opt &  1273 &  1273 & 1316   &  1273  \\
-Berlin52 &      &   &   &    &    \\
-	 & 2-opt &  7716 & 8130 &   8629 &  10464  \\
-          & 3-opt &  7803 &  7692 &  7983  & 8705   \\
-St70      &      &   &   &    &    \\
-	& 2-opt &  714 &  888 &   1211 &  1386  \\
-          & 3-opt &  684 &  754 &    &    \\
-KroA100   &      &   &   &    &    \\
-	& 2-opt &  37162 &  54119 &   74951 &   74462 \\
-          & 3-opt &   &   &    &   
-\end{tabular}
-\end{table}
 
 \begin{figure}[h]
 \caption{Časovna primerjava ILP in GRASP}
@@ -434,9 +389,49 @@ KroA100   &      &   &   &    &    \\
 \end{figure}
 
 
+\subsection{Primerjava parametra alpha} ~\\
+Za primerjavo parametra alpha smo se osredoto"cili na "stiri parametre in sicer 3, 5, 10 in 15. Parameter alpha nam dolo"ca velikost RCL (restricted client list) na "zacetku algoritma GRASP v sklopu greedy randomized construction. Torej "ce je alpha enak 5, bo algoritem skonstruiral 5 za"cetnih re"sitev problema. Te bo nato local search izbolj"seval. Primerjavo smo naredili za obe metodi na 100 iteracijah, razen v zadnjem primeru na desetih, saj je bila matrika "ze prevelika. Prav tako smo naredili deset ponovitev algoritma.
+"Ce si najprej ogledamo najmanj"si graf Ulysses22, lahko vidimo, da izbira parametra ne vpliva na rezultat, saj v vseh primerih vrne  znan optimalni rezultat 1273. Pri malo ve"cjem grafu Swiss42 "ze opazimo, da se rezultat oddaljuje od optimuma, ve"cji kot je alpha. Vendar pa je pri 2-opt slab"sanje o"citno hitrej"se. Pri 3-opt celo kljub slab"sem rezultatu pri alpha = 10, pri alpha = 15 vrne optimalen rezultat. Optimalen rezultat za Berlin52 je 7544, mi pa smo dobili 7616, kar je precej blizu. Se pa tu rezultat "se hitreje poslab"sa z v"canjem alpha. Spet pri 2-opt bolj kot pri 3-opt. Tudi pri St70 najbolj"si rezultat vrne 3-opt, zopet pri najmanj"sem izbranem alpha. 
+Za KroA100 so rezultati "ze moCno oddaljeni od optimuma in vse bolj kot se pove"cuje alpha. 
+"Ce zaklju"cimo. Opazimo da razen v primeru zelo majnih grafov
+
+
+
+\begin{table}[h]
+\begin{tabular}{lllllll}
+\rowcolor[HTML]{FFCCC9} 
+TSP       &      & 3 & 5 & 10 & 15 &opt \\ \hline
+Ulysses22 &      &   &   &    &  &7013  \\
+          & 2-opt & 7013  &  7013 & 7013   & 7013   &\\
+          & 3-opt &   7013&  7013 &  7013  &  7013 & \\
+Swiss42   &      &   &   &    &   &1273 \\
+	& 2-opt &   1273&  1273 &   1420 &  1592 & \\
+          & 3-opt &  1273 &  1273 & 1316   &  1273 & \\
+Berlin52 &      &   &   &    &   &7542 \\
+	 & 2-opt &  7716 & 8130 &   8629 &  10464 & \\
+          & 3-opt &  7616 &  7684 &  7735  & 8705  & \\
+St70      &      &   &   &    &  & 675 \\
+	& 2-opt &  714 &  888 &   1211 &  1386 & \\
+          & 3-opt &  684 &  754 &   878 &   & \\
+KroA100   &      &   &   &    &  &21282  \\
+	& 2-opt &  37162 &  54119 &   74951 &   74462& \\
+          & 3-opt &   &   &    &   &
+\end{tabular}
+\end{table}
+
+
+
 \subsection{Primerjava s skupino 7} ~\\
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+\begin{table}[h]
+\begin{tabular}{lll}
+\rowcolor[HTML]{FFCCC9} 
+          & GRASP & GA \\
+Ulysses22 & 7013  & 7112               \\
+Berlin52  & 7616  & 8737               \\
+KroA100   & 21761 & 36408             
+\end{tabular}
+\end{table}
 
 \begin{figure}[h]
 \caption{Najkraša pot primera berlin52 dolga 7692}
