@@ -439,11 +439,17 @@ Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a upo
 \rowcolor[HTML]{FFCCC9} 
           & GRASP & GA \\
 Ulysses22 & 7013  & 7112               \\
-Berlin52  & 7616  & 8737               \\
+Berlin52  & 7544  & 8737               \\
 KroA100   & 21761 & 36408             
 \end{tabular}
 \end{table}
 
+Skupina 7 je na problem potujočega trgovca implementirala Genetski Algoritem (GA). Iz njihovega poročila sva poiskali njihove najboljše rezultate posameznega grafa in jih zapisali v tabelo. Iz tabele razberemo, da se je algoritem GRASP odrezal bolje od genetskega algoritma.
+Tudi iz vira [6] razberemo, da je genetski algoritem sicer natančnejši, vendar se na primerih iz prakse pokaže, da natančnost ni tako pomembna, in zato GRASP deluje bolje od GA.
+
+\subsection{Vizualizacija}
+Za boljšo predstavo sva napisali še dve funkciji, ki narišeta podano omrežje in rešitev na njem.
+Če imamo podane koordinate, funkcija $narisi$ nariše točke kot koordinate v 2D in jih poveže glede na dano rešitev.
 \begin{figure}[H]
 \caption{Najkraša pot primera berlin52 dolga 7544}
 \centering
@@ -462,6 +468,14 @@ KroA100   & 21761 & 36408
 \includegraphics[scale =0.5]{kroA100_21761}
 \end{figure}
 
+Če pa koordinat nimamo podanih, pa funckija $narisigraf(matrika)$ sprejme matriko uteži povezav in nariše usmerjen graf z utežmi na povezavah. Napisali sva še funkcijo, ki rešitev algoritma GRASP spremeni v matriko, tako da še lahko narišemo rešitev. 
+Opomba: pri velikih grafih je risanje vseh povezav nesmiselno, zato te funkcije nisva izboljševali.
+\begin{figure}[H]
+\caption{Poln graf in primer rešitve za swiss42}
+\centering
+\includegraphics[scale =0.5]{swiss_primerjava}
+\end{figure}
+
 \section{Zaključek}
 
 Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučenih problemov optimizacije. Na problem sva implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u sva obravnavali metodi 2opt in 3 opt, kjer je glavna razlika to, da pri 2opt zamenjamo dve vozlišči, pri 3opt pa tri. Metoda 3opt vsebuje tri for zanke, zato je njena časovna zahtevnost kar  $\mathcal{O}(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, sva ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP sva izvedli na grafih ulysses22, berllin52, kroA100, swiss42 in st70.  Najprej sva primerjali parameter alpha, ki določa koliko različnih začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato sva v nadaljevanju uporabljali vrednost alpha = 3. Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3opt je na primeru st70 za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP sva na primerih ulysses22, berlin52 in kroA100 primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili sva, da so se najinim rezultatom najbolje približali pri najmanjšem grafu ulysses22, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 479, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, je da algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
@@ -476,8 +490,7 @@ Travelling salesman problem
 \\\texttt{http://en.wikipedia.org/wiki/Travelling\_salesman\_problem}
 
 \bibitem{}
-C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual
-Comparison, online
+C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual Comparison, online.
 \\\texttt{https://www.iiia.csic.es/~christian.blum/downloads/blum\_roli\_2003.pdf}
 
 \bibitem{}
@@ -492,6 +505,9 @@ TSP Basics
 R. Škrekovski, Zbornik seminarjev iz hevristik [Elektronski vir]: izbrana poglavja iz optimizacijskih metod (2010-11) / Riste Škrekovski, Vida Vukašinovič - El. knjiga. - Ljubljana: samozal. R. Škrekovski, 2012. 
 \\\texttt{https://www.fmf.uni-lj.si/~skreko/Gradiva/Zbornik\_Hevristike.pdf}
 
+\bibitem{}
+B. Bernai, S. Deleplanque, A. Quilliot, Routing on Dynamic Networks: GRASP versus Genetic.
+\\\texttt{https://annals-csis.org/Volume\_2/pliks/52.pdff}
 
 \end{thebibliography}
 
