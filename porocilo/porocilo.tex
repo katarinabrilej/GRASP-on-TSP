@@ -9,7 +9,7 @@
 %\usepackage[normalem]{ulem}
 \usepackage[dvipsnames,usenames]{color}
 \usepackage{graphicx}
-
+\usepackage{float} % za fiksiranje slik na mestih (uporabi [H])
 \usepackage[table,xcdraw]{xcolor}
 
 \usepackage{listings}
@@ -376,7 +376,7 @@ V nadaljevanju bomo ugotovili, da na čas izvajanja local\_search-a vplivata tud
 lahko vseeno sklepamo, da deluje hitreje kot $ tsp\_as\_ilp$. 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Časovna primerjava ILP in GRASP}
 \centering
 \includegraphics[scale =0.8]{casilp}
@@ -386,12 +386,12 @@ lahko vseeno sklepamo, da deluje hitreje kot $ tsp\_as\_ilp$.
 \subsection{Primerjava parametra alpha} ~\\
 Za primerjavo parametra alpha smo se osredoto"cili na "stiri parametre in sicer 3, 5, 10 in 15. Parameter alpha nam dolo"ca velikost RCL (restricted client list) na "zacetku algoritma GRASP v sklopu greedy randomized construction. Torej "ce je alpha enak 5, bo algoritem skonstruiral 5 za"cetnih re"sitev problema. Te bo nato local search izbolj"seval. Primerjavo smo naredili za obe metodi na 100 iteracijah, razen v zadnjem primeru na desetih, saj je bila matrika "ze prevelika. Prav tako smo naredili deset ponovitev algoritma.
 "Ce si najprej ogledamo najmanj"si graf Ulysses22, lahko vidimo, da izbira parametra ne vpliva na rezultat, saj v vseh primerih vrne  znan optimalni rezultat 1273. Pri malo ve"cjem grafu Swiss42 "ze opazimo, da se rezultat oddaljuje od optimuma, ve"cji kot je alpha. Vendar pa je pri 2-opt slab"sanje o"citno hitrej"se. Pri 3-opt celo kljub slab"sem rezultatu pri alpha = 10, pri alpha = 15 vrne optimalen rezultat. Optimalen rezultat za Berlin52 je 7544, mi pa smo dobili 7616, kar je precej blizu. Se pa tu rezultat "se hitreje poslab"sa z v"canjem alpha. Spet pri 2-opt bolj kot pri 3-opt. Tudi pri St70 najbolj"si rezultat vrne 3-opt, zopet pri najmanj"sem izbranem alpha. 
-Za KroA100 so rezultati "ze moCno oddaljeni od optimuma in vse bolj kot se pove"cuje alpha. 
-"Ce zaklju"cimo. Opazimo da razen v primeru zelo majnih grafov
+Za KroA100 so rezultati že močno oddaljeni od optimuma in vse bolj kot se pove"cuje alpha. 
+"Ce zaklju"cimo. Opazimo, da razen v primeru zelo majnih grafov, z uporabo manjšega alpha (npr. 3), dobimo boljši rezultat. 
 
 
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{tabular}{lllllll}
 \rowcolor[HTML]{FFCCC9} 
 TSP       &      & 3 & 5 & 10 & 15 &opt \\ \hline
@@ -418,7 +418,7 @@ KroA100   &      &   &   &    &  &21282  \\
 
 Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij smo preizkusili na primeru St70 (velikosti 70). Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2opt dobimo še le pri 600 iteracijah. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Odvisnost rešitve od števila iteracij}
 \centering
 \includegraphics[scale =0.8]{resitev_iteracije}
@@ -426,7 +426,7 @@ Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. O
 
 Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a uporabimo več iteracij kot pri metodi 3opt. Metoda 3opt uporabi $\mathcal{O}(n^3)$ operacij, 2opt pa ima kvadratično časovno zahtevnost oz. $\mathcal{O}(n^2)$.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Odvisnost časa izvajanja od števila iteracij}
 \centering
 \includegraphics[scale =0.8]{cas_izvajanja}
@@ -434,7 +434,7 @@ Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a upo
 
 \subsection{Primerjava s skupino 7} ~\\
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{tabular}{lll}
 \rowcolor[HTML]{FFCCC9} 
           & GRASP & GA \\
@@ -444,19 +444,19 @@ KroA100   & 21761 & 36408
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Najkraša pot primera berlin52 dolga 7544}
 \centering
 \includegraphics[scale =0.5]{berlin_7544}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Najkrajša pot primera ulysses22, dolga 7013}
 \centering
 \includegraphics[scale =0.5]{ulysses22_7013}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \caption{Najkrajša pot primera kroA100, dolga 21761}
 \centering
 \includegraphics[scale =0.5]{kroA100_21761}
@@ -464,7 +464,7 @@ KroA100   & 21761 & 36408
 
 \section{Zaključek}
 
-Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučenih problemov optimizacije. Na problem sva implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u sva obravnavali metodi 2opt in 3 opt, kjer je glavna razlika to, da pri 2opt zamenjamo dve vozlišči, pri 3opt pa tri. Metoda 3opt vsebuje tri $for$ zanke, zato je njena časovna zahtevnost kar $O(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, sva ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP sva izvedli na grafih ulysses22, berllin52, kroA100, swiss42 in st70.  Najprej sva primerjali parameter alpha, ki določa koliko različnih začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato sva v nadaljevanju uporabljali vrednost alpha = 3. Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3opt je na primeru st70 za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP sva na primerih ulysses22, berlin52 in kroA100 primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili sva, da so se najinim rezultatom najbolje približali pri najmanjšem grafu ulysses22, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 479, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, je da algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
+Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučenih problemov optimizacije. Na problem sva implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u sva obravnavali metodi 2opt in 3 opt, kjer je glavna razlika to, da pri 2opt zamenjamo dve vozlišči, pri 3opt pa tri. Metoda 3opt vsebuje tri for zanke, zato je njena časovna zahtevnost kar  $\mathcal{O}(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, sva ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP sva izvedli na grafih ulysses22, berllin52, kroA100, swiss42 in st70.  Najprej sva primerjali parameter alpha, ki določa koliko različnih začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato sva v nadaljevanju uporabljali vrednost alpha = 3. Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3opt je na primeru st70 za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP sva na primerih ulysses22, berlin52 in kroA100 primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili sva, da so se najinim rezultatom najbolje približali pri najmanjšem grafu ulysses22, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 479, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, je da algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
 
 
 \pagebreak
