@@ -1,51 +1,45 @@
-import random
-
-#import ilp as ILP
 import GRASP as GRASP
 import uvoz as uv
 
-
 # funkcije
 
-# GRASP.dolzina_poti(g,pot)
+# GRASP.dolzina_poti(slovar,pot)
 # GRASP.local_search(g,k,iter, metoda)
 
-# uv.TSP(N, max)
-# uv.preberi_matriko(datoteka,velikost, k = 7) #za swiss42
-# uv.geo_razdalje(datoteka, velikost,k = 7) #za ulysses22
-# uv.razdalje(datoteka, velikost,k = 6) #za berlin52 in kroA100
 
 
 # primeri od skupine 7 
-ulysses22 = uv.geo_razdalje("ulysses22.tsp",22)
-berlin52 = uv.razdalje("berlin52.tsp",52)
-kroA100 = uv.razdalje("kroA100.tsp",100)
+ulysses22 = uv.ulysses22
+berlin52 = uv.berlin52
+kroA100 = uv.kroA100
 
 # primeri
-swiss42 = uv.preberi_matriko("swiss42.tsp",42)
-st70 = uv.razdalje("st70.tsp",70)
+swiss42 = uv.swiss42
+st70 = uv.st70 
 
-#funkcija vrne povprečje cen pri določenemu številu ponovitev in najboljšo pot
-def povprecje(ponovitve,g,k,iter, metoda):
-    min_pot = GRASP.local_search(g,k,iter, metoda)
+# tako kot v algoritmu g predstavlja matriko za TSP, iter število dovoljeni iteracij algoritma
+# alpha število začetnih približkov, metoda je lahko 2-opt ali pa 3-opt. 
+def povprecje(ponovitve,g,alpha,iter, metoda):
+    " funkcija vrne povprečje dolžin poti/cikla pri danem številu ponovitev algortima GRASP "
+    " vrne tudi minimalno dolžino in najboljšo pot "
+    min_pot = GRASP.local_search(g,alpha,iter, metoda)
     min_resitev = min_pot[0]
     vsota = min_resitev
     for i in range (ponovitve-1):
-        resitev = GRASP.local_search(g,k,iter, metoda)
+        resitev = GRASP.local_search(g,alpha,iter, metoda)
         l = resitev[0]
         vsota += l
         if l < min_resitev:
             min_resitev = l
-            min_pot = resitev
-            
+            min_pot = resitev       
     povprecje = vsota / ponovitve
     return (povprecje, min_resitev, min_pot)
 
-# primerjava rezultatov za različne vrednosti parametra alfa
-
+# primerjava rezultatov za različne vrednosti parametra alpha
 
 # ulysses22 velikosti 22x22
 # ponovitve = 10, iter = 100
+# 7013 je znana optimalna rešitev
 
 # dva_opt
 
@@ -65,6 +59,7 @@ def povprecje(ponovitve,g,k,iter, metoda):
 
 # swiss42 velikosti 42x42
 # ponovitve = 10, iter = 100
+# 1273 je znana optimalna rešitev 
 
 # dva_opt
 
@@ -72,8 +67,6 @@ def povprecje(ponovitve,g,k,iter, metoda):
 ##povprecje(10,swiss42,5,100,"dva_opt") # best = 1273
 ##povprecje(10,swiss42,10,100,"dva_opt") # best = 1420
 ##povprecje(10,swiss42,15,100,"dva_opt") # best = 1592
-
-# če je iter = 1000 -> vedno vrne optimalen rezultat 1273, neodvisno od parametra alfa
 
 # tri_opt
 
@@ -149,16 +142,15 @@ def povprecje(ponovitve,g,k,iter, metoda):
 
 # ulysses22
 # GRASP: 7013
-# genetski: 
+# genetski: 7112
 
 # berlin52
 # GRASP: 7692
-# genetski:
+# genetski: 8737
 
 # kroA100
 # GRASP: 21761
-# genetski:
-
+# genetski: 36408
 
 
 # iter = 1000
@@ -168,26 +160,29 @@ def povprecje(ponovitve,g,k,iter, metoda):
 ##povprecje(10,swiss42,5,1000,"dva_opt") # best = 1273
 ##povprecje(10,swiss42,10,1000,"dva_opt") # best = 1273
 ##povprecje(10,swiss42,15,1000,"dva_opt") # best = 1273
+##povprecje(10,swiss42,30,1000,"dva_opt") # best = 1273
 
-##povprecje(10,berlin52,3,1000,"dva_opt") # best = 
-##povprecje(10,berlin52,5,1000,"dva_opt") # best = 
-##povprecje(10,berlin52,10,1000,"dva_opt") # best = 
-##povprecje(10,berlin52,15,1000,"dva_opt") # best =
-7616
+# vedno vrne optimalen rezultat 1273, neodvisno od parametra alfa
 
-##povprecje(10,st70,3,1000,"dva_opt") # best = 
-##povprecje(10,st70,5,1000,"dva_opt") # best = 
-##povprecje(10,st70,10,1000,"dva_opt") # best = 
-##povprecje(10,st70,15,1000,"dva_opt") # best =
-684
+##povprecje(10,berlin52,3,1000,"dva_opt") # best = 7544
+##povprecje(10,berlin52,5,1000,"dva_opt") # best = 7544
+##povprecje(10,berlin52,10,1000,"dva_opt") # best = 7544
+##povprecje(10,berlin52,15,1000,"dva_opt") # best = 7544
+##povprecje(10,berlin52,30,1000,"dva_opt") # best = 7560
 
-##povprecje(10,kroA100,3,1000,"dva_opt") # best = 21909
-##povprecje(10,kroA100,5,1000,"dva_opt") # best = 21855
-##povprecje(10,kroA100,10,1000,"dva_opt") # best = 21761
-##povprecje(10,kroA100,15,1000,"dva_opt") # best = 22508
+##povprecje(10,st70,3,1000,"dva_opt") # best = 678
+##povprecje(10,st70,5,1000,"dva_opt") # best = 685
+##povprecje(10,st70,10,1000,"dva_opt") # best = 678
+##povprecje(10,st70,15,1000,"dva_opt") # best = 682
+##povprecje(10,st70,30,1000,"dva_opt") # best = 685
+
+##povprecje(10,kroA100,3,1000,"dva_opt") # best = 21381
+##povprecje(10,kroA100,5,1000,"dva_opt") # best = 21709
+##povprecje(10,kroA100,10,1000,"dva_opt") # best = 21642
+##povprecje(10,kroA100,15,1000,"dva_opt") # best = 22009
+##povprecje(10,kroA100,30,1000,"dva_opt") # best = 24275
 
 
-#GRASP.local_search(berlin52,10,10000,"dva_opt")
 #[7544.365901904088, 1, 22, 31, 18, 3, 17, 21, 42, 7, 2, 30, 23, 20, 50,
 # 29, 16, 46, 44, 34, 35, 36, 39, 40, 37, 38, 48, 24, 5,
 # 15, 6, 4, 25, 12, 28, 27, 26, 47, 13, 14, 52, 11, 51, 33, 43, 10, 9, 8, 41, 19, 45, 32, 49]
@@ -197,10 +192,12 @@ def povprecje(ponovitve,g,k,iter, metoda):
  # 52, 10, 5, 53, 6, 41, 43, 17, 9, 61, 39, 25, 45, 40, 46, 27, 68, 44, 30, 20,
  # 14, 28, 49, 55, 26, 8, 3, 32, 42, 18, 4, 2, 7, 19, 24, 15, 57, 63, 66, 22, 59, 38, 31, 69, 35, 70, 13, 29, 36]
 
-#[21761.92240454664, 1, 93, 28, 67, 58, 61, 51, 87, 25, 81, 69, 64, 40, 54, 2, 44, 50,
-# 73, 68, 85, 39, 82, 95, 13, 76, 33, 37, 5, 52, 78, 96, 30, 48, 100, 41, 71, 14, 3, 43,
-# 46, 29, 34, 83, 55, 7, 9, 57, 20, 12, 27, 86, 35, 62, 60, 77, 23, 98, 45, 91, 47, 32,
-# 11, 15, 17, 59, 74, 21, 72, 36, 99, 38, 24, 18, 84, 10, 90, 49, 6, 63, 75, 19, 53, 79,
-# 88, 16, 94, 22, 70, 66, 26, 65, 4, 97, 56, 80, 31, 89, 42, 8, 92]
+#[678.9886291554706, 1, 36, 23, 13, 29, 70, 35, 69, 31,
+ #                                        38, 59, 22, 66, 63, 57, 15, 24, 19, 7, 2, 4, 18, 42, 32, 3, 8, 26, 55, 49, 28, 14, 20, 30, 44, 68, 27, 46, 45, 25, 39, 61, 40, 9, 17, 43,
+ #                                        41, 6, 53, 5, 10, 52, 60, 12, 21, 34, 33, 62, 54, 48, 67, 56, 11, 64, 65, 51, 50, 58, 37, 47, 16]
 
+#(21381.84422089123, 21381.84422089123, [21381.84422089123, 1, 93, 28, 67, 58, 61, 51, 25, 81, 69, 64, 40, 54, 2, 44, 50, 73, 68, 85, 39, 82, 95,
+#                                        13, 76, 33, 37, 5, 52, 78, 96, 30, 48, 100, 41, 71, 14, 3, 43, 46, 29, 34, 83, 55, 7, 9, 87, 57, 20, 12,
+#                                        27, 86, 35, 62, 60, 77, 23, 98, 91, 45, 32, 11, 15, 17, 59, 74, 21, 72, 47, 63, 6, 49, 90,
+#                                        10, 84, 36, 99, 38, 24, 18, 79, 53, 88, 16, 94, 22, 70, 66, 26, 65, 4, 19, 75, 97, 56, 80, 31, 89, 42, 8, 92])
 

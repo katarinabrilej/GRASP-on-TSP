@@ -406,13 +406,29 @@ Berlin52 &      &   &   &    &   &7542 \\
           & 3-opt &  7616 &  7684 &  7735  & 8705  & \\
 St70      &      &   &   &    &  & 675 \\
 	& 2-opt &  714 &  888 &   1211 &  1386 & \\
-          & 3-opt &  684 &  754 &   878 &   & \\
+          & 3-opt &  684 &  754 &   878 &   941& \\
 KroA100   &      &   &   &    &  &21282  \\
 	& 2-opt &  37162 &  54119 &   74951 &   74462& \\
-          & 3-opt &   &   &    &   &
+          & 3-opt &  22917 &  26938 &  41953  & 46026  &
 \end{tabular}
 \end{table}
 
+Primerjava parametra alpha "se za iter = 1000. 
+
+\begin{table}[h]
+\begin{tabular}{llllllll}
+\rowcolor[HTML]{FFCCC9} 
+TSP      &       & 3     & 5     & 10    & 15   & 30   & opt   \\
+Berlin52 &       &       &       &       &      &      & 1273  \\
+         & opt-2 & 1273  & 1273  & 1273  & 1273 & 1273 &       \\
+Swiss42  &       &       &       &       &      &      & 7542  \\
+         & opt-2 & 7544  & 7544  & 7544  & 7544 & 7560 &       \\
+St70     &       &       &       &       &      &      & 675   \\
+         & opt-2 & 678   & 685   & 678   & 682  & 685  &       \\
+KroA100  &       &       &       &       &      &      & 21282 \\
+         & opt-2 & 21381 & 21709 & 21642 &  22009    &  24275    &      
+\end{tabular}
+\end{table}
 
 \subsection{Primerjava glede na število iteracij} ~\\
 
@@ -440,7 +456,7 @@ Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a upo
           & GRASP & GA \\
 Ulysses22 & 7013  & 7112               \\
 Berlin52  & 7544  & 8737               \\
-KroA100   & 21761 & 36408             
+KroA100   & 21381 & 36408             
 \end{tabular}
 \end{table}
 
