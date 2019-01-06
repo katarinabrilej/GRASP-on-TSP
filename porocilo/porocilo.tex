@@ -119,6 +119,9 @@ Ljubljana, \letnica}
 
 \thispagestyle{empty}
 \tableofcontents
+\listoffigures
+\listoftables
+
 \pagebreak
 
 
@@ -447,12 +450,12 @@ KroA100  &       &       &       &       &      &      & 21282 \\
 
 \subsection{Primerjava glede na število iteracij} ~\\
 
-Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij smo preizkusili na primeru St70, velikosti 70. Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3-opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3-opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2-opt dobimo šele pri 600 iteracijah. 
+Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij smo preizkusili na primeru St70, velikosti 70. Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3-opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3-opt je pri preizkušanju dosegla dober rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2-opt dobimo šele pri 600 iteracijah, najboljšo pa pri 1000.
 
 \begin{figure}[H]
 \caption{Odvisnost rešitve od števila iteracij}
 \centering
-\includegraphics[scale =0.8]{resitev_iteracije}
+\includegraphics[scale =0.8]{resitev_iteracije1}
 \end{figure}
 
 Zaradi manjše časovne zahtevnosti metode 2-opt, lahko pri izvajanju GRASP-a uporabimo več iteracij kot pri metodi 3-opt. Metoda 3-opt uporabi $\mathcal{O}(n^3)$ operacij, 2-opt pa ima kvadratično časovno zahtevnost oz. $\mathcal{O}(n^2)$.
@@ -511,7 +514,7 @@ Opomba: pri velikih grafih je risanje vseh povezav nesmiselno, zato te funkcije 
 \section{Zaključek}
 
 Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučevanih problemov optimizacije. Na problem smo implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u smo obravnavali metodi 2-opt in 3-opt, kjer je glavna razlika to, da pri 2-opt zamenjamo dve vozlišči, pri 3-opt pa tri. Metoda 3-opt vsebuje tri for zanke, zato je njena časovna zahtevnost kar  $\mathcal{O}(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, smo ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP smo izvedli na grafih \textit{Ulysses22}, \textit{Berllin52}, \textit{KroA100}, \textit{Swiss42} in \textit{St70}.  Najprej smo primerjali parameter alpha, ki določa koliko začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato smo v nadaljevanju uporabljali vrednost alpha = 3. Prav tako smo ugotovili, da lahko pri večjem "stevilu iteracij vzamemo ve"cji alpha da bo re"sitev "se vedno optimalna. Tako pri metodi 2-opt in 3-opt smo z ve"canjem alpha zasledili oddaljevanje od optimuma (vsaj pri ve"cjih grafih), oddaljevanje pa je bilo hitrej"se pri metodi 2-opt. 
-Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3-opt je na primeru \textit{St70} za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2-opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP smo na primerih \textit{Ulysses22}, \textit{Berllin52} in \textit{KroA100} primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili smo, da so se na"sim rezultatom najbolje približali pri najmanjšem grafu \textit{Ulysses22}, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 99, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, da je algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
+Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3-opt je na primeru \textit{St70} za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila podoben rezultat kot 2-opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP smo na primerih \textit{Ulysses22}, \textit{Berllin52} in \textit{KroA100} primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili smo, da so se na"sim rezultatom najbolje približali pri najmanjšem grafu \textit{Ulysses22}, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 99, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, da je algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
 
 
 \pagebreak
@@ -543,11 +546,6 @@ B. Bernai, S. Deleplanque, A. Quilliot, Routing on Dynamic Networks: GRASP versu
 \\\texttt{https://annals-csis.org/Volume\_2/pliks/52.pdff}
 
 \end{thebibliography}
-
-\thispagestyle{empty}
-\listoffigures
-\listoftables
-\pagebreak
 
 \end{document}
 
