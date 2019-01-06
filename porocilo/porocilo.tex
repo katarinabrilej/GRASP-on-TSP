@@ -125,7 +125,7 @@ Ljubljana, \letnica}
 % tu se zacne besedilo seminarja
 \section{Uvod}
 
-Metahevristika je algoritemski način reševanja kombinatoričnega optimizacijskega problema, pri katerem na začetku izberemo množico kandidatov za rešitev, in jo iterativno izboljšujemo (glede na neko vnaprej izbrano funkcijo zaželenosti), ter po dovolj korakih vrnemo najboljši element iz te množice. Metahevristike torej vrnejo približne rešitve, a veliko hitreje kot eksaktni postopki. V projektu bova na problem potujočega trgovca implementirali metahevristiko GRASP (\textit{greedy randomized adaptive search procedure}). Problem potujočega trgovca bova rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bova nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bova primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
+Metahevristika je algoritemski način reševanja kombinatoričnega optimizacijskega problema, pri katerem na začetku izberemo množico kandidatov za rešitev in jo iterativno izboljšujemo (glede na neko vnaprej izbrano funkcijo zaželenosti) ter po dovolj korakih vrnemo najboljši element iz te množice. Metahevristike torej vrnejo približne rešitve, a veliko hitreje kot eksaktni postopki. V projektu bomo na problem potujočega trgovca implementirali metahevristiko GRASP (\textit{greedy randomized adap\-tive search procedure}). Problem potujočega trgovca bomo rešili tudi kot celoštevilski linearni program in primerjali rešitve. Generirali bomo nekaj zanimivih grafov in na njih preizkusili algoritem. Rezultate bomo primerjail tudi z rezultati iz spleta in rezultati skupine 7, ki bo na problem potujočega trgovca implementirala genetski algoritem. 
 
 
 \section{Problem potujočega trgovca} 
@@ -135,7 +135,7 @@ Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
 
 \begin{itemize}
 \item {\bf Formulacija v vsakdanjem jeziku:} danih je $n$ mest in razdalja med poljubnim parom mest (od mesta do mesta lahko potujemo po zgolj eni poti). Najdi najkrajšo (najcenejšo) pot, ki se začne in konča v istem mestu ter obišče vsako mesto natanko enkrat.
-\item{\bf Formulacija v matematičnem jeziku}: v (neusmerjenem enostavnem) polnem grafu $K_n$ z uteženimi povezavami (pozitivne vrednosti) najdi najkrajši cikel, ki vsebuje vsa vozlišča. Ciklom, ki vsebujejo vsa vozlišča grafa, pravimo Hamiltonovi cikli.
+\item{\bf Formulacija v matematičnem jeziku}: v (neusmerjenem enostavnem) polnem grafu $K_n$ z uteženimi povezavami (pozitivne vrednosti) najdi naj\-krajši cikel, ki vsebuje vsa vozlišča. Ciklom, ki vsebujejo vsa vozlišča grafa, pravimo Hamiltonovi cikli.
 
 \end{itemize}
 
@@ -144,139 +144,152 @@ Problem potujočega trgovca (”travelling salesman problem”/TSP) se glasi:
 
 GRASP (\textit{greedy randomized adaptive search procedure}) je metahevristika, ki sestoji iz dveh faz: \textit{greedy randomized construction} in \textit{local search}.
 V prvi fazi na pameten način (odvisno od problema) izberemo izmed vseh možnih rešitev CL (candidate list) množico začetnih približkov RCL (restricted candidates list). 
-To storimo deloma deterministično in deloma stohastično, da zagotovimo, da so začetni približki obetavni, a dovolj razpršeni po celotni množici CL, da bo druga faza pregledala čimvečji del CL. 
+To storimo deloma deterministično in deloma stohastično, da zagotovimo, da so začetni približki obe-tavni, a dovolj razpršeni po celotni množici CL, da bo druga faza pregledala čimvečji del CL. 
 V drugi fazi za vsako izmed teh rešitev $ s \in  RCL $ pregledamo elemente $s' \in CL$ v njeni okolici (kaj je okolica je od problema in načina reševanja odvisno). Če najdemo boljšo rešitev $s'$, 
 jo dodamo v RCL ter $s$ odstranimo. To ponavljamo dokler zaustavitveni pogoj (npr. št. iteracij, zahtevana natančnost) ni izpolnjen.
 
 \subsection{Greedy randomized construction} 
 
-Kot smo "ze omenili je GRASP sestavljen iz dveh delov. Najprej bomo predstavili tako imenovan greedy randomized construction.
-Tu parameter alpha predstavlja mo"c mno"zice za"cetnih pribli"zkov (RCL), v na"sem primeru torej dol"zino seznama RCL.
-Za vhodni podatek imamo tudi inciden"cno matriko cen povezav velikosti $n \times n$. g je simetri"cna matrika, z ni"clami po diagonali.
-Na za"cetku jo s pomo"cjo funkcije slovar\_cen spremenimo v slovar, sestavljen iz elementov, ki imajo za klju"c povezavo oblike ($x_{i}$, $x_{j}$), za vrednost pa ceno/razdaljo, ki ji pripada. Vsak za"cetni pribli"zek $t = (l,1,v_{2}, \dots,v_{n})$ iz RCL konstruiramo tako, da dolo"cimo $ v_{1} := 1$ nato iterativno za $ i = 2, \dots,n$ za $v_{i}$ izberemo naklju"cno med p \% najbli"zjih vozli"s"c do $v_{i-1}$, ki "se niso v $t$. Na koncu "se izra"cunamo dol"zino poti s prej definirano funkcijo dolzina\_poti in jo postavimo na ni"cto mesto. Take cikle $t$ konstruiramo toliko časa, da RCL napolnimo. Če delamo z matrikami velikosti manj kot 5, moramo nastaviti tudi parameter $delez$, saj mora vrednost n // delez presegati "stevilo 1.  
+Kot smo "ze omenili je GRASP sestavljen iz dveh faz. Najprej bomo predstavili prvo fazo oz. \textit{greedy randomized construction}.
+Tu parameter alpha predstavlja mo"c mno"zice za"cetnih pribli"zkov (RCL), v na"sem primeru torej dol"zino seznama RCL. Algoritmu podamo tudi slovar razdalj (cen povezav) med mesti, n pa predstavlja dol"zino slovarja oz. "stevilo mest. Slovar je sestavljen iz elementov, ki imajo za klju"c povezavo oblike ($x_{i}$, $x_{j}$), za vrednost pa razdaljo/ceno, ki ji pripada.
+Vsak za"cetni pribli"zek $t = (l,1,v_{2}, \dots,v_{n})$ $\in$ RCL konstruiramo tako, da dolo"cimo $ v_{1} := 1$ nato iterativno za $ i = 2, \dots,n$ za $v_{i}$ izberemo naklju"cno med p \% najbli"zjih vozli"s"c do $v_{i-1}$, ki "se niso v $t$. Na koncu "se izra"cunamo dol"zino poti s prej definirano funkcijo \textit{dolzina\_poti} in jo postavimo na ni"cto mesto. Take cikle $t$ konstruiramo toliko časa, da RCL napolnimo.   
 
 
 \begin{lstlisting}[language=Python]
-def greedy_construction(g, alpha, delez = 5):
+def greedy_construction(slovar,n,alpha):
     RCL = [0] * alpha
-    slovar = slovar_cen(g)
-    n = len(g)
-    p = n // delez
+    if n > 5: # p mora biti vsaj 1
+        p = n // 5 
+    else:
+        p = 1
     for j in range(0, alpha):
         t = [0] * (n+1)
         t[1] = 1
-        mesta = [h for h in range(2,n+1)]
+        mesta = [h for h in range(2,n+1)] 
         for i in range(2,n+1):
-            povezave = [(t[i-1],m) for m in mesta]
-            cene = { key:value for key, value in slovar.items() if key in povezave }
-            urejene_povezave = sorted(cene, key=cene.__getitem__)
-            (_,vi) = random.choice(urejene_povezave[:p])
+            povezave = [(t[i-1],m) for m in mesta] 
+            slovar_povezav = { key:value for key, value in 
+						slovar.items() if key in povezave }
+            urejene_povezave = sorted(slovar_povezav, 
+						key=slovar_povezav.__getitem__)
+            (_,vi) = random.choice(urejene_povezave[:p]) 
             t[i] = vi
-            mesta.remove(vi)
-        t[0] = dolzina_poti(g,t)
-        RCL[j] = t
-    return RCL
+            mesta.remove(vi) 
+        t[0] = dolzina_poti(slovar,n,t) 
+        RCL[j] = t 
+    return RCL 
 \end{lstlisting}
 
 \subsection{Local search} 
 
-V tem delu se bomo posvetili drugemu delu algoritma imenovanemu local search. Obravnavali bomo dve metodi: 2opt in 3opt. Funkcija local\_search zato poleg matrike g, parametra alpha in "stevila iteracij sprejme "se parameter $metoda$. 
-Na za"cetku definiramo RCL, ki predstavlja za"cetni seznam pribli"zkov. Te nato uredimo po dol"zini, primerjamo jih po prvem elementu, ki predstavlja dol"zino poti. Nato naklju"cno izberemo t iz RCL, toda z linerano padajo"co verjetnostjo. Najverjetneje izberemo cikel na vrhu RCL , torej najkraj"si. Ko imamo izbran t, se na podlagi parametra $metoda$ odlo"cimo za 2opt ali 3opt. Obe metodi poizku"sata pribli"zek izbolj"sati, "ce jima uspe, vrneta novi\_t. Neodvisno od metode nato v primeru, da je izbolj"sava uspela, v RCL dodamo izbolj"san pribli"zek in starega odstranimo. Kasneje si bomo ogledali "se kako posamezna metoda deluje. Ponavljamo tolikokrat kot je predpisano, to nam dolo"ca parameter $iter$. 
-
+Drugo fazo algortima predstavlja \textit{local search}. Obravnavali bomo dve metodi: 2-opt in 3-opt. Funkcija \textit{local\_search} zato poleg matrike g, parametra alpha in "stevila iteracij sprejme "se parameter $metoda$. g je podana kot inciden"cna matrika razdalj med mesti/cen povezav velikosti $n \times n$, je simetri"cna ter z ni"clami na diagonali. Funkcija $slovar_razdalj$ matriko g pretvori v slovar kot je opisan v prvi fazi. 
+V vrstici 2 definiramo RCL, ki predstavlja za"cetni seznam pribli"zkov. Te nato uredimo po dol"zini, primerjamo jih po prvem elementu, ki predstavlja dol"zino poti. Nato naklju"cno izberemo $t \in$ RCL, toda z linerano padajo"co verjetnostjo. Zato v vrstici 8 definiramo ute"zi. Najverjetneje izberemo cikel na vrhu RCL , torej najkraj"si. Ko imamo izbran $t$, se na podlagi parametra $metoda$ odlo"cimo za 2-opt ali 3-opt. Obe metodi poizku"sata pribli"zek izbolj"sati, "ce jima uspe, vrneta $novi\_t$. Neodvisno od metode nato v primeru, da smo pribli"zek uspeli izbolj"sati, v RCL dodamo izbolj"san pribli"zek in starega odstranimo. Kasneje si bomo ogledali "se kako posamezna metoda deluje. Ponavljamo tolikokrat kot je predpisano, to nam dolo"ca parameter $iter$. 
 
 \begin{lstlisting}[language=Python]
-def local_search(g,k,iter,metoda):
-    RCL = greedy_construction(g,k)
+def local_search(g,alpha,iter,metoda):
     n = len(g)
-    slovar = slovar_cen(g)
-    #urejen seznam zacetnih priblizkov
-    RCL.sort(key=lambda x: x[0])
+    slovar = slovar_razdalj(g) 
+    RCL = greedy_construction(slovar,n,alpha)
+    RCL.sort(key=lambda x: x[0]) 
     stevec = 0
-    while stevec < iter:
-        utezi = [i * 2/((k+1)*k) for i in range(k,0,-1)]
-        indeks = np.random.choice(len(RCL), size = 1, p = utezi)
+    while stevec < iter: 
+        utezi = [i * 2/((alpha+1)*alpha) for i in range(alpha,0,-1)]
+        indeks = np.random.choice(len(RCL), size = 1, p = utezi) 
         t = RCL[indeks[0]]
         if metoda == "dva_opt":
-            novi_t = dva_opt(n,t,g)
+            novi_t = dva_opt(n,t,slovar)
         elif metoda == "tri_opt":
-            novi_t = tri_opt(n,t,g)      
+            novi_t = tri_opt(n,t,slovar)
         if novi_t:
-            RCL.append(novi_t)
-            RCL.remove(t)   
+            RCL.append(novi_t) 
+            RCL.remove(t) 
         stevec += 1
-        RCL.sort(key=lambda x: x[0])
-    RCL.sort(key=lambda x: x[0])
-    return RCL[0]
+        RCL.sort(key=lambda x: x[0]) 
+    return RCL[0] 
 \end{lstlisting}
 
-Sedaj si oglejmo kako delujeta posamezni metodi. Za"cnimo s preprostej"so, 2opt. 
-Ko naklju"cno izberemo cikel t, ga "zelimo izbolj"sati. Kraj"si cikel iščemo v okolici, ki je definirana kot monožica vseh ciklov t' iz CL, 
-ki jih dobimo iz t tako, da mu zamenjamo dve vozišči, torej naključno zamenjamo dve vozlišči t. Namesto, da bi shranjevali vse mo"zne  t' in na koncu preverili, "ce je najkraj"si kraj"si od trenutnega t, je bolj u"cinkovito, "ce sproti preverjamo, "ce posamezna menjava prinese izbolj"savo. Na za"cetku zato definiramo spremenljivko $razlika$, ta meri, "ce je dana menjava bolj"sa. Nato moramo v zanki lo"citi dva primera, saj v primeru, da je $j = n$, razdremo povezavo s prvim elementom. Nato izra"cunamo $change$, "ce je ta manj"si od trenutne razlike, jo posodobimo, saj smo dobili kraj"si cikel. Shranimo si tudi optimalni i in j, da bomo na koncu vedeli s katero menjavo smo dosegli najkraj"si cikel. "Ce smo uspeli izbolj"sati t, bo razlika negativna in dobili bomo novi\_t. Tega konstruiramo tako, da na starem t izvedemo menjavo dolo"ceno z optimalnim i in j. Namesto, da znova ra"cunamo celotno dol"zino cikla, samo pri"stejemo razliko, ki je nagativna. 
+Sedaj si oglejmo kako delujeta posamezni metodi. Za"cnimo s preprostej"so, 2-opt. 
+Ko naklju"cno izberemo cikel $t$, ga "zelimo izbolj"sati. Kraj"si cikel iščemo v okolici, ki je definirana kot množica vseh ciklov t' iz CL, 
+ki jih dobimo iz t tako, da mu zamenjamo dve vozišči. Namesto, da bi shranjevali vse mo"zne  t' in na koncu preverili, "ce je najkraj"si kraj"si od trenutnega t, je bolj u"cinkovito, "ce sproti preverjamo, "ce posamezna menjava prinese izbolj"savo. Na za"cetku zato definiramo spremenljivko $razlika$, ta meri, "ce je dana menjava bolj"sa ("ce smo uspeli skraj"sati pot).
+ Nato moramo v zanki lo"citi dva primera, saj v primeru, da je $j = n$, razdremo povezavo s prvim elementom. Nato izra"cunamo $change$, "ce je ta manj"si od trenutne razlike, jo posodobimo, saj smo dobili kraj"si cikel. Shranimo si tudi optimalni $i$ in $j$, da bomo na koncu vedeli s katero menjavo smo dosegli najkraj"si cikel. "Ce smo uspeli izbolj"sati t, bo razlika negativna in dobili bomo $novi\_t$. Tega konstruiramo tako, da na starem $t$ izvedemo menjavo dolo"ceno z optimalnima $i$ in $j$. Namesto, da znova ra"cunamo celotno dol"zino cikla, samo pri"stejemo razliko, ki je nagativna. 
 
 \begin{lstlisting}[language=Python]
-def dva_opt(n,t,g):
-    slovar = slovar_cen(g)
+def dva_opt(n, t, slovar):
     razlika = 0
     for i in range(2,n):
         for j in range(i+1,n+1):
-            if j != n:
-                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[j+1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[j+1])]
-            else:
-                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]               
+            if j != n: 
+                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[j+1])] 
+								- slovar[(t[i-1],t[i])] - slovar[(t[j],t[j+1])]
+            else: 
+                change = slovar[(t[i-1],t[j])] + slovar[(t[i],t[1])] - 
+								slovar[(t[i-1],t[i])] - slovar[(t[j],t[1])]
             if change < razlika:
-                razlika = change
-                opt_i =  i
-                opt_j = j
-    if razlika < 0:
-        novi_t = [t[m] for m in range(0,n+1)]
-        novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1]
-        novi_t[0] = t[0] + razlika        
+                razlika = change 
+                opt_i =  i 
+                opt_j = j 
+    if razlika < 0: 
+        novi_t = [t[m] for m in range(0,n+1)] 
+        novi_t[opt_i:opt_j+1] = novi_t[opt_i:opt_j+1][::-1] 
+        novi_t[0] = t[0] + razlika  
         return novi_t
     else:
-        return None
+        return None 
 \end{lstlisting}
 
-3opt je nekoliko bolj dodelana razli"cica local searcha, zamenjamo namre"c kar tri vozli"s"ca. Tako kot 2opt sprejme velikost matrike, 
-matriko in cikel t. Zaradi preglednosti na za"cetku definiramo spremenljivke X1, X2, Y1, Y2, Z1, Z2. Sedaj imamo 7 mo"znih menjav. Tri od teh so 2opt, "stiri pa 3opt. Za vsako od mo"znih menjav nato izra"cunamo razliko. Ker pri 3opt menjavah odstranimo enake povezave, lahko to shranimo pod spremenljivko $odstej$. Ko izra"cunamo vse razlike, poi"s"cemo minimum, s tem ko si zabele"zimo, pri katerem indeksu je bila minimalna razlika dose"zena, bomo kasneje vedeli katero menjavo izvesti, saj so te urejene po vrsti v seznamu spremembe. "Ce je $change$ manj"sa od trenutne razlike, pomeni, da lahko t izbolj"samo. Posodobimo razliko, indeks in si zabele"zimo optimalne i,j in k, ki jih bomo potem potrebovali, da izvedemo ustrezno menjavo. Torej "ce je na koncu razlika manj"sa kot 0, lahko zgradimo novi\_t. Ta je odvisen od vrste menjave, ki jo moramo izvr"siti, ta pa je dolo"cena z indeksom in optimalnimi i,j in k. Tako kot pri 2opt tudi tukaj novo dol"zino cikla izra"cunamo tako, da pri"stejemo razliko. 
-
+3-opt je nekoliko bolj dodelana razli"cica \textit{local searcha}, zamenjamo namre"c kar tri vozli"s"ca. 3-opt metoda nam omogo"ca pobeg v primeru, ko bi se z 2-opt metodo ujeli v lokalnem minimumu in ne bi mogli ven. Tako kot 2-opt funkcija sprejme velikost matrike, 
+cikel $t$ in slovar povezav. Zaradi preglednosti na za"cetku definiramo spremenljivke X1, X2, Y1, Y2, Z1, Z2. Sedaj imamo 7 mo"znih menjav. Tri od teh so 2-opt (torej "ceprav razdremo tri povezave, nato eno spet pove"zemo nazaj), "stiri pa 3-opt (vse tri ostanejo nepovezane). Za vsako od mo"znih menjav nato izra"cunamo razliko. Ker pri 3-opt menjavah odstranimo enake povezave, lahko to shranimo pod spremenljivko $odstej$. Ko izra"cunamo vse razlike, poi"s"cemo minimum.
+S tem ko si zabele"zimo, pri katerih indeksih je bila minimalna razlika dose"zena, bomo kasneje vedeli katero menjavo izvesti, saj so te urejene po vrsti v seznamu spremembe. "Ce je $change$ manj"sa od trenutne razlike, pomeni, da lahko $t$ izbolj"samo. Posodobimo $razliko$, $indeks$ in si zabele"zimo optimalne $i$,$j$ in $k$, ki jih bomo potem potrebovali, da izvedemo ustrezno menjavo. Torej "ce je na koncu razlika manj"sa kot 0, lahko zgradimo $novi\_t$. Ta je odvisen od vrste menjave, ki jo moramo izvr"siti, ta pa je dolo"cena z $indeksom$ in optimalnimi $i$,$j$ in $k$. Tako kot pri 2-opt tudi tukaj novo dol"zino cikla izra"cunamo tako, da pri"stejemo razliko. 
+"Ce opi"semo se eno bolj zahtevno menjavo, recimo 3-opt menjavo change4. Prekinemo povezave (X1,X2), (Y1, Y2) in (Z1, Z2), zato te vrednosti od"stejemo. Na novo pa v tem primeru zgradimo povezave
+(X1, Y1), (X2, Z1) in (Y2, Z2), zato te vrednosti pri"stejemo. Na ta na"cin izra"cunamo razliko v dol"zini cikla, ki jo ta menjava prinese, kako natan"cno pa to menjavo izvedemo bomo opisali pri funkciji \textit{menjava}. 
 \begin{lstlisting}[language=Python]
-def tri_opt(n, t, g):
-    slovar = slovar_cen(g)
+def tri_opt(n, t, slovar):
     razlika = 0    
     for i in range(2,n-1):
         for j in range(i+1,n):
             for k in range(j+1,n+1):
-                X1, X2, Y1, Y2, Z1, Z2 = t[i-1], t[i], t[j-1], t[j], t[k-1], t[k]
-# 2 opt moves
-                change1 = slovar[(X1,Z1)] + slovar[(X2,Z2)] -  slovar[(X1,X2)] - slovar[(Z1,Z2)]
-                change2 = slovar[(Y1, Z1)] + slovar[(Y2, Z2)] -  slovar[(Y1, Y2)] - slovar[(Z1, Z2)] 
-                change3 = slovar[(X1, Y1)] + slovar[(X2, Y2)] -  slovar[(X1, X2)] - slovar[(Y1, Y2)]
-# 3 opt moves
-                odstej = slovar[(X1, X2)] + slovar[(Y1, Y2)] + slovar[(Z1, Z2)]
-# v vseh treh primerih odstranimo enake povezave
-                change4 = slovar[(X1, Y1)] + slovar[(X2, Z1)] + slovar[(Y2, Z2)] -  odstej
-                change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + slovar[(Y1, Z2)] -  odstej
-                change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + slovar[(X2, Z2)] -  odstej
-                change7 = slovar[(X1, Y2)] + slovar[(Z1, X2)] + slovar[(Y1, Z2)] -  odstej
-# izracunamo najmanjso vrednost razlike
-                spremembe = [change1,change2, change3, change4, change5,change6,change7]
+                X1, X2, Y1, Y2, Z1, Z2 = t[i-1], t[i], t[j-1], t[j], 
+								t[k-1], t[k]
+                # 2 opt moves
+                change1 = slovar[(X1,Z1)] + slovar[(X2,Z2)] -  
+								slovar[(X1,X2)] - slovar[(Z1,Z2)]
+                change2 = slovar[(Y1, Z1)] + slovar[(Y2, Z2)] -  
+								slovar[(Y1, Y2)] - slovar[(Z1, Z2)] 
+                change3 = slovar[(X1, Y1)] + slovar[(X2, Y2)] -  
+								slovar[(X1, X2)] - slovar[(Y1, Y2)]
+                # 3 opt moves
+                odstej = slovar[(X1, X2)] + slovar[(Y1, Y2)] + 
+								slovar[(Z1, Z2)]
+                change4 = slovar[(X1, Y1)] + slovar[(X2, Z1)] + 
+								slovar[(Y2, Z2)] -  odstej
+                change5 = slovar[(X1, Z1)] + slovar[(Y2, X2)] + 
+								slovar[(Y1, Z2)] -  odstej
+                change6 = slovar[(X1, Y2)] + slovar[(Z1, Y1)] + 
+								slovar[(X2, Z2)] -  odstej
+                change7 = slovar[(X1, Y2)] + slovar[(Z1, X2)] + 
+								slovar[(Y1, Z2)] -  odstej
+                spremembe = [change1,change2,change3, change4, change5,
+								change6,change7]
                 change = min(spremembe)
-                ind = np.argmin(spremembe) + 1
+                ind = np.argmin(spremembe) + 1 
                 if change < razlika:
                     razlika = change
                     indeks = ind
-                    opt_i =  i
+                    opt_i =  i 
                     opt_j = j
                     opt_k = k
-    if razlika < 0:
-        novi_t = menjava(indeks,n,t,opt_i,opt_j,opt_k)
-        novi_t[0] = t[0] + razlika
+    if razlika < 0: 
+        novi_t = menjava(indeks,n,t,opt_i,opt_j,opt_k) 
+        novi_t[0] = t[0] + razlika 
         return novi_t
     else:
         return None
 \end{lstlisting}
 
-V naslednji funkciji so opisane menjave, ki jih moramo narediti na trenutnem ciklu t, odvisne pa so od indeksa. 
+Funkcija \textit{menjava} sprejme indeks oz. katero mejavo "zelimo narediti, velikost matrike n, naklju"cno izbrani cikle $t$ $\in$ RCL ter optimalne $i$,$j$ in $k$ pri katerih je bila dose"zena minimalna razlika. 
+"Ce opi"semo menjavo 4. Nove povezave (X1, Z1),(Y2, X2) in (Y1, Z1) dobimo tako da obrnemo del cikla med Y1 in X2 ter med Z1 in Y2.
+Vse ostale menjave, prav tako pa izra"cuni razlik so opisani v datoteki GRASP.py.  
+
 
 \begin{lstlisting}[language=Python]
 def menjava(indeks,n,t,opt_i,opt_j,opt_k):   
@@ -330,7 +343,7 @@ $y_{i}$ \ldots katero po vrsti obiščemo mesto $i$
 \end{equation*}
 \\
 Problem potujočega trgovca se da v Pythonu elegantno zapisati kot celoštevilski linearni program s pomočjo knjižnice PuLP. PuLP za reševanje problema izbere enega od vgrajenih algoritmov.
- V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP sva napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiskanih mest.
+ V našem primeru je PuLP za reševanje izbral PULP\_CBC\_CMD. S pomočjo knjižnice PuLP smo napisali funckijo, ki sprejme matriko cen povezav, izpiše minimalno ceno potovanja in vrne urejen seznam obiska\-nih mest.
  V nadaljevanju je prikazan del funkcije $ tsp\_as\_ilp$, v katerem definiramo problem in ga rešimo. Na repozitoriju se nahaja celotna funckija, ki vrne urejen seznam obiskanih mest.
 
 \begin{lstlisting}[language=Python]
@@ -358,7 +371,7 @@ def tsp_as_ilp(g):
 
 
 \section{Primerjave}
-Za razli"cne primerjave sva se osredoto"cili na pet grafov, vendar pa ne bova povsod primerjali vseh. Poleg grafov skupine 7, ti so ulysses22, berlin52 in kroA100 sva si izbrali "se swiss42 in st70. Vse sva dobili iz TSPLIB, kjer so zapisane tudi trenutne znane optimalne re"sitve, ki jih bova tekom naslednjega poglavja tudi primerjali. Ker pa so podatki za TSP podani v razli"cnih oblikah, sva napisali "se tri razli"cne funkcije za uvoz. Za primerjavo GRASP in ILP pa sva sami generirali nekoliko manj"se matrike. Te so simetri"cne s celo"stevilskimi vrednostmi od 1 pa do maximalne vrednosti, ki jo dolo"cimo sami. 
+Za razli"cne primerjave smo se osredoto"cili na pet grafov, vendar pa ne bomo povsod primerjali vseh. Poleg grafov skupine 7, ti so \textit{Ulysses22}, \textit{Berlin52} in \textit{KroA100} smo si izbrali "se \textit{Swiss42} in \textit{St70}. Vse smo dobili iz TSPLIB, kjer so zapisane tudi trenutne znane optimalne re"sitve, ki jih bomo tekom naslednjega poglavja tudi primerjali. Ker pa so podatki za TSP podani v razli"cnih oblikah, smo napisali "se tri razli"cne funkcije za uvoz. Za primerjavo GRASP in ILP pa smo sami generirali nekoliko manj"se matrike. Te so simetri"cne s celo"stevilskimi vrednostmi od 1 pa do maximalne vrednosti, ki jo dolo"cimo sami. 
 
 \begin{lstlisting}[language=Python]
 def TSP(N, max_pot, min_pot = 1):
@@ -371,7 +384,7 @@ def TSP(N, max_pot, min_pot = 1):
 \end{lstlisting}
 
 \subsection{Primerjava ILP in GRASP} ~\\
-Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. Za potrebe primerjave, sva za parametre pri $GRASP$ vzeli alpha=3, število iteracij=100 in metodo $3opt$. 
+Z merjenjem časa reševanja določenih primerov različnih velikosti ugotovimo, da napisana funkcija $ilp$ porabi več časa za reševanje, kot metahevristika $GRASP$. Za potrebe primerjave, smo za parametre pri $GRASP$ vzeli alpha=3, št. iteracij=100 in metodo 3-opt.
 V nadaljevanju bomo ugotovili, da na čas izvajanja local\_search-a vplivata tudi število iteracij in predvsem metoda, zato časovna primerjava funkcij $ tsp\_as\_ilp$ in $GRASP$ ni najbolj točna. Ker za majhne grafe $GRASP$ tudi pri 100 iteracijah vrne pravilno (optimalno) rešitev,
 lahko vseeno sklepamo, da deluje hitreje kot $ tsp\_as\_ilp$. 
 
@@ -384,14 +397,14 @@ lahko vseeno sklepamo, da deluje hitreje kot $ tsp\_as\_ilp$.
 
 
 \subsection{Primerjava parametra alpha} ~\\
-Za primerjavo parametra alpha sva se osredoto"cili na "stiri parametre in sicer 3, 5, 10 in 15. Parameter alpha nam dolo"ca velikost RCL (restricted client list) na "zacetku algoritma GRASP v sklopu greedy randomized construction. Torej "ce je alpha enak 5, bo algoritem skonstruiral 5 za"cetnih re"sitev problema. Te bo nato local search izbolj"seval. Primerjavo sva naredili za obe metodi na 100 iteracijah, razen v zadnjem primeru na desetih, saj je bila matrika "ze prevelika. Prav tako sva naredili deset ponovitev algoritma.
-"Ce si najprej ogledamo najmanj"si graf Ulysses22, lahko vidimo, da izbira parametra ne vpliva na rezultat, saj v vseh primerih vrne znan optimalni rezultat 1273. Pri malo ve"cjem grafu Swiss42 "ze opazimo, da se rezultat oddaljuje od optimuma, ve"cji kot je alpha. Vendar pa je pri 2-opt slab"sanje o"citno hitrej"se. Pri 3-opt celo kljub slab"sem rezultatu pri alpha = 10, pri alpha = 15 vrne optimalen rezultat. Optimalen rezultat za Berlin52 je 7544, mi pa smo dobili 7616, kar je precej blizu. Se pa tu rezultat "se hitreje poslab"sa z večanjem alpha. Spet pri 2-opt bolj kot pri 3-opt. Tudi pri St70 najbolj"si rezultat vrne 3-opt, zopet pri najmanj"sem izbranem alpha. 
-Za KroA100 so rezultati že močno oddaljeni od optimuma vse bolj kot se pove"cuje alpha. 
-"Ce zaklju"cimo. Opazimo, da razen v primeru zelo majnih grafov, z uporabo manjšega alpha (npr. 3), dobimo boljši rezultat. 
+
+Za primerjavo parametra alpha sva se osredoto"cili na "stiri parametre in sicer 3, 5, 10 in 15. Parameter alpha nam dolo"ca velikost RCL, torej "stevilo za"cetnih pribli"zkov. "Ce je alpha enak 5, bo funkcija \textit{greedy\_construction} skonstruirala 5 za"cetnih pribli"zkov. Te bo nato \textit{local\_search} izbolj"seval. Za za"cetek smo primerjavo naredili za obe metodi na 100 iteracijah, naredili smo deset ponovitev algoritma. "Ce si najprej ogledamo najmanj"si graf \textit{Ulysses22}, lahko vidimo, da izbira parametra ne vpliva na rezultat, saj v vseh primerih algoritem vrne znan optimalni rezultat 1273. Pri malo ve"cjem grafu \textit{Swiss42} "ze opazimo, da se rezultat oddaljuje od optimuma, ve"cji kot je alpha. Vendar pa je pri 2-opt slab"sanje o"citno hitrej"se. Pri 3-opt celo kljub slab"sem rezultatu pri alpha = 10, pri alpha = 15 vrne optimalen rezultat. Optimalen rezultat za \textit{Berlin52} je 7544, mi pa smo dobili 7616, kar je precej blizu. Se pa tu rezultat "se hitreje poslab"sa z večanjem alpha, zopet pri 2-opt bolj kot pri 3-opt. Tudi pri \textit{St70} najbolj"si rezultat vrne 3-opt, spet pri najmanj"sem izbranem alpha. Za \textit{KroA100} so rezultati že močno oddaljeni od optimuma vse bolj kot se pove"cuje alpha. 
+"Ce povzamemo. Opazimo, da razen v primeru zelo majnih grafov, z uporabo manjšega alpha (npr. 3), dobimo boljši rezultat. Ve"canje alpha pa bolj vpliva na metodo 2-opt kot 3-opt, saj se ta za"cne hitreje odmikati od optimuma. Prav tako ima spreminjanje parametra ve"cji vpliv pri ve"cjih grafih. Opazimo tudi, da pri enakem "stevilu iteracij metoda opt-3 na"celoma vrne bolj"si rezultat. To je smiselno, saj vsaki"c pregleda ve"cjo okolico cikla, ki ga "zelim oizbolj
 
 
 
 \begin{table}[H]
+\caption{Primerjava parametra alpha, iter = 100, ponovitve = 10}
 \begin{tabular}{lllllll}
 \rowcolor[HTML]{FFCCC9} 
 TSP       &      & 3 & 5 & 10 & 15 &opt \\ \hline
@@ -413,9 +426,11 @@ KroA100   &      &   &   &    &  &21282  \\
 \end{tabular}
 \end{table}
 
-Primerjava parametra alpha "se za iter = 1000. 
+Za naslednjo primerjavo smo se odlo"cili primerjati "se razli"cne parametre alpha pri "stevilu iteracij = 1000. Zdaj smo primerjali samo metodo 2-opt, dodali pa smo "se alpha = 30. Zopet pa smo naredili 10 ponovitev. 
+Opazimo, da zdaj tudi za primer \textit{Swiss42} metoda vrne optimalno vrednost, neodvisno od alpha. Pri grafu \textit{Berlin52} se vrednosti za vse prej"snje alpha mo"cno izbolj"sajo, nekolik"sno odstopanje lahko zasledimo le pri alpha = 30. Tudi pri primerih \textit{St70} in  \textit{KroA100} se vrednosti precej bolje pribli"zajo optimalni, tudi oddaljevanje od optimuma v odvisnosti z ve"canjem alpha je po"casnej"se kot pri iter = 100. Zopet lahko najmanj"se vrednosti v povpre"cju opazimo pri manj"sih alpha, vendar pa se zdaj vpliv izbranih parametrov alpha zmanj"sa. Sklepamo lahko torej, da si lahko pri ve"cjem "stevilu iteracij lahko "privo"scimo" ve"cji alpha in bo algoritem "se vedno vra"cal optimalno re"sitev. Prav tako so re"sitve pri danem "stevilu iteracij bolj"se za manj"se grafe. 
 
-\begin{table}[h]
+\begin{table}[H]
+\caption{Primerjava parametra alpha, iter = 1000, ponovitve = 10}
 \begin{tabular}{llllllll}
 \rowcolor[HTML]{FFCCC9} 
 TSP      &       & 3     & 5     & 10    & 15   & 30   & opt   \\
@@ -432,7 +447,7 @@ KroA100  &       &       &       &       &      &      & 21282 \\
 
 \subsection{Primerjava glede na število iteracij} ~\\
 
-Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij sva preizkusili na primeru St70 (velikosti 70). Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3opt, sva za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2opt dobimo še le pri 600 iteracijah. 
+Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. Odvisnost vrednosti rešitve od števila iteracij smo preizkusili na primeru St70, velikosti 70. Iz prejšnjega podpoglavja ugotovimo, da je za ta primer najboljši parameter alpha = 3. Zaradi velike časovne zahtevnosti metode 3-opt, smo za ta primer naredili le 200 iteracij. Ugotovimo, da se vrednost rešitve izboljšuje z večanjem iteracij. Metoda 3-opt je pri preizkušanju dosegla najboljši rezultat (684) že pri 100 iteracijah. Podobno rešitev pri metodi 2-opt dobimo šele pri 600 iteracijah. 
 
 \begin{figure}[H]
 \caption{Odvisnost rešitve od števila iteracij}
@@ -440,7 +455,7 @@ Pri določanju parametrov algoritma ima pomembno vlogo tudi število iteracij. O
 \includegraphics[scale =0.8]{resitev_iteracije}
 \end{figure}
 
-Zaradi manjše časovne zahtevnosti metode 2opt, lahko pri izvajanju GRASP-a uporabimo več iteracij kot pri metodi 3opt. Metoda 3opt uporabi $\mathcal{O}(n^3)$ operacij, 2opt pa ima kvadratično časovno zahtevnost oz. $\mathcal{O}(n^2)$.
+Zaradi manjše časovne zahtevnosti metode 2-opt, lahko pri izvajanju GRASP-a uporabimo več iteracij kot pri metodi 3-opt. Metoda 3-opt uporabi $\mathcal{O}(n^3)$ operacij, 2-opt pa ima kvadratično časovno zahtevnost oz. $\mathcal{O}(n^2)$.
 
 \begin{figure}[H]
 \caption{Odvisnost časa izvajanja od števila iteracij}
@@ -460,41 +475,43 @@ KroA100   & 21381 & 36408
 \end{tabular}
 \end{table}
 
-Skupina 7 je na problem potujočega trgovca implementirala Genetski Algoritem (GA). V njihovem poročilu sva poiskali najboljše rezultate posameznega grafa in jih zapisali v tabelo. Iz tabele razberemo, da se je algoritem GRASP odrezal bolje od genetskega algoritma.
+Skupina 7 je na problem potujočega trgovca implementirala Genetski Algoritem (GA). V njihovem poročilu smo poiskali najboljše rezultate posameznega grafa in jih zapisali v tabelo. Iz tabele razberemo, da se je algoritem GRASP odrezal bolje od genetskega algoritma.
 Tudi iz vira [6] razberemo, da je genetski algoritem sicer natančnejši, vendar se na primerih iz prakse pokaže, da natančnost ni tako pomembna, in zato GRASP deluje bolje od GA.
 
 \subsection{Vizualizacija} ~ \\
-Za boljšo predstavo sva napisali še dve funkciji, ki narišeta podano omrežje in rešitev na njem.
+Za boljšo predstavo smo napisali še dve funkciji, ki narišeta podano omrežje in rešitev na njem.
 Če imamo podane koordinate, funkcija $narisi$ nariše točke kot koordinate v 2D in jih poveže glede na dano rešitev.
 \begin{figure}[H]
-\caption{Najkraša pot primera berlin52 dolga 7544}
+\caption{Najkraša pot primera Berlin52 dolga 7544}
 \centering
 \includegraphics[scale =0.5]{berlin_7544}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Najkrajša pot primera ulysses22, dolga 7013}
+\caption{Najkrajša pot primera Ulysses22, dolga 7013}
 \centering
 \includegraphics[scale =0.5]{ulysses22_7013}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Najkrajša pot primera kroA100, dolga 21381}
+\caption{Najkrajša pot primera KroA100, dolga 21381}
 \centering
 \includegraphics[scale =0.5]{kroA100_21381}
 \end{figure}
 
-Če pa koordinat nimamo podanih, pa funckija $narisigraf(matrika)$ sprejme matriko uteži povezav in nariše usmerjen graf z utežmi na povezavah. Napisali sva še funkcijo, ki rešitev algoritma GRASP spremeni v matriko, tako da še lahko narišemo rešitev. 
-Opomba: pri velikih grafih je risanje vseh povezav nesmiselno, zato te funkcije nisva izboljševali.
+Če pa koordinat nimamo podanih, pa funckija $narisigraf(matrika)$ sprejme matriko uteži povezav in nariše usmerjen graf z utežmi na povezavah. Napisali smo še funkcijo, ki rešitev algoritma GRASP spremeni v matriko, tako da še lahko narišemo rešitev. 
+Opomba: pri velikih grafih je risanje vseh povezav nesmiselno, zato te funkcije nismo izboljševali.
 \begin{figure}[H]
-\caption{Poln graf in primer rešitve za swiss42}
+\caption{Poln graf in primer rešitve za Swiss42}
 \centering
 \includegraphics[scale =0.5]{swiss_primerjava}
 \end{figure}
+\pagebreak
 
 \section{Zaključek}
 
-Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučevanih problemov optimizacije. Na problem sva implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u sva obravnavali metodi 2opt in 3 opt, kjer je glavna razlika to, da pri 2opt zamenjamo dve vozlišči, pri 3opt pa tri. Metoda 3opt vsebuje tri for zanke, zato je njena časovna zahtevnost kar  $\mathcal{O}(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, sva ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP sva izvedli na grafih ulysses22, berllin52, kroA100, swiss42 in st70.  Najprej sva primerjali parameter alpha, ki določa koliko različnih začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato sva v nadaljevanju uporabljali vrednost alpha = 3. Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3opt je na primeru st70 za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP sva na primerih ulysses22, berlin52 in kroA100 primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili sva, da so se najinim rezultatom najbolje približali pri najmanjšem grafu ulysses22, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 99, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, da je algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
+Problem potujočega trgovca je NP-težak problem v kombinatorični optimizaciji, ki je pomemben v operacijskih raziskavah in računalniških znanostih.  Problem je bil prvič oblikovan leta 1930 in je eden izmed najbolj intenzivno proučevanih problemov optimizacije. Na problem smo implementirali metahevristiko GRASP, ki sestoji iz dveh faz (Greedy randomized construction in Local search). V Local search-u smo obravnavali metodi 2-opt in 3-opt, kjer je glavna razlika to, da pri 2-opt zamenjamo dve vozlišči, pri 3-opt pa tri. Metoda 3-opt vsebuje tri for zanke, zato je njena časovna zahtevnost kar  $\mathcal{O}(n^3)$. Vsak 3-opt premik je bodisi enak 2-opt premiku ali je enak zaporedju dveh ali treh 2-opt potez. Čeprav je 3-opt bolj zapleten in počasnejši, se uporablja, ker je možno, da obstaja zaporedje 2-opt premikov, ki izboljšajo pot vendar se začne z 2-opt premikom, ki poveča dolžino poti, zaradi česar to zaporedje premikov ne bo izvedeno.  V Pythonu lahko problem potujočega trgovca zapišemo kot celoštevilski linearni program (ILP) s pomočjo knjižnice PULP, ki za reševanje problema izbere enega od vgrajenih algoritmov. Z merjenjem časa izvajanja funkcij, smo ugotovili, da GRASP (100 iteracij, metoda 3opt) deluje hitreje kot ILP.  Primerjave različnih parametrov metode GRASP smo izvedli na grafih \textit{Ulysses22}, \textit{Berllin52}, \textit{KroA100}, \textit{Swiss42} in \textit{St70}.  Najprej smo primerjali parameter alpha, ki določa koliko začetnih rešitev problema bo skonstruiral algoritem. Na rešitve manjših grafov parameter alpha ni vplival, pri večjih grafih pa je manjši alpha pomenil boljšo rešitev. Zato smo v nadaljevanju uporabljali vrednost alpha = 3. Prav tako smo ugotovili, da lahko pri večjem "stevilu iteracij vzamemo ve"cji alpha da bo re"sitev "se vedno optimalna. Tako pri metodi 2-opt in 3-opt smo z ve"canjem alpha zasledili oddaljevanje od optimuma (vsaj pri ve"cjih grafih), oddaljevanje pa je bilo hitrej"se pri metodi 2-opt. 
+Vrednost rešitve se izboljšuje z večanjem števila iteracij, vendar se s tem veča tudi časovna zahtevnost. Metoda 3-opt je na primeru \textit{St70} za 200 iteracij potrebovala že skoraj 200 sekund, vendar je že pri 100 iteracijah vrnila boljši rezultat kot 2-opt pri 1000 ali 2000. Metoda 2opt tudi za 2000 iteracij potrebuje manj kot 30 sekund. Rezultate algoritma GRASP smo na primerih \textit{Ulysses22}, \textit{Berllin52} in \textit{KroA100} primerjali tudi s skupino 7, ki je izvajala Genetski algoritem (GA). Ugotovili smo, da so se na"sim rezultatom najbolje približali pri najmanjšem grafu \textit{Ulysses22}, kjer GRASP zelo hitro vrne kar optimalno rešitev (7013). Pri grafu velikosti 100 (KroA100), pa je GRASP deloval veliko bolje, saj se je od znane optimalne rešitve (21282) razlikoval za 99, rešitev genetskega algoritma pa se je od te rešitve razlikovala za kar 15126. Ugotovimo, da je algoritem zaradi svoje enostavnosti na splošno zelo hiter in je zmožen producirati kar dobre rezultate v kratkem času. 
 
 
 \pagebreak
@@ -526,6 +543,11 @@ B. Bernai, S. Deleplanque, A. Quilliot, Routing on Dynamic Networks: GRASP versu
 \\\texttt{https://annals-csis.org/Volume\_2/pliks/52.pdff}
 
 \end{thebibliography}
+
+\thispagestyle{empty}
+\listoffigures
+\listoftables
+\pagebreak
 
 \end{document}
 
